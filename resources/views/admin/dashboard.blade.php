@@ -11,8 +11,8 @@
     </div>
 @endif
 
-<div class="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-2">
-    <h1 class="h3 fw-bold mb-0">Dashboard Operasional</h1>
+<div class="d-flex flex-wrap justify-content-between align-items-center mb-3 gap-2">
+    <h1 class="h4 fw-bold mb-0">Dashboard Operasional</h1>
 
     <div class="d-flex align-items-center gap-2">
         <form method="GET" class="d-flex align-items-center gap-2">
@@ -26,17 +26,17 @@
 </div>
 
 {{-- Kartu Statistik --}}
-<div class="row g-3 mb-4">
+<div class="row g-3 mb-3">
     <div class="col-md-4">
         <div class="card p-3">
             <div class="d-flex justify-content-between align-items-center">
                 <div>
                     <p class="text-muted small mb-1">Total Motor Selesai</p>
-                    <h3 class="fw-bold mb-0">{{ $totalMotorSelesai }}</h3>
+                    <h4 class="fw-bold mb-0">{{ $totalMotorSelesai }}</h4>
                 </div>
-                <div class="rounded-circle d-flex align-items-center justify-content-center"
-                     style="width:48px;height:48px;background:linear-gradient(135deg,var(--bengkel-primary),var(--bengkel-accent));">
-                    <i class="bi bi-scooter text-white fs-5"></i>
+                <div class="d-flex align-items-center justify-content-center"
+                     style="width:40px;height:40px;border-radius:.75rem;background:linear-gradient(135deg,var(--bengkel-primary),var(--bengkel-accent));">
+                    <i class="bi bi-scooter text-white"></i>
                 </div>
             </div>
         </div>
@@ -46,11 +46,11 @@
             <div class="d-flex justify-content-between align-items-center">
                 <div>
                     <p class="text-muted small mb-1">Pendapatan Hari Ini</p>
-                    <h3 class="fw-bold mb-0">Rp {{ number_format($pendapatanHariIni, 0, ',', '.') }}</h3>
+                    <h4 class="fw-bold mb-0">Rp {{ number_format($pendapatanHariIni, 0, ',', '.') }}</h4>
                 </div>
-                <div class="rounded-circle d-flex align-items-center justify-content-center"
-                     style="width:48px;height:48px;background:linear-gradient(135deg,var(--bengkel-primary),var(--bengkel-accent));">
-                    <i class="bi bi-cash-coin text-white fs-5"></i>
+                <div class="d-flex align-items-center justify-content-center"
+                     style="width:40px;height:40px;border-radius:.75rem;background:linear-gradient(135deg,var(--bengkel-primary),var(--bengkel-accent));">
+                    <i class="bi bi-cash-coin text-white"></i>
                 </div>
             </div>
         </div>
@@ -60,11 +60,11 @@
             <div class="d-flex justify-content-between align-items-center">
                 <div>
                     <p class="text-muted small mb-1">Skor Efisiensi</p>
-                    <h3 class="fw-bold mb-0">{{ $skorEfisiensi }}%</h3>
+                    <h4 class="fw-bold mb-0">{{ $skorEfisiensi }}%</h4>
                 </div>
-                <div class="rounded-circle d-flex align-items-center justify-content-center"
-                     style="width:48px;height:48px;background:linear-gradient(135deg,var(--bengkel-primary),var(--bengkel-accent));">
-                    <i class="bi bi-speedometer2 text-white fs-5"></i>
+                <div class="d-flex align-items-center justify-content-center"
+                     style="width:40px;height:40px;border-radius:.75rem;background:linear-gradient(135deg,var(--bengkel-primary),var(--bengkel-accent));">
+                    <i class="bi bi-speedometer2 text-white"></i>
                 </div>
             </div>
         </div>
@@ -80,17 +80,17 @@
             <ul class="nav nav-tabs" id="antrianTab" role="tablist">
                 <li class="nav-item" role="presentation">
                     <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tab-menunggu" type="button">
-                        Menunggu Mekanik <span class="badge bg-secondary ms-1">{{ $antrianMenunggu->count() }}</span>
+                        Menunggu Mekanik
                     </button>
                 </li>
                 <li class="nav-item" role="presentation">
                     <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-proses" type="button">
-                        Proses Servis <span class="badge bg-secondary ms-1">{{ $antrianProses->count() }}</span>
+                        Proses Servis
                     </button>
                 </li>
                 <li class="nav-item" role="presentation">
                     <button class="nav-link" data-bs-toggle="tab" data-bs-target="#tab-siap-bayar" type="button">
-                        Siap Bayar <span class="badge bg-secondary ms-1">{{ $antrianSiapBayar->count() }}</span>
+                        Siap Bayar
                     </button>
                 </li>
             </ul>
@@ -101,13 +101,19 @@
                     @forelse ($antrianMenunggu as $order)
                         <div class="d-flex flex-wrap justify-content-between align-items-center border rounded-3 p-3 mb-2 gap-2">
                             <div class="d-flex align-items-center gap-3">
-                                <i class="bi bi-scooter fs-4" style="color: var(--bengkel-primary);"></i>
+                                <div class="d-flex align-items-center justify-content-center"
+                                     style="width:40px;height:40px;border-radius:.6rem;background:#f3f4f6;">
+                                    <i class="bi bi-scooter fs-5" style="color: var(--bengkel-primary);"></i>
+                                </div>
                                 <div>
                                     <div class="fw-semibold">
                                         {{ $order->vehicle->brand }} {{ $order->vehicle->model }}
                                         — {{ $order->vehicle->plat_nomor }}
                                     </div>
-                                    <div class="text-muted small">Keluhan: {{ $order->keluhan_awal }}</div>
+                                    <div class="text-muted small">
+                                        <span style="text-dark fw-bold;">Keluhan:</span>
+                                        {{ $order->keluhan_awal }}
+                                    </div>
                                 </div>
                             </div>
                             <form method="POST" action="{{ route('admin.service-orders.assign-mechanic', $order) }}"
@@ -132,7 +138,10 @@
                     @forelse ($antrianProses as $order)
                         <div class="d-flex flex-wrap justify-content-between align-items-center border rounded-3 p-3 mb-2 gap-2">
                             <div class="d-flex align-items-center gap-3">
-                                <i class="bi bi-wrench-adjustable fs-4" style="color: var(--bengkel-primary);"></i>
+                                <div class="d-flex align-items-center justify-content-center"
+                                     style="width:40px;height:40px;border-radius:.6rem;background:#f3f4f6;">
+                                    <i class="bi bi-wrench-adjustable fs-5" style="color: var(--bengkel-primary);"></i>
+                                </div>
                                 <div>
                                     <div class="fw-semibold">
                                         {{ $order->vehicle->brand }} {{ $order->vehicle->model }}
@@ -181,20 +190,26 @@
                 <i class="bi bi-exclamation-triangle-fill"></i> Peringatan Stok Tipis
             </h2>
 
+            @php
+                $badgeStyles = [
+                    'background:#fce7f3;color:#db2777;',
+                    'background:#ffedd5;color:#c2410c;',
+                    'background:#fef9c3;color:#a16207;',
+                ];
+            @endphp
             @forelse ($lowStockItems as $item)
                 <div class="d-flex justify-content-between align-items-center py-2 border-bottom">
                     <div>
                         <div class="fw-semibold small">{{ $item->name }}</div>
                         <div class="text-muted" style="font-size:.75rem;">Kategori: {{ $item->category->name ?? '-' }}</div>
                     </div>
-                    <span class="badge bg-danger-subtle text-danger">Sisa {{ $item->stok }} {{ $item->satuan }}</span>
+                    <span class="badge" style="{{ $badgeStyles[$loop->index % 3] }}">Sisa {{ $item->stok }} {{ $item->satuan }}</span>
                 </div>
             @empty
                 <p class="text-muted small mb-0 py-2">Semua stok sparepart dalam kondisi aman.</p>
             @endforelse
 
-            <a href="{{ route('admin.inventori') }}" class="d-block text-center small fw-semibold mt-3"
-               style="color: var(--bengkel-primary);">Lihat Semua Inventori</a>
+            <a href="{{ route('admin.inventori') }}" class="d-block text-center small fw-semibold mt-3 link-inventori text-decoration-none">Lihat Semua Inventori</a>
         </div>
     </div>
 </div>
@@ -205,6 +220,15 @@
 <style>
     .nav-tabs .nav-link { color: #6b7280; font-weight: 600; font-size: .85rem; border: none; }
     .nav-tabs .nav-link.active { color: var(--bengkel-primary); border-bottom: 2px solid var(--bengkel-primary); }
+    
+    /* Tambahan CSS baru untuk tautan inventori */
+    .link-inventori {
+        color: #212529; /* Warna hitam (default text dark Bootstrap) */
+        transition: color 0.2s ease-in-out; /* Efek transisi halus */
+    }
+    .link-inventori:hover {
+        color: var(--bengkel-accent); /* Berubah menjadi magenta saat di-hover */
+    }
 </style>
 @endpush
 

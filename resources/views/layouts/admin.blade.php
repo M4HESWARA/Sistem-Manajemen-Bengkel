@@ -8,7 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     <style>
         :root {
-            --bengkel-primary: #7c3aed;
+            --bengkel-primary: #ed02fe;
             --bengkel-accent: #ed02fe;
         }
         body {
@@ -16,53 +16,62 @@
             font-family: 'Segoe UI', system-ui, sans-serif;
         }
         .topbar {
-            background: #fff;
-            border-bottom: 1px solid #eee;
-            padding: .6rem 1.5rem;
+            background: linear-gradient(180deg, #ffffff 0%, #fafafa 100%);
+            border-bottom: 3px solid var(--bengkel-accent);
+            padding: .8rem 1.5rem;
         }
-        .topbar img { height: 38px; }
+        .topbar img { height: 42px; }
         .nav-pill {
-            padding: .4rem 1rem;
-            border-radius: 2rem;
-            font-weight: 600;
-            font-size: .9rem;
-            color: #6b7280;
+            padding: .4rem .2rem;
+            font-weight: 700;
+            font-size: .95rem;
+            line-height: 1;
+            color: #374151;
             text-decoration: none;
+            border-bottom: 2px solid transparent;
         }
-        .nav-pill:hover { color: var(--bengkel-primary); }
+        .nav-pill:hover { color: var(--bengkel-accent); }
         .nav-pill.active {
-            background: linear-gradient(135deg, var(--bengkel-primary), var(--bengkel-accent));
-            color: #fff;
+            color: var(--bengkel-accent);
+            border-bottom: 2px solid var(--bengkel-accent);
         }
         .icon-btn {
-            width: 38px;
-            height: 38px;
-            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            border-radius: .5rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #6b7280;
-            background: #f3f4f6;
+            color: #374151;
+            background: transparent;
             border: none;
+            font-size: 1.3rem;
         }
-        .icon-btn:hover { background: #e5e7eb; }
-        .card { border: none; border-radius: .9rem; box-shadow: 0 2px 10px rgba(0,0,0,.04); }
+        .icon-btn:hover { background: rgba(237, 2, 254, 0.1); color: var(--bengkel-accent); }
+        .brand-caption { font-size: .75rem; color: #9ca3af; line-height: 1; margin-top: 4px; }
+        .nav-divider { width: 1px; height: 24px; background: #d1d5db; }
+        main { margin-top: .5rem; }
+        .card { border: 1px solid #eee; border-radius: .75rem; box-shadow: 0 1px 4px rgba(0,0,0,.03); }
         .btn-bengkel {
-            background: linear-gradient(135deg, var(--bengkel-primary), var(--bengkel-accent));
+            background: var(--bengkel-accent); /* Ubah menjadi warna magenta solid */
             border: none;
             color: #fff;
             font-weight: 600;
+            border-radius: 2rem;
         }
         .btn-bengkel:hover { opacity: .9; color: #fff; }
     </style>
     @stack('styles')
 </head>
 <body>
-    <nav class="topbar d-flex align-items-center justify-content-between flex-wrap gap-2">
-        <div class="d-flex align-items-center gap-4 flex-wrap">
-            <img src="{{ asset('images/logo-ksr-garage.png') }}" alt="KSR Garage">
+    <nav class="topbar d-flex align-items-start justify-content-between flex-wrap gap-2">
+        <div class="d-flex align-items-start gap-4 flex-wrap">
+            <div>
+                <img src="{{ asset('images/logo-ksr-garage.png') }}" alt="KSR Garage" style="display:block;">
+                <div class="brand-caption">@yield('nav-caption', 'Admin Dashboard')</div>
+            </div>
 
-            <div class="d-flex gap-1 flex-wrap">
+            <div class="d-flex align-items-center gap-4 flex-wrap" style="padding-top: 6px;">
                 <a href="{{ route('admin.dashboard') }}"
                    class="nav-pill {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">Dashboard</a>
                 <a href="{{ route('admin.pendaftaran') }}"
@@ -76,12 +85,12 @@
             </div>
         </div>
 
-        <div class="d-flex align-items-center gap-2">
-            <span class="text-muted small d-none d-md-inline">{{ auth()->user()->full_name }}</span>
-            <button class="icon-btn"><i class="bi bi-gear"></i></button>
-            <form method="POST" action="{{ route('logout') }}">
+        <div class="d-flex align-items-center gap-3" style="padding-top: 6px;">
+            <div class="nav-divider d-none d-md-block"></div>
+            <button class="icon-btn" title="{{ auth()->user()->full_name }}"><i class="bi bi-gear"></i></button>
+            <form method="POST" action="{{ route('logout') }}" class="m-0 d-flex">
                 @csrf
-                <button class="icon-btn" type="submit"><i class="bi bi-box-arrow-right"></i></button>
+                <button class="icon-btn" type="submit" title="Keluar"><i class="bi bi-box-arrow-right"></i></button>
             </form>
         </div>
     </nav>
