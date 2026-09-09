@@ -11,11 +11,11 @@
     </div>
 @endif
 
-<div class="d-flex flex-wrap justify-content-between align-items-center mb-3 gap-2">
+<div class="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-2">
     <h1 class="h4 fw-bold mb-0">Dashboard Operasional</h1>
 
     <div class="d-flex align-items-center gap-2">
-        <form method="GET" class="d-flex align-items-center gap-2">
+        <form method="GET" class="d-flex align-items-center m-0">
             <input type="date" name="date" class="form-control form-control-sm"
                    value="{{ $date->format('Y-m-d') }}" onchange="this.form.submit()">
         </form>
@@ -183,13 +183,17 @@
         </div>
     </div>
 
-    {{-- Peringatan Stok Tipis --}}
-    <div class="col-lg-4">
-        <div class="card p-3" style="background:#fef2f2;">
-            <h2 class="h6 fw-bold mb-3 text-danger">
+{{-- Peringatan Stok Tipis --}}
+<div class="col-lg-4">
+    <div class="card overflow-hidden">
+        {{-- Header dengan background merah muda khusus --}}
+        <div class="p-3" style="background:#fee2e2;">
+            <h2 class="h6 fw-bold mb-0 text-danger">
                 <i class="bi bi-exclamation-triangle-fill"></i> Peringatan Stok Tipis
             </h2>
+        </div>
 
+        <div class="p-3">
             @php
                 $badgeStyles = [
                     'background:#fce7f3;color:#db2777;',
@@ -203,13 +207,19 @@
                         <div class="fw-semibold small">{{ $item->name }}</div>
                         <div class="text-muted" style="font-size:.75rem;">Kategori: {{ $item->category->name ?? '-' }}</div>
                     </div>
-                    <span class="badge" style="{{ $badgeStyles[$loop->index % 3] }}">Sisa {{ $item->stok }} {{ $item->satuan }}</span>
+                    {{-- Mengubah label satuan dinamis menjadi teks "Item" agar seragam --}}
+                    <span class="badge" style="{{ $badgeStyles[$loop->index % 3] }}">Sisa {{ $item->stok }} Item</span>
                 </div>
             @empty
                 <p class="text-muted small mb-0 py-2">Semua stok sparepart dalam kondisi aman.</p>
             @endforelse
+        </div>
 
-            <a href="{{ route('admin.inventori') }}" class="d-block text-center small fw-semibold mt-3 link-inventori text-decoration-none">Lihat Semua Inventori</a>
+        {{-- Footer link Lihat Semua Inventori dibungkus border atas --}}
+        <div class="border-top p-2 text-center bg-white">
+            <a href="{{ route('admin.inventori') }}" class="small fw-semibold link-inventori text-decoration-none">
+                Lihat Semua Inventori
+            </a>
         </div>
     </div>
 </div>
