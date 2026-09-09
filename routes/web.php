@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\Admin\ServiceOrderActionController;
 use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,11 +28,20 @@ Route::middleware('auth')->group(function () {
 
 /*
 |--------------------------------------------------------------------------
-| Dashboard Admin (khusus role admin)
+| Area Admin (khusus role admin)
 |--------------------------------------------------------------------------
 */
 Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
-    Route::get('/dashboard', fn () => view('dashboard.admin'))->name('dashboard');
+    Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
+
+    Route::post('/service-orders/{serviceOrder}/assign-mechanic', [ServiceOrderActionController::class, 'assignMechanic'])
+        ->name('service-orders.assign-mechanic');
+
+    // Menu yang belum dibangun - halaman "segera hadir" sementara
+    Route::get('/pendaftaran', fn () => view('admin.coming-soon', ['title' => 'Pendaftaran Servis']))->name('pendaftaran');
+    Route::get('/inventori', fn () => view('admin.coming-soon', ['title' => 'Inventori']))->name('inventori');
+    Route::get('/kasir', fn () => view('admin.coming-soon', ['title' => 'Kasir']))->name('kasir');
+    Route::get('/laporan', fn () => view('admin.coming-soon', ['title' => 'Laporan']))->name('laporan');
 });
 
 /*
