@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\Admin\PendaftaranController;
 use App\Http\Controllers\Admin\ServiceOrderActionController;
 use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Route;
@@ -37,8 +38,12 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::post('/service-orders/{serviceOrder}/assign-mechanic', [ServiceOrderActionController::class, 'assignMechanic'])
         ->name('service-orders.assign-mechanic');
 
+    // Pendaftaran Servis
+    Route::get('/pendaftaran', [PendaftaranController::class, 'create'])->name('pendaftaran');
+    Route::post('/pendaftaran', [PendaftaranController::class, 'store'])->name('pendaftaran.store');
+    Route::get('/pendaftaran/cari-kendaraan', [PendaftaranController::class, 'cariKendaraan'])->name('pendaftaran.cari-kendaraan');
+
     // Menu yang belum dibangun - halaman "segera hadir" sementara
-    Route::get('/pendaftaran', fn () => view('admin.coming-soon', ['title' => 'Pendaftaran Servis']))->name('pendaftaran');
     Route::get('/inventori', fn () => view('admin.coming-soon', ['title' => 'Inventori']))->name('inventori');
     Route::get('/kasir', fn () => view('admin.coming-soon', ['title' => 'Kasir']))->name('kasir');
     Route::get('/laporan', fn () => view('admin.coming-soon', ['title' => 'Laporan']))->name('laporan');
