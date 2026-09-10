@@ -7,18 +7,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     <style>
-        .bg-watermark {
-            position: fixed;
-            top: 55%; 
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 1000px; 
-            opacity: 0.08; 
-            pointer-events: none;
-            z-index: 0;
-        }
         :root {
-            --bengkel-primary: #ed02fe;
+            --bengkel-primary: #7c3aed;
             --bengkel-accent: #ed02fe;
         }
         body {
@@ -63,22 +53,17 @@
         main { margin-top: .5rem; }
         .card { border: 1px solid #eee; border-radius: .75rem; box-shadow: 0 1px 4px rgba(0,0,0,.03); }
         .btn-bengkel {
-            background: var(--bengkel-accent); 
+            background: linear-gradient(135deg, var(--bengkel-primary), var(--bengkel-accent));
             border: none;
             color: #fff;
             font-weight: 600;
-            border-radius: 0,375rem;
+            border-radius: 2rem;
         }
-        .btn-bengkel:hover { 
-            background-color: #ffffff; 
-            color: #ed02fe; 
-            opacity: 0.85; 
-        }
+        .btn-bengkel:hover { opacity: .9; color: #fff; }
     </style>
     @stack('styles')
 </head>
 <body>
-    <img src="{{ asset('images/logo-ksr-garage.png') }}" alt="Watermark" class="bg-watermark">
     <nav class="topbar d-flex align-items-start justify-content-between flex-wrap gap-2">
         <div class="d-flex align-items-start gap-4 flex-wrap">
             <div>
@@ -90,9 +75,9 @@
                 <a href="{{ route('admin.dashboard') }}"
                    class="nav-pill {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">Dashboard</a>
                 <a href="{{ route('admin.pendaftaran') }}"
-                   class="nav-pill {{ request()->routeIs('admin.pendaftaran') ? 'active' : '' }}">Pendaftaran</a>
+                   class="nav-pill {{ request()->routeIs('admin.pendaftaran*') ? 'active' : '' }}">Pendaftaran</a>
                 <a href="{{ route('admin.inventori') }}"
-                   class="nav-pill {{ request()->routeIs('admin.inventori') ? 'active' : '' }}">Inventori</a>
+                   class="nav-pill {{ request()->routeIs('admin.inventori*') ? 'active' : '' }}">Inventori</a>
                 <a href="{{ route('admin.kasir') }}"
                    class="nav-pill {{ request()->routeIs('admin.kasir') ? 'active' : '' }}">Kasir</a>
                 <a href="{{ route('admin.laporan') }}"
@@ -101,9 +86,12 @@
         </div>
 
         <div class="d-flex align-items-center gap-3" style="padding-top: 6px;">
+            <a href="{{ route('admin.pendaftaran') }}" class="btn btn-bengkel btn-sm px-3">
+                <i class="bi bi-plus-lg"></i> Registrasi Servis Baru
+            </a>
             <div class="nav-divider d-none d-md-block"></div>
             <button class="icon-btn" title="{{ auth()->user()->full_name }}"><i class="bi bi-gear"></i></button>
-            <form method="POST" action="{{ route('logout') }}" class="m-0 d-flex">
+            <form method="POST" action="{{ route('logout') }}">
                 @csrf
                 <button class="icon-btn" type="submit" title="Keluar"><i class="bi bi-box-arrow-right"></i></button>
             </form>
@@ -113,6 +101,16 @@
     <main class="container-fluid px-3 px-md-4 py-4">
         @yield('content')
     </main>
+
+    <footer class="text-center text-muted small py-4 mt-3" style="border-top: 1px solid #eee;">
+        &copy; {{ date('Y') }} KSR Garage. Mechanical Precision & Digital Efficiency.
+        <div class="mt-1">
+            <a href="#" class="text-muted text-decoration-none me-2">Support</a>
+            <a href="#" class="text-muted text-decoration-none me-2">Privacy Policy</a>
+            <a href="#" class="text-muted text-decoration-none">Terms of Service</a>
+        </div>
+    </footer>
     @stack('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

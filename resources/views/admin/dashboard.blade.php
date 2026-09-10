@@ -11,18 +11,13 @@
     </div>
 @endif
 
-<div class="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-2">
+<div class="d-flex flex-wrap justify-content-between align-items-center mb-3 gap-2">
     <h1 class="h4 fw-bold mb-0">Dashboard Operasional</h1>
 
-    <div class="d-flex align-items-center gap-2">
-        <form method="GET" class="d-flex align-items-center m-0">
-            <input type="date" name="date" class="form-control form-control-sm"
-                   value="{{ $date->format('Y-m-d') }}" onchange="this.form.submit()">
-        </form>
-        <a href="{{ route('admin.pendaftaran') }}" class="btn btn-bengkel btn-sm px-3">
-            <i class="bi bi-plus-lg"></i> Registrasi Servis Baru
-        </a>
-    </div>
+    <form method="GET" class="d-flex align-items-center gap-2">
+        <input type="date" name="date" class="form-control form-control-sm"
+               value="{{ $date->format('Y-m-d') }}" onchange="this.form.submit()">
+    </form>
 </div>
 
 {{-- Kartu Statistik --}}
@@ -111,7 +106,7 @@
                                         — {{ $order->vehicle->plat_nomor }}
                                     </div>
                                     <div class="text-muted small">
-                                        <span style="text-dark fw-bold;">Keluhan:</span>
+                                        <span style="color: var(--bengkel-accent); font-weight:600;">Keluhan:</span>
                                         {{ $order->keluhan_awal }}
                                     </div>
                                 </div>
@@ -183,17 +178,13 @@
         </div>
     </div>
 
-{{-- Peringatan Stok Tipis --}}
-<div class="col-lg-4">
-    <div class="card overflow-hidden">
-        {{-- Header dengan background merah muda khusus --}}
-        <div class="p-3" style="background:#fee2e2;">
-            <h2 class="h6 fw-bold mb-0 text-danger">
+    {{-- Peringatan Stok Tipis --}}
+    <div class="col-lg-4">
+        <div class="card p-3" style="background:#fef2f2;">
+            <h2 class="h6 fw-bold mb-3 text-danger">
                 <i class="bi bi-exclamation-triangle-fill"></i> Peringatan Stok Tipis
             </h2>
-        </div>
 
-        <div class="p-3">
             @php
                 $badgeStyles = [
                     'background:#fce7f3;color:#db2777;',
@@ -207,19 +198,14 @@
                         <div class="fw-semibold small">{{ $item->name }}</div>
                         <div class="text-muted" style="font-size:.75rem;">Kategori: {{ $item->category->name ?? '-' }}</div>
                     </div>
-                    {{-- Mengubah label satuan dinamis menjadi teks "Item" agar seragam --}}
-                    <span class="badge" style="{{ $badgeStyles[$loop->index % 3] }}">Sisa {{ $item->stok }} Item</span>
+                    <span class="badge" style="{{ $badgeStyles[$loop->index % 3] }}">Sisa {{ $item->stok }} {{ $item->satuan }}</span>
                 </div>
             @empty
                 <p class="text-muted small mb-0 py-2">Semua stok sparepart dalam kondisi aman.</p>
             @endforelse
-        </div>
 
-        {{-- Footer link Lihat Semua Inventori dibungkus border atas --}}
-        <div class="border-top p-2 text-center bg-white">
-            <a href="{{ route('admin.inventori') }}" class="small fw-semibold link-inventori text-decoration-none">
-                Lihat Semua Inventori
-            </a>
+            <a href="{{ route('admin.inventori') }}" class="d-block text-center small fw-semibold mt-3"
+               style="color: var(--bengkel-primary);">Lihat Semua Inventori</a>
         </div>
     </div>
 </div>
@@ -230,15 +216,6 @@
 <style>
     .nav-tabs .nav-link { color: #6b7280; font-weight: 600; font-size: .85rem; border: none; }
     .nav-tabs .nav-link.active { color: var(--bengkel-primary); border-bottom: 2px solid var(--bengkel-primary); }
-    
-    /* Tambahan CSS baru untuk tautan inventori */
-    .link-inventori {
-        color: #212529; /* Warna hitam (default text dark Bootstrap) */
-        transition: color 0.2s ease-in-out; /* Efek transisi halus */
-    }
-    .link-inventori:hover {
-        color: var(--bengkel-accent); /* Berubah menjadi magenta saat di-hover */
-    }
 </style>
 @endpush
 

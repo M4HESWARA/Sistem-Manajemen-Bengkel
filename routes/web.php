@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\Admin\InventoriController;
 use App\Http\Controllers\Admin\PendaftaranController;
 use App\Http\Controllers\Admin\ServiceOrderActionController;
 use App\Http\Controllers\Auth\LoginController;
@@ -43,8 +44,16 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::post('/pendaftaran', [PendaftaranController::class, 'store'])->name('pendaftaran.store');
     Route::get('/pendaftaran/cari-kendaraan', [PendaftaranController::class, 'cariKendaraan'])->name('pendaftaran.cari-kendaraan');
 
+    // Inventori Sparepart
+    Route::get('/inventori', [InventoriController::class, 'index'])->name('inventori');
+    Route::get('/inventori/tambah', [InventoriController::class, 'create'])->name('inventori.create');
+    Route::post('/inventori', [InventoriController::class, 'store'])->name('inventori.store');
+    Route::get('/inventori/{sparepart}/edit', [InventoriController::class, 'edit'])->name('inventori.edit');
+    Route::put('/inventori/{sparepart}', [InventoriController::class, 'update'])->name('inventori.update');
+    Route::post('/inventori/{sparepart}/toggle-active', [InventoriController::class, 'toggleActive'])->name('inventori.toggle-active');
+    Route::post('/inventori/{sparepart}/tambah-stok', [InventoriController::class, 'tambahStok'])->name('inventori.tambah-stok');
+
     // Menu yang belum dibangun - halaman "segera hadir" sementara
-    Route::get('/inventori', fn () => view('admin.coming-soon', ['title' => 'Inventori']))->name('inventori');
     Route::get('/kasir', fn () => view('admin.coming-soon', ['title' => 'Kasir']))->name('kasir');
     Route::get('/laporan', fn () => view('admin.coming-soon', ['title' => 'Laporan']))->name('laporan');
 });
