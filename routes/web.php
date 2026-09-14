@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\InventoriController;
+use App\Http\Controllers\Admin\KasirController;
 use App\Http\Controllers\Admin\PendaftaranController;
 use App\Http\Controllers\Admin\ServiceOrderActionController;
 use App\Http\Controllers\Auth\LoginController;
@@ -53,8 +54,12 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::post('/inventori/{sparepart}/toggle-active', [InventoriController::class, 'toggleActive'])->name('inventori.toggle-active');
     Route::post('/inventori/{sparepart}/tambah-stok', [InventoriController::class, 'tambahStok'])->name('inventori.tambah-stok');
 
+    // Kasir & Pembayaran
+    Route::get('/kasir', [KasirController::class, 'index'])->name('kasir');
+    Route::post('/kasir/{serviceOrder}/bayar', [KasirController::class, 'bayar'])->name('kasir.bayar');
+    Route::get('/kasir/{serviceOrder}/nota', [KasirController::class, 'nota'])->name('kasir.nota');
+
     // Menu yang belum dibangun - halaman "segera hadir" sementara
-    Route::get('/kasir', fn () => view('admin.coming-soon', ['title' => 'Kasir']))->name('kasir');
     Route::get('/laporan', fn () => view('admin.coming-soon', ['title' => 'Laporan']))->name('laporan');
 });
 

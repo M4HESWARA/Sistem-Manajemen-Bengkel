@@ -166,7 +166,7 @@
                                     Total: Rp {{ number_format($order->totalJasa() + $order->totalSparepart(), 0, ',', '.') }}
                                 </div>
                             </div>
-                            <a href="{{ route('admin.kasir') }}" class="btn btn-bengkel btn-sm">
+                            <a href="{{ route('admin.kasir', ['order' => $order->id]) }}" class="btn btn-bengkel btn-sm">
                                 <i class="bi bi-receipt"></i> Proses Pembayaran & Cetak Nota
                             </a>
                         </div>

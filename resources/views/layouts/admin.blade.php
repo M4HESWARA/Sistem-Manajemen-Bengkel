@@ -8,7 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     <style>
         :root {
-            --bengkel-primary: #7c3aed;
+            --bengkel-primary: #ed02fe;
             --bengkel-accent: #ed02fe;
         }
         body {
