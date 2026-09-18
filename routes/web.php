@@ -3,17 +3,22 @@
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\InventoriController;
 use App\Http\Controllers\Admin\KasirController;
+use App\Http\Controllers\Admin\LaporanController;
 use App\Http\Controllers\Admin\PendaftaranController;
 use App\Http\Controllers\Admin\ServiceOrderActionController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Mekanik\MekanikController;
+use App\Http\Controllers\Public\CekStatusController;
+use App\Http\Controllers\Public\LandingController;
 use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
-| Halaman utama -> arahkan ke login
+| Halaman Publik (tanpa login) - Portal Pelanggan
 |--------------------------------------------------------------------------
 */
-Route::get('/', fn () => redirect()->route('login'));
+Route::get('/', [LandingController::class, 'index'])->name('public.landing');
+Route::get('/cek-status', [CekStatusController::class, 'index'])->name('public.cek-status');
 
 /*
 |--------------------------------------------------------------------------
@@ -59,8 +64,8 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
     Route::post('/kasir/{serviceOrder}/bayar', [KasirController::class, 'bayar'])->name('kasir.bayar');
     Route::get('/kasir/{serviceOrder}/nota', [KasirController::class, 'nota'])->name('kasir.nota');
 
-    // Menu yang belum dibangun - halaman "segera hadir" sementara
-    Route::get('/laporan', fn () => view('admin.coming-soon', ['title' => 'Laporan']))->name('laporan');
+    // Laporan & Analitik
+    Route::get('/laporan', [LaporanController::class, 'index'])->name('laporan');
 });
 
 /*
@@ -69,5 +74,10 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
 |--------------------------------------------------------------------------
 */
 Route::middleware(['auth', 'role:mekanik'])->prefix('mekanik')->name('mekanik.')->group(function () {
-    Route::get('/dashboard', fn () => view('dashboard.mekanik'))->name('dashboard');
+    Route::get('/dashboard', [MekanikController::class, 'dashboard'])->name('dashboard');
+    Route::post('/tugas/{serviceOrder}/status', [MekanikController::class, 'updateStatus'])->name('tugas.update-status');
+    Route::post('/tugas/{serviceOrder}/sparepart', [MekanikController::class, 'tambahSparepart'])->name('tugas.tambah-sparepart');
+    Route::delete('/tugas/{serviceOrder}/sparepart/{item}', [MekanikController::class, 'hapusSparepart'])->name('tugas.hapus-sparepart');
+    Route::post('/tugas/{serviceOrder}/jasa', [MekanikController::class, 'tambahJasa'])->name('tugas.tambah-jasa');
+    Route::post('/tugas/{serviceOrder}/selesai', [MekanikController::class, 'selesaikan'])->name('tugas.selesai');
 });

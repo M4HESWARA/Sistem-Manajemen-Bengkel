@@ -129,9 +129,7 @@
                         <input class="form-check-input" type="checkbox" id="remember" name="remember">
                         <label class="form-check-label small" for="remember">Remember me</label>
                     </div>
-                    {{-- Fitur lupa password belum dibangun, link ini placeholder dulu --}}
-                    <a href="#" class="link-accent">Forget your password?</a>
-                </div>
+                    </div>
 
                 <button type="submit" class="btn btn-bengkel w-100 py-2">MASUK</button>
             </form>
