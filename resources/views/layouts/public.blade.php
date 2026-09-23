@@ -31,6 +31,7 @@
     @stack('styles')
 </head>
 <body>
+    @unless (View::hasSection('hide-navbar'))
     <nav class="navbar-public d-flex align-items-center justify-content-between">
         <a href="{{ route('public.landing') }}"><img src="{{ asset('images/logo-ksr-garage.png') }}" alt="KSR Garage"></a>
         <div class="d-none d-md-flex gap-4">
@@ -39,6 +40,7 @@
         </div>
         <a href="{{ route('login') }}" class="nav-link-public">Masuk</a>
     </nav>
+    @endunless
 
     @yield('content')
 
