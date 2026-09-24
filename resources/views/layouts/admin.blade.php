@@ -19,11 +19,17 @@
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
             color: #212529;
         }
+        .dropdown-item.active, .dropdown-item:active {
+            background-color: var(--bengkel-accent) !important;
+            color: #ffffff !important;
+        }
         .topbar {
             background: #ffffff;
             border-bottom: 3px solid var(--bengkel-accent);
             padding: 0.75rem 1.5rem;
             box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+            position: relative;
+            z-index: 1050;
         }
         .brand-caption {
             font-size: 0.72rem;
@@ -41,11 +47,7 @@
             border-radius: 0.5rem;
             transition: all 0.2s ease;
         }
-        .nav-pill-item:hover {
-            color: var(--bengkel-accent);
-            background-color: #fcf0fc;
-        }
-        .nav-pill-item.active {
+        .nav-pill-item:hover, .nav-pill-item.active {
             color: var(--bengkel-accent);
             background-color: #fcf0fc;
         }
@@ -84,42 +86,74 @@
             background-color: #a31d99;
             color: #ffffff;
         }
-        .card-custom {
-            border: 1px solid #edf2f7;
-            border-radius: 1rem;
-            background: #ffffff;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+
+        /* Logo Watermark Background */
+        .bg-watermark {
+            position: fixed;
+            top: 55%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 550px;
+            opacity: 0.08;
+            pointer-events: none;
+            z-index: 0;
+        }
+        main {
+            position: relative;
+            z-index: 1;
         }
     </style>
     @stack('styles')
 </head>
+
 <body class="d-flex flex-column min-vh-100">
+
+    <!-- Watermark Background -->
+    <img src="{{ asset('images/logo-ksr-garage.png') }}" alt="Watermark" class="bg-watermark">
 
     <!-- HEADER TOPBAR -->
     <nav class="topbar d-flex align-items-center justify-content-between flex-wrap gap-3">
-        <div class="d-flex align-items-center gap-4">
+        <div class="d-flex align-items-center gap-3">
             <a href="{{ route('admin.dashboard') }}" class="text-decoration-none">
                 <img src="{{ asset('images/logo-ksr-garage.png') }}" alt="KSR Garage" style="height: 36px; display: block;">
                 <div class="brand-caption">Admin Dashboard</div>
             </a>
 
+            <!-- Menu Navigasi Desktop (Laptop / Komputer) -->
             <div class="d-none d-md-flex align-items-center gap-1">
-                <a href="{{ route('admin.dashboard') }}"
-                   class="nav-pill-item {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">Dashboard</a>
-                <a href="{{ route('admin.pendaftaran') }}"
-                   class="nav-pill-item {{ request()->routeIs('admin.pendaftaran') ? 'active' : '' }}">Pendaftaran</a>
-                <a href="{{ route('admin.inventori') }}"
-                   class="nav-pill-item {{ request()->routeIs('admin.inventori') ? 'active' : '' }}">Inventori</a>
-                <a href="{{ route('admin.kasir') }}"
-                   class="nav-pill-item {{ request()->routeIs('admin.kasir') ? 'active' : '' }}">Kasir</a>
-                <a href="{{ route('admin.laporan') }}"
-                   class="nav-pill-item {{ request()->routeIs('admin.laporan') ? 'active' : '' }}">Laporan</a>
-                <a href="{{ route('admin.riwayat') }}"
-                   class="nav-pill {{ request()->routeIs('admin.riwayat*') ? 'active' : '' }}">Riwayat</a>
+                <a href="{{ route('admin.dashboard') }}" class="nav-pill-item {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">Dashboard</a>
+                <a href="{{ route('admin.pendaftaran') }}" class="nav-pill-item {{ request()->routeIs('admin.pendaftaran') ? 'active' : '' }}">Pendaftaran</a>
+                <a href="{{ route('admin.inventori') }}" class="nav-pill-item {{ request()->routeIs('admin.inventori') ? 'active' : '' }}">Inventori</a>
+                <a href="{{ route('admin.kasir') }}" class="nav-pill-item {{ request()->routeIs('admin.kasir') ? 'active' : '' }}">Kasir</a>
+                <a href="{{ route('admin.laporan') }}" class="nav-pill-item {{ request()->routeIs('admin.laporan') ? 'active' : '' }}">Laporan</a>
+                <a href="{{ route('admin.riwayat') }}" class="nav-pill-item {{ request()->routeIs('admin.riwayat*') ? 'active' : '' }}">Riwayat</a>
+            </div>
+
+            <!-- Menu Navigasi Mobile Dropdown (HP) -->
+            <div class="dropdown d-md-none">
+                <!-- Kita hapus data-bs-toggle, ganti dengan fungsi onclick bawaan -->
+                <button class="btn btn-outline-secondary btn-sm dropdown-toggle fw-semibold" type="button" onclick="document.getElementById('menuMobile').classList.toggle('show')">
+                    <i class="bi bi-list me-1"></i>
+                </button>
+                
+                <!-- Tambahkan ID menuMobile di sini -->
+                <ul class="dropdown-menu shadow" id="menuMobile">
+                    <li><a class="dropdown-item {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}" href="{{ route('admin.dashboard') }}">Dashboard</a></li>
+                    <li><a class="dropdown-item {{ request()->routeIs('admin.pendaftaran') ? 'active' : '' }}" href="{{ route('admin.pendaftaran') }}">Pendaftaran</a></li>
+                    <li><a class="dropdown-item {{ request()->routeIs('admin.inventori') ? 'active' : '' }}" href="{{ route('admin.inventori') }}">Inventori</a></li>
+                    <li><a class="dropdown-item {{ request()->routeIs('admin.kasir') ? 'active' : '' }}" href="{{ route('admin.kasir') }}">Kasir</a></li>
+                    <li><a class="dropdown-item {{ request()->routeIs('admin.laporan') ? 'active' : '' }}" href="{{ route('admin.laporan') }}">Laporan</a></li>
+                    <li><a class="dropdown-item {{ request()->routeIs('admin.riwayat*') ? 'active' : '' }}" href="{{ route('admin.riwayat') }}">Riwayat</a></li>
+                </ul>
             </div>
         </div>
 
         <div class="d-flex align-items-center gap-2">
+            <!-- Tombol Registrasi Servis Baru -->
+            <a href="{{ route('admin.pendaftaran') }}" class="btn-bengkel-primary text-nowrap">
+                <i class="bi bi-plus-lg"></i> <span class="d-none d-sm-inline">Servis Baru</span>
+            </a>
+
             <button class="icon-btn" title="Pengaturan"><i class="bi bi-gear"></i></button>
             <form method="POST" action="{{ route('logout') }}" class="m-0">
                 @csrf
@@ -134,10 +168,11 @@
     </main>
 
     <!-- FOOTER -->
-    <footer class="text-center py-3 bg-white border-top text-muted small mt-auto">
-        <p class="mb-1">&copy; 2026 KSR Garage. Mechanical Precision & Digital Efficiency.</p>
+    <footer class="text-center py-3 bg-white border-top text-muted small mt-auto" style="position: relative; z-index: 1;">
+        <p class="mb-0">&copy; 2026 KSR Garage. Mechanical Precision & Digital Efficiency.</p>
     </footer>
 
+    <!-- Bootstrap 5 JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     @stack('scripts')
 </body>

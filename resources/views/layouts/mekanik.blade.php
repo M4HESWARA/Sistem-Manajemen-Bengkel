@@ -3,63 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Workspace Mekanik') - Auto Bengkel</title>
+    <title>@yield('title', 'Workspace Mekanik') - KSR Garage</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     <style>
-        :root { --bengkel-primary: #7c3aed; --bengkel-accent: #ed02fe; }
+        :root { 
+            --bengkel-primary: #a31d99; 
+            --bengkel-accent: #BF24B4; 
+        }
         body {
-            background: #f5f6fa;
+            background: #f8f9fc;
             font-family: 'Segoe UI', system-ui, sans-serif;
-            font-size: 1.05rem;
-            padding-bottom: 2rem;
+            color: #2b2b2b;
         }
+        /* Topbar putih bersih sesuai referensi */
         .topbar {
-            background: linear-gradient(135deg, var(--bengkel-primary), var(--bengkel-accent));
-            padding: 1rem 1.25rem;
-            color: #fff;
+            background: #ffffff;
+            padding: 0.75rem 2rem;
+            border-bottom: 1px solid #edf2f7;
         }
-        .topbar img { height: 32px; filter: brightness(0) invert(1); }
-        .card { border: none; border-radius: 1rem; box-shadow: 0 2px 10px rgba(0,0,0,.05); }
-
-        /* Tombol besar, mudah dipencet dengan jempol - sesuai kebutuhan PRD */
-        .btn { min-height: 48px; font-weight: 600; border-radius: .75rem; font-size: 1rem; }
-        .btn-lg { min-height: 56px; font-size: 1.1rem; }
-        .form-control, .form-select { min-height: 48px; font-size: 1.05rem; }
-
+        .brand-caption {
+            font-size: 0.8rem;
+            color: #6c757d;
+            font-weight: 500;
+        }
+        .card { 
+            border: 1px solid #edf2f7; 
+            border-radius: 12px; 
+            box-shadow: 0 2px 8px rgba(0,0,0,0.01);
+            background: #ffffff;
+        }
         .btn-bengkel {
-            background: linear-gradient(135deg, var(--bengkel-primary), var(--bengkel-accent));
+            background-color: var(--bengkel-accent);
             border: none;
             color: #fff;
+            font-weight: 600;
         }
-        .btn-bengkel:hover { opacity: .9; color: #fff; }
-
-        .status-badge { font-size: .85rem; padding: .5rem .9rem; border-radius: 2rem; font-weight: 700; }
+        .btn-bengkel:hover {
+            background-color: var(--bengkel-primary);
+            color: #fff;
+        }
+        /* Style pill status pekerjaan */
+        .status-pill {
+            padding: 0.4rem 0.9rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #6c757d;
+            border: 1px solid #dee2e6;
+            background: #ffffff;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+        .status-pill.active {
+            color: var(--bengkel-accent);
+            border-color: var(--bengkel-accent);
+            background-color: #fdf0fc;
+        }
     </style>
     @stack('styles')
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
+
+    <!-- Topbar Putih Bersih -->
     <nav class="topbar d-flex align-items-center justify-content-between">
-        <div class="d-flex align-items-center gap-2">
-            <img src="{{ asset('images/logo-ksr-garage.png') }}" alt="KSR Garage">
-            <div>
-                <div class="fw-bold" style="line-height:1;">{{ auth()->user()->full_name }}</div>
-                <div class="small" style="opacity:.85;">Workspace Mekanik</div>
+        <div class="d-flex align-items-center gap-3">
+            <span class="fw-bold fs-5 text-dark" style="letter-spacing: 0.5px;">
+                <span style="color: var(--bengkel-accent);">KSR</span> Garage
+            </span>
+            <div class="brand-caption border-start ps-3 ms-1">
+                Mekanik Dashboard
             </div>
         </div>
-        <form method="POST" action="{{ route('logout') }}">
-            @csrf
-            <button type="submit" class="btn btn-light btn-sm" style="min-height:auto;">
-                <i class="bi bi-box-arrow-right"></i> Keluar
-            </button>
-        </form>
+        <div class="d-flex align-items-center gap-3">
+            <button class="btn btn-link text-secondary p-0 text-decoration-none"><i class="bi bi-gear fs-5"></i></button>
+            <form method="POST" action="{{ route('logout') }}" class="m-0">
+                @csrf
+                <button type="submit" class="btn btn-link text-secondary p-0 text-decoration-none" title="Keluar">
+                    <i class="bi bi-box-arrow-right fs-5"></i>
+                </button>
+            </form>
+        </div>
     </nav>
 
-    <main class="container-fluid px-3 py-3" style="max-width: 640px;">
+    <!-- Konten Utama -->
+    <main class="container-fluid py-4 px-4 px-lg-5">
         @yield('content')
     </main>
 
-    @stack('scripts')
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    @stack('scripts')
 </body>
 </html>

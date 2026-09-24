@@ -14,223 +14,207 @@
     <div class="alert alert-danger">{{ $errors->first() }}</div>
 @endif
 
-{{-- Daftar Antrian Penugasan --}}
-<div class="mb-3">
-    <h1 class="h6 fw-bold mb-2">Daftar Antrian Penugasan</h1>
+<div class="row g-4">
+    
+    <!-- KOLOM KIRI: DAFTAR ANTRIAN PENUGASAN -->
+    <div class="col-lg-4">
+        <h5 class="fw-bold mb-4 text-dark">Daftar Antrian Penugasan</h5>
 
-    @forelse ($tugasAktif as $order)
-        @php
-            $isSelected = $selectedOrder && $selectedOrder->id === $order->id;
-            $badgeLabel = $order->status === 'proses_diagnosa' ? 'Proses Diagnosa' : 'Sedang Diperbaiki';
-            $badgeStyle = $order->status === 'proses_diagnosa' ? 'background:#fef3c7; color:#92400e;' : 'background:#dbeafe; color:#1e40af;';
-        @endphp
-        <div class="card p-3 mb-2 {{ $isSelected ? 'border-2' : '' }}"
-             style="{{ $isSelected ? 'border-color: var(--bengkel-accent) !important;' : '' }}">
-            <div class="d-flex justify-content-between align-items-start mb-1">
-                <div>
-                    <div class="fw-bold">{{ $order->vehicle->plat_nomor }}</div>
-                    <div class="text-muted small">{{ $order->vehicle->brand }} {{ $order->vehicle->model }}</div>
-                </div>
-                <span class="status-badge" style="{{ $badgeStyle }}">{{ $badgeLabel }}</span>
-            </div>
-            <div class="text-muted small mb-2">
-                <i class="bi bi-clock"></i> {{ $order->keluhan_awal }}
-            </div>
-            <div class="d-flex gap-2">
-                <button type="button" class="btn btn-outline-secondary btn-sm flex-grow-1" style="min-height:auto;"
-                        data-bs-toggle="modal" data-bs-target="#riwayatModal{{ $order->id }}">
-                    <i class="bi bi-clock-history"></i> Lihat Riwayat
-                </button>
-                @if (! $isSelected)
-                    <a href="{{ route('mekanik.dashboard', ['order' => $order->id]) }}"
-                       class="btn btn-bengkel btn-sm flex-grow-1" style="min-height:auto;">
-                        Kerjakan
-                    </a>
-                @endif
-            </div>
-        </div>
-
-        {{-- Modal Riwayat per kendaraan --}}
-        <div class="modal fade" id="riwayatModal{{ $order->id }}" tabindex="-1">
-            <div class="modal-dialog modal-dialog-centered">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title">Riwayat — {{ $order->vehicle->plat_nomor }}</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                    </div>
-                    <div class="modal-body">
-                        @forelse ($riwayatPerOrder[$order->id] as $r)
-                            <div class="small border-bottom py-2">
-                                <div class="fw-semibold">{{ $r->tanggal_selesai?->format('d M Y') }} — {{ $r->keluhan_awal }}</div>
-                                @if ($r->catatan_solusi)
-                                    <div class="text-muted">Solusi: {{ $r->catatan_solusi }}</div>
-                                @endif
-                            </div>
-                        @empty
-                            <p class="text-muted small mb-0">Belum ada riwayat servis untuk kendaraan ini.</p>
-                        @endforelse
-                    </div>
-                </div>
-            </div>
-        </div>
-    @empty
-        <div class="card p-4 text-center text-muted">
-            <i class="bi bi-check2-circle fs-1 mb-2"></i>
-            <p class="mb-0">Belum ada tugas aktif untuk kamu saat ini. 🎉</p>
-        </div>
-    @endforelse
-</div>
-
-{{-- Pengerjaan Aktif --}}
-@if ($selectedOrder)
-    @php
-        $step = match ($selectedOrder->status) {
-            'proses_diagnosa' => 0,
-            'sedang_diperbaiki' => 1,
-            'selesai' => 3,
-            default => 0,
-        };
-    @endphp
-
-    <div class="card p-3 mb-3" style="border-top: 4px solid var(--bengkel-accent);">
-        <h2 class="h5 fw-bold mb-1">
-            <i class="bi bi-person-workspace"></i> Pengerjaan Aktif: {{ $selectedOrder->vehicle->plat_nomor }}
-        </h2>
-        <p class="text-muted small mb-3">Status Pekerjaan</p>
-
-        {{-- Stepper 4 Tahap --}}
-        <div class="d-flex gap-1 mb-3 flex-wrap">
+        @forelse ($tugasAktif as $order)
             @php
-                $steps = [
-                    ['label' => 'Pengecekan', 'icon' => 'bi-search', 'active' => $step >= 0],
-                    ['label' => 'Bongkar', 'icon' => 'bi-tools', 'active' => $step >= 1],
-                    ['label' => 'Ganti Part', 'icon' => 'bi-arrow-left-right', 'active' => $step >= 1],
-                    ['label' => 'Selesai', 'icon' => 'bi-check-circle', 'active' => $step >= 3],
-                ];
+                $isSelected = $selectedOrder && $selectedOrder->id === $order->id;
+                $badgeLabel = $order->status === 'proses_diagnosa' ? 'MENUNGGU' : 'DALAM PERBAIKAN';
+                $badgeClass = $order->status === 'proses_diagnosa' ? 'bg-light text-danger border' : 'bg-light text-primary border';
             @endphp
-            @foreach ($steps as $s)
-                <span class="stepper-pill {{ $s['active'] ? 'active' : '' }}">
-                    <i class="bi {{ $s['icon'] }}"></i> {{ $s['label'] }}
-                </span>
-            @endforeach
-        </div>
-
-        @if ($selectedOrder->status === 'proses_diagnosa')
-            <form method="POST" action="{{ route('mekanik.tugas.update-status', $selectedOrder) }}" class="mb-3">
-                @csrf
-                <input type="hidden" name="status" value="sedang_diperbaiki">
-                <button type="submit" class="btn btn-bengkel btn-lg w-100">
-                    <i class="bi bi-play-circle"></i> Mulai Perbaikan (Bongkar &amp; Ganti Part)
-                </button>
-            </form>
-        @endif
-
-        @if ($selectedOrder->status !== 'selesai')
-            {{-- Penggunaan Sparepart --}}
-            <div class="border rounded-3 p-3 mb-3">
-                <p class="fw-bold small mb-2" style="color: var(--bengkel-primary);">
-                    <i class="bi bi-nut"></i> Penggunaan Sparepart
-                </p>
-
-                <form method="POST" action="{{ route('mekanik.tugas.tambah-sparepart', $selectedOrder) }}" class="d-flex gap-2 mb-2">
-                    @csrf
-                    <select name="sparepart_id" class="form-select" required>
-                        <option value="" disabled selected>Cari sparepart...</option>
-                        @foreach ($spareparts as $sp)
-                            <option value="{{ $sp->id }}">{{ $sp->name }} (stok: {{ $sp->stok }})</option>
-                        @endforeach
-                    </select>
-                    <input type="number" name="quantity" class="form-control" style="max-width:70px;" min="1" value="1" required>
-                    <button type="submit" class="btn btn-bengkel" style="min-width:48px;">
-                        <i class="bi bi-plus-lg"></i>
+            <div class="card p-3 mb-3 {{ $isSelected ? 'border-2' : '' }}"
+                 style="{{ $isSelected ? 'border-color: var(--bengkel-accent) !important;' : '' }}">
+                <div class="d-flex justify-content-between align-items-start mb-1">
+                    <h5 class="fw-bold mb-0 text-dark">{{ $order->vehicle->plat_nomor }}</h5>
+                    <span class="badge {{ $badgeClass }} rounded-pill py-1 px-2" style="font-size: 0.65rem; font-weight: 700;">{{ $badgeLabel }}</span>
+                </div>
+                <p class="text-muted small mb-3">{{ $order->vehicle->brand }} {{ $order->vehicle->model }}</p>
+                
+                <div class="d-flex align-items-center gap-2 mb-3 text-secondary small fw-medium">
+                    <i class="bi bi-tools"></i> {{ $order->keluhan_awal }}
+                </div>
+                
+                <div class="d-flex gap-2">
+                    <button type="button" class="btn btn-light border flex-grow-1 text-muted fw-semibold small py-2"
+                            data-bs-toggle="modal" data-bs-target="#riwayatModal{{ $order->id }}">
+                        Lihat Riwayat
                     </button>
-                </form>
+                    @if (! $isSelected)
+                        <a href="{{ route('mekanik.dashboard', ['order' => $order->id]) }}"
+                           class="btn btn-bengkel flex-grow-1 text-center text-decoration-none d-flex align-items-center justify-content-center small py-2">
+                            Mulai Perbaikan
+                        </a>
+                    @endif
+                </div>
+            </div>
 
-                @forelse ($selectedOrder->items as $item)
-                    <div class="d-flex justify-content-between align-items-center border-bottom py-2">
-                        <span class="small">{{ $item->sparepart->name }}</span>
-                        <div class="d-flex align-items-center gap-2">
-                            <span class="small text-muted">Qty: {{ $item->quantity }}</span>
-                            <form method="POST" action="{{ route('mekanik.tugas.hapus-sparepart', [$selectedOrder, $item]) }}"
-                                  onsubmit="return confirm('Hapus sparepart ini? Stok akan dikembalikan.');">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-outline-danger btn-sm" style="min-height:auto;">
-                                    <i class="bi bi-trash"></i>
-                                </button>
-                            </form>
+            <!-- Modal Riwayat -->
+            <div class="modal fade" id="riwayatModal{{ $order->id }}" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Riwayat — {{ $order->vehicle->plat_nomor }}</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            @forelse ($riwayatPerOrder[$order->id] as $r)
+                                <div class="small border-bottom py-2">
+                                    <div class="fw-semibold">{{ $r->tanggal_selesai?->format('d M Y') }} — {{ $r->keluhan_awal }}</div>
+                                    @if ($r->catatan_solusi)
+                                        <div class="text-muted">Solusi: {{ $r->catatan_solusi }}</div>
+                                    @endif
+                                </div>
+                            @empty
+                                <p class="text-muted small mb-0">Belum ada riwayat servis untuk kendaraan ini.</p>
+                            @endforelse
                         </div>
                     </div>
-                @empty
-                    <p class="text-muted small mb-0">Belum ada sparepart yang dipakai.</p>
-                @endforelse
+                </div>
             </div>
+        @empty
+            <div class="card p-4 text-center text-muted">
+                <i class="bi bi-check2-circle fs-1 mb-2"></i>
+                <p class="mb-0">Belum ada tugas aktif untuk kamu saat ini. 🎉</p>
+            </div>
+        @endforelse
+    </div>
 
-            {{-- Biaya Jasa --}}
-            <div class="border rounded-3 p-3 mb-3">
-                <p class="fw-bold small mb-2" style="color: var(--bengkel-primary);">
-                    <i class="bi bi-cash"></i> Biaya Jasa
-                </p>
+    <!-- KOLOM KANAN: PENGERJAAN AKTIF -->
+    <div class="col-lg-8">
+        @if ($selectedOrder)
+            <div class="card p-4 mb-3" style="border-top: 4px solid var(--bengkel-accent);">
+                
+                <div class="d-flex align-items-center gap-2 mb-4">
+                    <i class="bi bi-person-workspace fs-3" style="color: var(--bengkel-accent);"></i>
+                    <h3 class="fw-bold mb-0 text-dark">Pengerjaan Aktif: {{ $selectedOrder->vehicle->plat_nomor }}</h3>
+                </div>
 
-                <form method="POST" action="{{ route('mekanik.tugas.tambah-jasa', $selectedOrder) }}" class="d-flex gap-2 mb-2">
-                    @csrf
-                    <input type="text" name="deskripsi" class="form-control" placeholder="mis. Servis Rem" required>
-                    <input type="number" name="biaya" class="form-control" style="max-width:110px;" placeholder="Rp" min="0" required>
-                    <button type="submit" class="btn btn-bengkel" style="min-width:48px;">
-                        <i class="bi bi-plus-lg"></i>
-                    </button>
-                </form>
-
-                @forelse ($selectedOrder->jasaItems as $jasa)
-                    <div class="d-flex justify-content-between small border-bottom py-2">
-                        <span>{{ $jasa->deskripsi }}</span>
-                        <span>Rp {{ number_format($jasa->biaya, 0, ',', '.') }}</span>
+                <!-- Status Pekerjaan (Pills) -->
+                <div class="mb-4">
+                    <label class="form-label text-muted small fw-semibold mb-2">Status Pekerjaan</label>
+                    <div class="d-flex flex-wrap gap-2">
+                        <span class="status-pill active"><i class="bi bi-search"></i> Pengecekan</span>
+                        <span class="status-pill"><i class="bi bi-tools"></i> Bongkar</span>
+                        <span class="status-pill"><i class="bi bi-box-seam"></i> Ganti Part</span>
+                        <span class="status-pill"><i class="bi bi-check2-circle"></i> Selesai</span>
                     </div>
-                @empty
-                    <p class="text-muted small mb-0">Belum ada biaya jasa dicatat.</p>
-                @endforelse
-            </div>
+                </div>
 
-            {{-- Catatan Solusi --}}
-            <p class="fw-bold small mb-2" style="color: var(--bengkel-primary);">
-                <i class="bi bi-pencil-square"></i> Catatan Solusi &amp; Tindakan Perbaikan
-            </p>
-            <form method="POST" action="{{ route('mekanik.tugas.selesai', $selectedOrder) }}"
-                  onsubmit="return confirm('Yakin servis ini sudah selesai dikerjakan?');">
-                @csrf
-                <textarea name="catatan_solusi" class="form-control mb-3" rows="3" required
-                          placeholder="Detail perbaikan yang dilakukan...">{{ old('catatan_solusi') }}</textarea>
-                <button type="submit" class="btn btn-bengkel btn-lg w-100">
-                    <i class="bi bi-check-circle"></i> Selesaikan Pekerjaan
-                </button>
-            </form>
+                @if ($selectedOrder->status === 'proses_diagnosa')
+                    <form method="POST" action="{{ route('mekanik.tugas.update-status', $selectedOrder) }}" class="mb-4">
+                        @csrf
+                        <input type="hidden" name="status" value="sedang_diperbaiki">
+                        <button type="submit" class="btn btn-bengkel w-100 py-2">
+                            Mulai Perbaikan (Bongkar & Ganti Part)
+                        </button>
+                    </form>
+                @endif
+
+                @if ($selectedOrder->status !== 'selesai')
+                    <!-- Penggunaan Sparepart -->
+                    <div class="bg-light rounded-3 p-3 mb-4 border">
+                        <label class="form-label text-dark fw-bold mb-2 d-flex align-items-center gap-2">
+                            <i class="bi bi-clipboard2-check"></i> Penggunaan Sparepart
+                        </label>
+                        
+                        <form method="POST" action="{{ route('mekanik.tugas.tambah-sparepart', $selectedOrder) }}" class="input-group mb-3">
+                            @csrf
+                            <span class="input-group-text bg-white border-end-0"><i class="bi bi-search text-muted"></i></span>
+                            <select name="sparepart_id" class="form-select border-start-0 ps-0" required>
+                                <option value="" disabled selected>Cari sparepart...</option>
+                                @foreach ($spareparts as $sp)
+                                    <option value="{{ $sp->id }}">{{ $sp->name }} (stok: {{ $sp->stok }})</option>
+                                @endforeach
+                            </select>
+                            <input type="number" name="quantity" class="form-control" style="max-width: 80px;" min="1" value="1" required>
+                            <button class="btn btn-outline-secondary px-3" type="submit"><i class="bi bi-plus-lg"></i></button>
+                        </form>
+
+                        <div class="table-responsive bg-white rounded border">
+                            <table class="table table-borderless mb-0 align-middle">
+                                <thead class="border-bottom">
+                                    <tr class="small text-muted">
+                                        <th class="ps-3 py-2">Nama Item</th>
+                                        <th width="80" class="text-center py-2">Qty</th>
+                                        <th width="50" class="py-2"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @forelse ($selectedOrder->items as $item)
+                                        <tr class="border-bottom">
+                                            <td class="ps-3 small">{{ $item->sparepart->name }}</td>
+                                            <td class="text-center small">{{ $item->quantity }}</td>
+                                            <td class="text-end pe-3">
+                                                <form method="POST" action="{{ route('mekanik.tugas.hapus-sparepart', [$selectedOrder, $item]) }}" onsubmit="return confirm('Hapus sparepart ini?');" class="m-0">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-link text-danger p-0"><i class="bi bi-trash3"></i></button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                    @empty
+                                        <tr>
+                                            <td colspan="3" class="text-center text-muted small py-3">Belum ada sparepart yang dipakai.</td>
+                                        </tr>
+                                    @endforelse
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Biaya Jasa -->
+                    <div class="bg-light rounded-3 p-3 mb-4 border">
+                        <label class="form-label text-dark fw-bold mb-2 d-flex align-items-center gap-2">
+                            <i class="bi bi-cash"></i> Biaya Jasa
+                        </label>
+                        <form method="POST" action="{{ route('mekanik.tugas.tambah-jasa', $selectedOrder) }}" class="d-flex gap-2 mb-3">
+                            @csrf
+                            <input type="text" name="deskripsi" class="form-control" placeholder="mis. Servis Rem" required>
+                            <input type="number" name="biaya" class="form-control" style="max-width: 120px;" placeholder="Rp" min="0" required>
+                            <button type="submit" class="btn btn-outline-secondary px-3"><i class="bi bi-plus-lg"></i></button>
+                        </form>
+
+                        @forelse ($selectedOrder->jasaItems as $jasa)
+                            <div class="d-flex justify-content-between small border-bottom py-2 bg-white px-2 rounded mb-1">
+                                <span>{{ $jasa->deskripsi }}</span>
+                                <span class="fw-semibold">Rp {{ number_format($jasa->biaya, 0, ',', '.') }}</span>
+                            </div>
+                        @empty
+                            <p class="text-muted small mb-0">Belum ada biaya jasa dicatat.</p>
+                        @endforelse
+                    </div>
+
+                    <!-- Catatan Solusi & Tombol Selesai -->
+                    <div class="mb-3">
+                        <label class="form-label text-dark fw-bold small mb-2">Catatan Solusi & Tindakan Perbaikan</label>
+                        <form method="POST" action="{{ route('mekanik.tugas.selesai', $selectedOrder) }}" onsubmit="return confirm('Yakin servis ini sudah selesai dikerjakan?');">
+                            @csrf
+                            <textarea name="catatan_solusi" class="form-control mb-3" rows="3" required placeholder="Detail perbaikan yang dilakukan...">{{ old('catatan_solusi') }}</textarea>
+                            <button type="submit" class="btn btn-bengkel w-100 py-2 d-flex align-items-center justify-content-center gap-2">
+                                <i class="bi bi-check-circle-fill"></i> Selesaikan Pekerjaan
+                            </button>
+                        </form>
+                    </div>
+                @else
+                    <div class="alert alert-success mb-0">
+                        <i class="bi bi-check-circle-fill"></i> Servis ini sudah selesai.
+                        <div class="small mt-1"><strong>Catatan:</strong> {{ $selectedOrder->catatan_solusi }}</div>
+                    </div>
+                @endif
+
+            </div>
         @else
-            <div class="alert alert-success mb-0">
-                <i class="bi bi-check-circle-fill"></i> Servis ini sudah selesai.
-                <div class="small mt-1"><strong>Catatan:</strong> {{ $selectedOrder->catatan_solusi }}</div>
+            <div class="card p-5 text-center text-muted h-100 d-flex flex-column align-items-center justify-content-center" style="min-height: 400px;">
+                <i class="bi bi-arrow-left-circle fs-1 mb-2"></i>
+                <p class="mb-0 fw-semibold">Pilih salah satu tugas dari daftar antrian di sebelah kiri untuk mulai mengerjakannya.</p>
             </div>
         @endif
     </div>
-@endif
+
+</div>
 
 @endsection
-
-@push('styles')
-<style>
-    .stepper-pill {
-        display: inline-flex;
-        align-items: center;
-        gap: .3rem;
-        padding: .4rem .8rem;
-        border-radius: 2rem;
-        font-size: .8rem;
-        font-weight: 600;
-        background: #f3f4f6;
-        color: #9ca3af;
-    }
-    .stepper-pill.active {
-        background: linear-gradient(135deg, var(--bengkel-primary), var(--bengkel-accent));
-        color: #fff;
-    }
-</style>
-@endpush

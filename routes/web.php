@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\InventoriController;
 use App\Http\Controllers\Admin\KasirController;
 use App\Http\Controllers\Admin\LaporanController;
 use App\Http\Controllers\Admin\PendaftaranController;
+use App\Http\Controllers\Admin\RiwayatServisController;
 use App\Http\Controllers\Admin\ServiceOrderActionController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Mekanik\MekanikController;
@@ -66,6 +67,9 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
 
     // Laporan & Analitik
     Route::get('/laporan', [LaporanController::class, 'index'])->name('laporan');
+
+    // Riwayat Servis
+    Route::get('/riwayat', [RiwayatServisController::class, 'index'])->name('riwayat');
 });
 
 /*
