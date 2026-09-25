@@ -16,7 +16,7 @@
         <h1 class="h4 fw-bold mb-0">Manajemen Inventori</h1>
         <p class="text-muted small mb-0">Kelola stok suku cadang motor dan perlengkapan bengkel.</p>
     </div>
-    <a href="{{ route('admin.inventori.create') }}" class="btn btn-bengkel">
+    <a href="{{ route('admin.inventori.create') }}" style="background-color: #BF24B4; color: #ffffff; border: none; border-radius: 0.7rem; padding: 8px 16px; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
         <i class="bi bi-plus-lg"></i> Tambah Barang Baru
     </a>
 </div>
