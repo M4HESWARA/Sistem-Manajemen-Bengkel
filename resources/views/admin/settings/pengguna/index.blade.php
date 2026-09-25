@@ -14,6 +14,10 @@
     <div class="alert alert-danger">{{ $errors->first() }}</div>
 @endif
 
+<a href="{{ route('admin.settings.index') }}" class="text-decoration-none text-muted d-inline-block mb-2">
+    <i class="bi bi-arrow-left"></i> Kembali ke Pengaturan
+</a>
+
 <div class="d-flex flex-wrap justify-content-between align-items-center mb-3 gap-2">
     <div>
         <h1 class="h4 fw-bold mb-0">Kelola Pengguna</h1>

@@ -14,36 +14,42 @@
     <div class="alert alert-danger">{{ $errors->first() }}</div>
 @endif
 
+<a href="{{ route('admin.settings.index') }}" class="text-decoration-none text-muted d-inline-block mb-2">
+    <i class="bi bi-arrow-left"></i> Kembali ke Pengaturan
+</a>
+
 <div class="mb-4">
     <h1 class="h4 fw-bold mb-0">Info Bengkel</h1>
     <p class="text-muted small mb-0">Data ini tampil di landing page dan nota pembayaran.</p>
 </div>
 
-<div class="card p-4" style="max-width: 560px;">
-    <form method="POST" action="{{ route('admin.settings.bengkel.update') }}">
-        @csrf
-        @method('PUT')
+<div class="d-flex justify-content-center">
+    <div class="card p-4" style="max-width: 560px; width: 100%;">
+        <form method="POST" action="{{ route('admin.settings.bengkel.update') }}">
+            @csrf
+            @method('PUT')
 
-        <div class="mb-3">
-            <label class="form-label small fw-semibold">Nama Bengkel</label>
-            <input type="text" name="nama_bengkel" class="form-control"
-                   value="{{ old('nama_bengkel', $setting->nama_bengkel) }}" required>
-        </div>
-        <div class="mb-3">
-            <label class="form-label small fw-semibold">Alamat</label>
-            <textarea name="alamat" class="form-control" rows="2">{{ old('alamat', $setting->alamat) }}</textarea>
-        </div>
-        <div class="mb-3">
-            <label class="form-label small fw-semibold">Telepon</label>
-            <input type="text" name="telepon" class="form-control" value="{{ old('telepon', $setting->telepon) }}">
-        </div>
-        <div class="mb-3">
-            <label class="form-label small fw-semibold">Email</label>
-            <input type="email" name="email" class="form-control" value="{{ old('email', $setting->email) }}">
-        </div>
+            <div class="mb-3">
+                <label class="form-label small fw-semibold">Nama Bengkel</label>
+                <input type="text" name="nama_bengkel" class="form-control"
+                       value="{{ old('nama_bengkel', $setting->nama_bengkel) }}" required>
+            </div>
+            <div class="mb-3">
+                <label class="form-label small fw-semibold">Alamat</label>
+                <textarea name="alamat" class="form-control" rows="2">{{ old('alamat', $setting->alamat) }}</textarea>
+            </div>
+            <div class="mb-3">
+                <label class="form-label small fw-semibold">Telepon</label>
+                <input type="text" name="telepon" class="form-control" value="{{ old('telepon', $setting->telepon) }}">
+            </div>
+            <div class="mb-3">
+                <label class="form-label small fw-semibold">Email</label>
+                <input type="email" name="email" class="form-control" value="{{ old('email', $setting->email) }}">
+            </div>
 
-        <button type="submit" class="btn btn-bengkel w-100"><i class="bi bi-check-circle"></i> Simpan Perubahan</button>
-    </form>
+            <button type="submit" class="btn btn-bengkel w-100"><i class="bi bi-check-circle"></i> Simpan Perubahan</button>
+        </form>
+    </div>
 </div>
 
 @endsection

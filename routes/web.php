@@ -1,12 +1,16 @@
 <?php
 
+use App\Http\Controllers\Admin\CompanySettingController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\InventoriController;
 use App\Http\Controllers\Admin\KasirController;
 use App\Http\Controllers\Admin\LaporanController;
+use App\Http\Controllers\Admin\PasswordSettingController;
 use App\Http\Controllers\Admin\PendaftaranController;
 use App\Http\Controllers\Admin\RiwayatServisController;
 use App\Http\Controllers\Admin\ServiceOrderActionController;
+use App\Http\Controllers\Admin\SettingsController;
+use App\Http\Controllers\Admin\UserManagementController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Mekanik\MekanikController;
 use App\Http\Controllers\Public\CekStatusController;
@@ -70,6 +74,24 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
 
     // Riwayat Servis
     Route::get('/riwayat', [RiwayatServisController::class, 'index'])->name('riwayat');
+
+    // Pengaturan
+    Route::prefix('settings')->name('settings.')->group(function () {
+        Route::get('/', [SettingsController::class, 'index'])->name('index');
+
+        Route::get('/pengguna', [UserManagementController::class, 'index'])->name('pengguna');
+        Route::get('/pengguna/tambah', [UserManagementController::class, 'create'])->name('pengguna.create');
+        Route::post('/pengguna', [UserManagementController::class, 'store'])->name('pengguna.store');
+        Route::get('/pengguna/{user}/edit', [UserManagementController::class, 'edit'])->name('pengguna.edit');
+        Route::put('/pengguna/{user}', [UserManagementController::class, 'update'])->name('pengguna.update');
+        Route::post('/pengguna/{user}/toggle-active', [UserManagementController::class, 'toggleActive'])->name('pengguna.toggle-active');
+
+        Route::get('/password', [PasswordSettingController::class, 'edit'])->name('password');
+        Route::put('/password', [PasswordSettingController::class, 'update'])->name('password.update');
+
+        Route::get('/bengkel', [CompanySettingController::class, 'edit'])->name('bengkel');
+        Route::put('/bengkel', [CompanySettingController::class, 'update'])->name('bengkel.update');
+    });
 });
 
 /*

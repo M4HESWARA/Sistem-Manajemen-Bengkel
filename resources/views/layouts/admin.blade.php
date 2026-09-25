@@ -24,12 +24,13 @@
             color: #ffffff !important;
         }
         .topbar {
+            top: 0;
             background: #ffffff;
             border-bottom: 3px solid var(--bengkel-accent);
             padding: 0.75rem 1.5rem;
             box-shadow: 0 1px 3px rgba(0,0,0,0.04);
-            position: relative;
-            z-index: 1050;
+            position: sticky;
+            z-index: 1000;
         }
         .brand-caption {
             font-size: 0.72rem;
@@ -75,7 +76,7 @@
             font-weight: 700;
             font-size: 0.85rem;
             padding: 0.55rem 1.25rem;
-            border-radius: 2rem;
+            border-radius: 0.7rem;
             box-shadow: 0 4px 10px rgba(191, 36, 180, 0.25);
             text-decoration: none;
             display: inline-flex;
@@ -154,7 +155,7 @@
                 <i class="bi bi-plus-lg"></i> <span class="d-none d-sm-inline">Servis Baru</span>
             </a>
 
-            <button class="icon-btn" title="Pengaturan"><i class="bi bi-gear"></i></button>
+            <a href="{{ route('admin.settings.index') }}" class="icon-btn" title="{{ auth()->user()->full_name }}"><i class="bi bi-gear"></i></a>
             <form method="POST" action="{{ route('logout') }}" class="m-0">
                 @csrf
                 <button class="icon-btn text-danger" type="submit" title="Keluar"><i class="bi bi-box-arrow-right"></i></button>

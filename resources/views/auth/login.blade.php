@@ -8,8 +8,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     <style>
         :root {
-            --bengkel-primary: #7c3aed;
-            --bengkel-accent: #ed02fe;
+            --bengkel-primary: #a31d99;
+            --bengkel-accent: #BF24B4;
             --bengkel-accent-dark: #c000cf;
         }
         body {
@@ -65,14 +65,14 @@
         }
 
         .btn-bengkel {
-            background: var(--bengkel-accent);
-            border: none;
-            color: #fff;
+            background-color: var(--bengkel-accent) !important;
+            border: none !important;
+            color: #fff !important;
             font-weight: 600;
         }
-        .btn-bengkel:hover {
-            background: var(--bengkel-accent-dark);
-            color: #fff;
+        .btn-bengkel:hover, .btn-bengkel:focus {
+            background-color: var(--bengkel-accent-dark) !important;
+            color: #fff !important;
         }
 
         .link-accent {
