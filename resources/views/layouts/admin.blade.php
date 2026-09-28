@@ -113,7 +113,9 @@
     <img src="{{ asset('images/logo-ksr-garage.png') }}" alt="Watermark" class="bg-watermark">
 
     <!-- HEADER TOPBAR -->
-    <nav class="topbar d-flex align-items-center justify-content-between flex-wrap gap-3">
+    <nav class="topbar d-flex align-items-center justify-content-between gap-2">
+        
+        <!-- 1. Bagian Kiri (Logo & Menu Desktop) -->
         <div class="d-flex align-items-center gap-3">
             <a href="{{ route('admin.dashboard') }}" class="text-decoration-none">
                 <img src="{{ asset('images/logo-ksr-garage.png') }}" alt="KSR Garage" style="height: 36px; display: block;">
@@ -129,37 +131,45 @@
                 <a href="{{ route('admin.laporan') }}" class="nav-pill-item {{ request()->routeIs('admin.laporan') ? 'active' : '' }}">Laporan</a>
                 <a href="{{ route('admin.riwayat') }}" class="nav-pill-item {{ request()->routeIs('admin.riwayat*') ? 'active' : '' }}">Riwayat</a>
             </div>
-
-            <!-- Menu Navigasi Mobile Dropdown (HP) -->
-            <div class="dropdown d-md-none">
-                <!-- Kita hapus data-bs-toggle, ganti dengan fungsi onclick bawaan -->
-                <button class="btn btn-outline-secondary btn-sm dropdown-toggle fw-semibold" type="button" onclick="document.getElementById('menuMobile').classList.toggle('show')">
-                    <i class="bi bi-list me-1"></i>
-                </button>
-                
-                <!-- Tambahkan ID menuMobile di sini -->
-                <ul class="dropdown-menu shadow" id="menuMobile">
-                    <li><a class="dropdown-item {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}" href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-                    <li><a class="dropdown-item {{ request()->routeIs('admin.pendaftaran') ? 'active' : '' }}" href="{{ route('admin.pendaftaran') }}">Pendaftaran</a></li>
-                    <li><a class="dropdown-item {{ request()->routeIs('admin.inventori') ? 'active' : '' }}" href="{{ route('admin.inventori') }}">Inventori</a></li>
-                    <li><a class="dropdown-item {{ request()->routeIs('admin.kasir') ? 'active' : '' }}" href="{{ route('admin.kasir') }}">Kasir</a></li>
-                    <li><a class="dropdown-item {{ request()->routeIs('admin.laporan') ? 'active' : '' }}" href="{{ route('admin.laporan') }}">Laporan</a></li>
-                    <li><a class="dropdown-item {{ request()->routeIs('admin.riwayat*') ? 'active' : '' }}" href="{{ route('admin.riwayat') }}">Riwayat</a></li>
-                </ul>
-            </div>
         </div>
 
-        <div class="d-flex align-items-center gap-2">
+        <!-- 2. Bagian Kanan (Tombol Aksi & Menu Mobile) -->
+        <div class="d-flex align-items-center gap-1 gap-md-2">
+            
             <!-- Tombol Registrasi Servis Baru -->
-            <a href="{{ route('admin.pendaftaran') }}" class="btn-bengkel-primary text-nowrap">
+            <a href="{{ route('admin.pendaftaran') }}" class="btn-bengkel-primary text-nowrap px-2 px-md-3">
                 <i class="bi bi-plus-lg"></i> <span class="d-none d-sm-inline">Servis Baru</span>
             </a>
 
-            <a href="{{ route('admin.settings.index') }}" class="icon-btn" title="{{ auth()->user()->full_name }}"><i class="bi bi-gear"></i></a>
+            <!-- Tombol Pengaturan -->
+            <a href="{{ route('admin.settings.index') }}" class="icon-btn" title="{{ auth()->user()->full_name }}">
+                <i class="bi bi-gear"></i>
+            </a>
+            
+            <!-- Tombol Keluar -->
             <form method="POST" action="{{ route('logout') }}" class="m-0">
                 @csrf
-                <button class="icon-btn text-danger" type="submit" title="Keluar"><i class="bi bi-box-arrow-right"></i></button>
+                <button class="icon-btn text-danger" type="submit" title="Keluar">
+                    <i class="bi bi-box-arrow-right"></i>
+                </button>
             </form>
+
+            <!-- Menu Navigasi Mobile Dropdown (HP) -->
+            <div class="dropdown d-md-none position-relative">
+                <button class="icon-btn text-dark border-0" type="button" onclick="event.stopPropagation(); document.getElementById('menuMobile').classList.toggle('show')">
+                    <i class="bi bi-list fs-4"></i>
+                </button>
+                
+                <ul class="dropdown-menu dropdown-menu-end shadow mt-2 border-0" id="menuMobile" style="position: absolute; right: 0; top: 100%;">
+                    <li><a class="dropdown-item py-2 {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}" href="{{ route('admin.dashboard') }}">Dashboard</a></li>
+                    <li><a class="dropdown-item py-2 {{ request()->routeIs('admin.pendaftaran') ? 'active' : '' }}" href="{{ route('admin.pendaftaran') }}">Pendaftaran</a></li>
+                    <li><a class="dropdown-item py-2 {{ request()->routeIs('admin.inventori') ? 'active' : '' }}" href="{{ route('admin.inventori') }}">Inventori</a></li>
+                    <li><a class="dropdown-item py-2 {{ request()->routeIs('admin.kasir') ? 'active' : '' }}" href="{{ route('admin.kasir') }}">Kasir</a></li>
+                    <li><a class="dropdown-item py-2 {{ request()->routeIs('admin.laporan') ? 'active' : '' }}" href="{{ route('admin.laporan') }}">Laporan</a></li>
+                    <li><a class="dropdown-item py-2 {{ request()->routeIs('admin.riwayat*') ? 'active' : '' }}" href="{{ route('admin.riwayat') }}">Riwayat</a></li>
+                </ul>
+            </div>
+
         </div>
     </nav>
 
@@ -172,6 +182,16 @@
     <footer class="text-center py-3 bg-white border-top text-muted small mt-auto" style="position: relative; z-index: 1;">
         <p class="mb-0">&copy; 2026 KSR Garage. Mechanical Precision & Digital Efficiency.</p>
     </footer>
+
+    <!-- Script penutup menu otomatis saat mengeklik area di luar menu -->
+    <script>
+        document.addEventListener('click', function(e) {
+            const menu = document.getElementById('menuMobile');
+            if (menu && menu.classList.contains('show')) {
+                menu.classList.remove('show');
+            }
+        });
+    </script>
 
     <!-- Bootstrap 5 JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
