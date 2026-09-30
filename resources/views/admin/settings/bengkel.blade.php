@@ -4,6 +4,18 @@
 
 @section('content')
 
+<!-- Style khusus untuk efek hover magenta -->
+<style>
+    .back-settings-link {
+        color: #6b7280 !important; /* Warna abu-abu default */
+        text-decoration: none;
+        transition: color 0.2s ease;
+    }
+    .back-settings-link:hover {
+        color: #BF24B4 !important; /* Warna magenta saat di-hover */
+    }
+</style>
+
 @if (session('success'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         {{ session('success') }}
@@ -14,7 +26,8 @@
     <div class="alert alert-danger">{{ $errors->first() }}</div>
 @endif
 
-<a href="{{ route('admin.settings.index') }}" class="text-decoration-none text-muted d-inline-block mb-2">
+<!-- Baris tautan yang diperbarui class-nya -->
+<a href="{{ route('admin.settings.index') }}" class="back-settings-link d-inline-block mb-2 fw-semibold small">
     <i class="bi bi-arrow-left"></i> Kembali ke Pengaturan
 </a>
 

@@ -4,6 +4,36 @@
 
 @section('content')
 
+<style>
+    .back-settings-link {
+        color: #6b7280 !important; /* Warna abu-abu default */
+        text-decoration: none;
+        transition: color 0.2s ease;
+    }
+    .back-settings-link:hover {
+        color: #BF24B4 !important; /* Warna magenta saat di-hover */
+    }
+    .btn-bengkel-pill {
+        background-color: var(--bengkel-accent, #BF24B4) !important;
+        color: #ffffff !important;
+        border: none !important;
+        border-radius: 50rem !important; /* Membuat sudut berbentuk oval/pill */
+        padding: 0.45rem 1.1rem !important;
+        font-weight: 600;
+        font-size: 0.875rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        text-decoration: none;
+        transition: background-color 0.2s ease, opacity 0.2s ease;
+    }
+    .btn-bengkel-pill:hover {
+        background-color: var(--bengkel-accent-dark, #a31d99) !important;
+        color: #ffffff !important;
+        opacity: 0.95;
+    }
+</style>
+
 @if (session('success'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         {{ session('success') }}

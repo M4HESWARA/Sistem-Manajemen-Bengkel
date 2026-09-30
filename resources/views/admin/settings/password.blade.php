@@ -4,6 +4,17 @@
 
 @section('content')
 
+<style>
+    .back-settings-link {
+        color: #6b7280 !important; /* Warna abu-abu default */
+        text-decoration: none;
+        transition: color 0.2s ease;
+    }
+    .back-settings-link:hover {
+        color: #BF24B4 !important; /* Warna magenta saat di-hover */
+    }
+</style>
+
 @if (session('success'))
     <div class="alert alert-success alert-dismissible fade show" role="alert">
         {{ session('success') }}
