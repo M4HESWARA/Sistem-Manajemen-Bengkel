@@ -26,7 +26,7 @@
             position: absolute;
             top: 1.5rem;
             left: 1.5rem;
-            color: #000000 !important; 
+            color: #6b7280 !important; 
             text-decoration: none;
             font-weight: 600;
             font-size: .9rem;
