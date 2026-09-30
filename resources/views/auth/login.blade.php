@@ -26,12 +26,12 @@
             position: absolute;
             top: 1.5rem;
             left: 1.5rem;
-            color: var(--bengkel-accent);
+            color: #000000;
             text-decoration: none;
             font-weight: 600;
             font-size: .9rem;
         }
-        .back-link:hover { color: var(--bengkel-primary); }
+        .back-link:hover { color: var(--bengkel-accent); }
 
         .brand-logo {
             font-family: 'Segoe UI', sans-serif;
