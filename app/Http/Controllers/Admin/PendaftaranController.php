@@ -9,6 +9,7 @@ use App\Models\Vehicle;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Validation\Rule;
 
 class PendaftaranController extends Controller
@@ -112,14 +113,25 @@ class PendaftaranController extends Controller
             'tanggal_masuk' => now(),
         ]);
 
-        // Simpan foto verifikasi fisik awal
-        $odometerPath = $request->file('odometer_photo')->store('verifikasi', 'public');
-        $fuelPath = $request->hasFile('fuel_photo')
-            ? $request->file('fuel_photo')->store('verifikasi', 'public')
-            : null;
+        // Simpan foto verifikasi fisik awal.
+        // Disk 'public' bisa tidak writable (mis. hosting serverless/ephemeral),
+        // dan disk itu dikonfigurasi throw=false sehingga store() tidak melempar
+        // exception, hanya mengembalikan false. Nilai false akan ter-binding
+        // sebagai integer 0 dan ditolak kolom bertipe text, jadi harus
+        // dinormalkan ke null sebelum masuk database.
+        $odometerPath = $this->storeVerificationPhoto($request->file('odometer_photo'));
+        $fuelPath = $this->storeVerificationPhoto(
+            $request->file('fuel_photo')
+        );
+
+        if ($odometerPath === null) {
+            report(new \RuntimeException(
+                "Foto odometer gagal disimpan pada disk 'public' untuk order {$order->order_number}."
+            ));
+        }
 
         $order->verification()->create([
-            'odometer_photo_url' => $odometerPath,
+            'odometer_photo_url' => $odometerPath ?? '',
             'odometer_reading' => $data['odometer_reading'],
             'fuel_photo_url' => $fuelPath,
             'fuel_level' => $data['fuel_level'],
@@ -133,7 +145,40 @@ class PendaftaranController extends Controller
             'verified_at' => now(),
         ]);
 
-        return redirect()->route('admin.dashboard')
-            ->with('success', "Servis {$order->order_number} untuk {$vehicle->plat_nomor} berhasil didaftarkan.");
+        $message = "Servis {$order->order_number} untuk {$vehicle->plat_nomor} berhasil didaftarkan.";
+
+        if ($odometerPath === null) {
+            $message .= ' Peringatan: foto odometer gagal disimpan, mohon catat manual pada arsip fisik.';
+        }
+
+        return redirect()->route('admin.dashboard')->with('success', $message);
+    }
+
+    /**
+     * Simpan satu file foto verifikasi ke disk 'public'.
+     *
+     * Mengembalikan null bila file tidak ada atau gagal ditulis. Kegagalan
+     * tidak boleh menggagalkan pendaftaran order, jadi sengaja tidak dilempar.
+     */
+    private function storeVerificationPhoto(?UploadedFile $file): ?string
+    {
+        if (! $file) {
+            return null;
+        }
+
+        try {
+            $path = $file->store('verifikasi', 'public');
+        } catch (\Throwable $e) {
+            report($e);
+
+            return null;
+        }
+
+        // store() mengembalikan false bila disk gagal menulis (throw=false).
+        if (! is_string($path) || $path === '') {
+            return null;
+        }
+
+        return $path;
     }
 }
