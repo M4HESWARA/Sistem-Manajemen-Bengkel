@@ -12,18 +12,18 @@ return new class extends Migration
             $table->id();
             $table->foreignId('service_order_id')->constrained('service_orders')->cascadeOnDelete();
             $table->foreignId('sparepart_id')->constrained('spareparts')->restrictOnDelete();
-            $table->integer('quantity');
+            $table->rawColumn('quantity', 'integer not null CHECK (quantity > 0)');
             $table->decimal('harga_satuan', 14, 2); // snapshot harga jual saat transaksi
             $table->foreignId('input_by')->constrained('users')->restrictOnDelete();
             $table->timestamp('created_at')->useCurrent();
 
+            // subtotal dihitung otomatis oleh database (kolom generated).
+            // Pakai storedAs() agar portable lintas driver, bukan ALTER TABLE.
+            $table->decimal('subtotal', 14, 2)->storedAs('quantity * harga_satuan');
+
             $table->index('service_order_id');
             $table->index('sparepart_id');
         });
-
-        // subtotal dihitung otomatis oleh database (kolom generated)
-        DB::statement('ALTER TABLE service_order_items ADD COLUMN subtotal NUMERIC(14,2) GENERATED ALWAYS AS (quantity * harga_satuan) STORED');
-        DB::statement('ALTER TABLE service_order_items ADD CONSTRAINT chk_item_qty_positive CHECK (quantity > 0)');
     }
 
     public function down(): void

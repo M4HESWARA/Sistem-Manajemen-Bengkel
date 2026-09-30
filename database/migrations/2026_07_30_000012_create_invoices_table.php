@@ -22,11 +22,13 @@ return new class extends Migration
             $table->foreignId('created_by')->constrained('users')->restrictOnDelete();
             $table->timestamps();
 
+            // total_tagihan dihitung otomatis oleh database.
+            // storedAs() portable lintas driver (PostgreSQL & MySQL),
+            // berbeda dari ALTER TABLE ... ADD COLUMN yang tidak seragam.
+            $table->decimal('total_tagihan', 14, 2)->storedAs('total_jasa + total_sparepart');
+
             $table->index('status');
         });
-
-        // total_tagihan dihitung otomatis oleh database
-        DB::statement('ALTER TABLE invoices ADD COLUMN total_tagihan NUMERIC(14,2) GENERATED ALWAYS AS (total_jasa + total_sparepart) STORED');
     }
 
     public function down(): void

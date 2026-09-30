@@ -12,7 +12,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('sparepart_id')->constrained('spareparts')->restrictOnDelete();
             $table->enum('movement_type', ['masuk', 'keluar', 'penyesuaian']);
-            $table->integer('quantity');
+            // CHECK inline: 'ALTER TABLE ... ADD CONSTRAINT' hanya didukung PostgreSQL 18+.
+            $table->rawColumn('quantity', 'integer not null CHECK (quantity > 0)');
             $table->foreignId('service_order_id')->nullable()
                 ->constrained('service_orders')->nullOnDelete();
             $table->text('keterangan')->nullable();
@@ -22,8 +23,6 @@ return new class extends Migration
             $table->index('sparepart_id');
             $table->index('service_order_id');
         });
-
-        DB::statement('ALTER TABLE sparepart_stock_movements ADD CONSTRAINT chk_quantity_positive CHECK (quantity > 0)');
     }
 
     public function down(): void
