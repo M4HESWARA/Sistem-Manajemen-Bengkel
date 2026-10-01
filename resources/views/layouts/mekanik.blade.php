@@ -115,7 +115,7 @@
                 <div class="brand-caption">Mekanik Dashboard</div>
             </a>
 
-            <!-- Tombol Keluar -->
+            <!-- Tombol Keluar (Sekarang di Paling Kanan) -->
             <form method="POST" action="{{ route('logout') }}" class="m-0">
                 @csrf
                 <button class="icon-btn text-danger" type="submit" title="Keluar">
@@ -123,16 +123,6 @@
                 </button>
             </form>
 
-            <!-- Menu Navigasi Mobile Dropdown (HP) -->
-            <div class="dropdown d-md-none position-relative">
-                <button class="icon-btn text-dark border-0" type="button" onclick="event.stopPropagation(); document.getElementById('menuMobile').classList.toggle('show')">
-                    <i class="bi bi-list fs-4"></i>
-                </button>
-
-                <ul class="dropdown-menu dropdown-menu-end shadow mt-2 border-0" id="menuMobile" style="position: absolute; right: 0; top: 100%;">
-                    <li><a class="dropdown-item py-2 {{ request()->routeIs('mekanik.dashboard') ? 'active' : '' }}" href="{{ route('mekanik.dashboard') }}">Dashboard</a></li>
-                </ul>
-            </div>
 
         </div>
     </nav>
