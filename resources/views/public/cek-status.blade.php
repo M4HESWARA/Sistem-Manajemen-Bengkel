@@ -36,8 +36,8 @@
 
             <!-- Tombol Kembali ke Halaman Utama -->
             <div>
-                <a href="{{ url('/') }}" class="text-xs md:text-sm font-medium text-gray-500 hover:text-gray-900 transition-colors no-underline flex items-center gap-1.5">
-                    <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <a href="{{ url('/') }}" class="group text-xs md:text-sm font-medium text-gray-500 hover:text-[#BF24B4] transition-colors no-underline flex items-center gap-1.5">
+                    <svg class="w-4 h-4 text-gray-400 group-hover:text-[#BF24B4]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
                     </svg>
                     <span>Kembali ke Halaman Utama</span>
