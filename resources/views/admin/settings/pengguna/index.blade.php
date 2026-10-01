@@ -13,25 +13,6 @@
     .back-settings-link:hover {
         color: #BF24B4 !important; /* Warna magenta saat di-hover */
     }
-    .btn-bengkel-pill {
-        background-color: var(--bengkel-accent, #BF24B4) !important;
-        color: #ffffff !important;
-        border: none !important;
-        border-radius: 50rem !important; /* Membuat sudut berbentuk oval/pill */
-        padding: 0.45rem 1.1rem !important;
-        font-weight: 600;
-        font-size: 0.875rem;
-        display: inline-flex;
-        align-items: center;
-        gap: 0.35rem;
-        text-decoration: none;
-        transition: background-color 0.2s ease, opacity 0.2s ease;
-    }
-    .btn-bengkel-pill:hover {
-        background-color: var(--bengkel-accent-dark, #a31d99) !important;
-        color: #ffffff !important;
-        opacity: 0.95;
-    }
 </style>
 
 @if (session('success'))
@@ -44,7 +25,7 @@
     <div class="alert alert-danger">{{ $errors->first() }}</div>
 @endif
 
-<a href="{{ route('admin.settings.index') }}" class="text-decoration-none text-muted d-inline-block mb-2">
+<a href="{{ route('admin.settings.index') }}" class="back-settings-link d-inline-block mb-2">
     <i class="bi bi-arrow-left"></i> Kembali ke Pengaturan
 </a>
 
@@ -53,7 +34,7 @@
         <h1 class="h4 fw-bold mb-0">Kelola Pengguna</h1>
         <p class="text-muted small mb-0">Akun Admin dan Mekanik yang bisa login ke sistem.</p>
     </div>
-    <a href="{{ route('admin.settings.pengguna.create') }}" class="btn btn-bengkel">
+    <a href="{{ route('admin.settings.pengguna.create') }}" class="btn-bengkel-primary text-nowrap">
         <i class="bi bi-plus-lg"></i> Tambah Akun
     </a>
 </div>

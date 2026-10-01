@@ -25,7 +25,7 @@
     <div class="alert alert-danger">{{ $errors->first() }}</div>
 @endif
 
-<a href="{{ route('admin.settings.index') }}" class="text-decoration-none text-muted d-inline-block mb-2">
+<a href="{{ route('admin.settings.index') }}" class="back-settings-link d-inline-block mb-2">
     <i class="bi bi-arrow-left"></i> Kembali ke Pengaturan
 </a>
 
