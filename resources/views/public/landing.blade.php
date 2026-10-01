@@ -36,9 +36,9 @@
     
     <!-- NAVBAR / HEADER -->
     <header class="w-full bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-gray-100">
-        <div class="max-w-7xl mx-auto px-6 md:px-12 lg:px-16 py-4 flex justify-between items-center">
-            <a href="{{ url('/') }}" class="flex items-center">
-                <img src="{{ asset('images/logo-ksr-garage.png') }}" alt="KSR Garage" class="h-[40px] w-auto object-contain">
+        <div class="max-w-7xl mx-auto px-5 sm:px-6 md:px-12 lg:px-16 py-3 md:py-4 flex justify-between items-center gap-3">
+            <a href="{{ url('/') }}" class="flex items-center flex-shrink-0">
+                <img src="{{ asset('images/logo-ksr-garage.png') }}" alt="KSR Garage" class="h-9 md:h-[40px] w-auto object-contain">
             </a>
 
             <nav class="hidden md:flex items-center gap-8">
@@ -46,13 +46,51 @@
                 <a href="#kontak" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors no-underline">Kontak</a>
             </nav>
 
-            <div>
-                <a href="{{ route('login') }}" class="text-sm font-semibold text-gray-700 hover:text-gray-900 transition-colors no-underline">
+            <div class="flex items-center gap-2 sm:gap-3">
+                <a href="{{ route('login') }}" class="hidden md:inline text-sm font-semibold text-gray-700 hover:text-gray-900 transition-colors no-underline">
                     Masuk
                 </a>
+
+                <button id="navToggle" type="button" aria-label="Buka menu" aria-expanded="false" aria-controls="navMobile"
+                    class="md:hidden inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-gray-200 bg-white text-gray-700 transition-colors hover:bg-gray-50">
+                    <svg id="navIconOpen" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+                    <svg id="navIconClose" class="w-5 h-5 hidden" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>
+                </button>
             </div>
         </div>
+
+        <!-- Menu khusus mobile -->
+        <div id="navMobile" class="md:hidden hidden border-t border-gray-100 bg-white">
+            <nav class="max-w-7xl mx-auto px-5 sm:px-6 py-3 flex flex-col gap-1">
+                <a href="#alur-layanan" class="px-3 py-2.5 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 no-underline">Alur Layanan</a>
+                <a href="#kontak" class="px-3 py-2.5 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 no-underline">Kontak</a>
+                <a href="{{ route('login') }}" class="mt-1 inline-flex items-center justify-center rounded-lg bg-[#BF24B4] hover:bg-[#a31d99] px-4 py-2.5 text-sm font-semibold text-white no-underline transition-colors">Masuk</a>
+            </nav>
+        </div>
     </header>
+
+    <script>
+        (function () {
+            var toggle = document.getElementById('navToggle');
+            var menu = document.getElementById('navMobile');
+            var iconOpen = document.getElementById('navIconOpen');
+            var iconClose = document.getElementById('navIconClose');
+            if (!toggle || !menu) { return; }
+
+            toggle.addEventListener('click', function () {
+                var open = menu.classList.contains('hidden');
+                menu.classList.toggle('hidden', !open);
+                toggle.setAttribute('aria-expanded', String(open));
+                toggle.setAttribute('aria-label', open ? 'Tutup menu' : 'Buka menu');
+                iconOpen.classList.toggle('hidden', open);
+                iconClose.classList.toggle('hidden', !open);
+            });
+
+            menu.addEventListener('click', function (e) {
+                if (e.target.closest('a')) { toggle.click(); }
+            });
+        })();
+    </script>
 
     <!-- HERO SECTION -->
     <section class="w-full pt-16 pb-20 md:pt-24 md:pb-28 flex flex-col items-center text-center px-4" 
