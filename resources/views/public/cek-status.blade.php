@@ -12,12 +12,8 @@
         font-family: 'Inter', sans-serif;
     }
     .full-bleed-container {
-        width: 100vw;
-        position: relative;
-        left: 50%;
-        right: 50%;
-        margin-left: -50vw;
-        margin-right: -50vw;
+        width: 100%;
+        max-width: 100%;
     }
     /* Sembunyikan footer & navbar bawaan dari template master */
     footer:not(.tailwind-footer),
