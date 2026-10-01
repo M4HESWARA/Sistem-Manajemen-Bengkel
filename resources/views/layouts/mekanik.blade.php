@@ -115,15 +115,6 @@
                 <div class="brand-caption">Mekanik Dashboard</div>
             </a>
 
-            <!-- Menu Navigasi Desktop (Laptop / Komputer) -->
-            <div class="d-none d-md-flex align-items-center gap-1">
-                <a href="{{ route('mekanik.dashboard') }}" class="nav-pill-item {{ request()->routeIs('mekanik.dashboard') ? 'active' : '' }}">Dashboard</a>
-            </div>
-        </div>
-
-        <!-- 2. Bagian Kanan (Tombol Aksi & Menu Mobile) -->
-        <div class="d-flex align-items-center gap-1 gap-md-2">
-
             <!-- Tombol Keluar -->
             <form method="POST" action="{{ route('logout') }}" class="m-0">
                 @csrf
