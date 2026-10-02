@@ -7,7 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     <style>
-        :root { --bengkel-primary: #7c3aed; --bengkel-accent: #ed02fe; }
+        :root { --bengkel-primary: #a31d99; --bengkel-accent: #BF24B4; }
         body { background: #f5f6fa; font-family: 'Segoe UI', system-ui, sans-serif; }
         .nota-wrapper { max-width: 480px; margin: 2rem auto; }
         .nota-card { background: #fff; border-radius: .75rem; padding: 2rem; box-shadow: 0 2px 10px rgba(0,0,0,.06); }
