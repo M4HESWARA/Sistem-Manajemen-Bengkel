@@ -29,7 +29,7 @@
         <a href="{{ route('admin.kasir') }}" class="btn btn-outline-secondary btn-sm">
             <i class="bi bi-arrow-left"></i> Kembali ke Kasir
         </a>
-        <button onclick="window.print()" class="btn btn-bengkel btn-sm" style="background:linear-gradient(135deg,var(--bengkel-primary),var(--bengkel-accent)); border:none;">
+        <button onclick="window.print()" class="btn btn-bengkel btn-sm" style="background: #BF24B4; color: #fff; border:none;">
             <i class="bi bi-printer"></i> Cetak Nota
         </button>
     </div>
