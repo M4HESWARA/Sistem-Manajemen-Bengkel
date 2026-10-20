@@ -66,9 +66,9 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                     </svg>
                     <input type="text" 
-                           name="nopol" 
+                           name="plat_nomor" 
                            placeholder="B 1234 ABC" 
-                           value="{{ request('nopol') }}" 
+                           value="{{ request('plat_nomor') }}" 
                            required 
                            class="w-full pl-11 pr-4 py-3 bg-transparent text-gray-800 placeholder-gray-400 text-sm md:text-base focus:outline-none uppercase font-semibold">
                 </div>
@@ -80,22 +80,91 @@
         </div>
 
         {{-- JIKA ADA RESULT / HASIL PENCARIAN --}}
-        @if(isset($transaksi))
-        <div class="w-full max-w-xl mt-8 text-left bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
-            <h3 class="text-lg font-bold text-gray-900 mb-4 border-b pb-2">Hasil Status Perbaikan</h3>
-            <div class="space-y-3 text-sm text-gray-600">
-                <div class="flex justify-between">
-                    <span class="text-gray-400">Nomor Polisi:</span>
-                    <span class="font-bold text-gray-800">{{ $transaksi->no_polisi ?? request('nopol') }}</span>
+        @if($searched)
+            @php
+                $statusLabels = [
+                    'menunggu' => 'Menunggu Antrean',
+                    'proses_diagnosa' => 'Sedang Diagnosa',
+                    'sedang_diperbaiki' => 'Sedang Diperbaiki',
+                    'selesai' => 'Selesai',
+                    'dibatalkan' => 'Dibatalkan',
+                ];
+                $statusColors = [
+                    'menunggu' => 'bg-amber-100 text-amber-700',
+                    'proses_diagnosa' => 'bg-blue-100 text-blue-700',
+                    'sedang_diperbaiki' => 'bg-purple-100 text-[#BF24B4]',
+                    'selesai' => 'bg-green-100 text-green-700',
+                    'dibatalkan' => 'bg-red-100 text-red-700',
+                ];
+            @endphp
+
+            @if($vehicle)
+                <div class="w-full max-w-xl mt-8 text-left space-y-4">
+                    <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
+                        <h3 class="text-lg font-bold text-gray-900 mb-4 border-b pb-2">Kendaraan Ditemukan</h3>
+                        <div class="space-y-3 text-sm text-gray-600">
+                            <div class="flex justify-between">
+                                <span class="text-gray-400">Nomor Polisi:</span>
+                                <span class="font-bold text-gray-800">{{ $vehicle->plat_nomor }}</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-400">Kendaraan:</span>
+                                <span class="font-semibold text-gray-800">{{ trim(($vehicle->brand ?? '') . ' ' . ($vehicle->model ?? '')) ?: '-' }}</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span class="text-gray-400">Pemilik:</span>
+                                <span class="font-semibold text-gray-800">{{ $vehicle->customer->full_name ?? '-' }}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    @forelse($serviceOrders as $order)
+                        <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm">
+                            <div class="flex items-center justify-between mb-3">
+                                <span class="text-xs font-semibold text-gray-400">{{ $order->order_number }}</span>
+                                <span class="px-3 py-1 rounded-full text-xs font-bold {{ $statusColors[$order->status] ?? 'bg-gray-100 text-gray-600' }}">
+                                    {{ $statusLabels[$order->status] ?? $order->status }}
+                                </span>
+                            </div>
+                            <div class="space-y-2 text-sm text-gray-600">
+                                <div class="flex justify-between gap-4">
+                                    <span class="text-gray-400 shrink-0">Keluhan:</span>
+                                    <span class="font-medium text-gray-800 text-right">{{ $order->keluhan_awal }}</span>
+                                </div>
+                                <div class="flex justify-between gap-4">
+                                    <span class="text-gray-400 shrink-0">Mekanik:</span>
+                                    <span class="font-medium text-gray-800 text-right">{{ $order->mechanic->full_name ?? 'Belum ditugaskan' }}</span>
+                                </div>
+                                <div class="flex justify-between gap-4">
+                                    <span class="text-gray-400 shrink-0">Masuk:</span>
+                                    <span class="font-medium text-gray-800 text-right">{{ optional($order->tanggal_masuk)->format('d M Y, H:i') ?? '-' }}</span>
+                                </div>
+                                @if($order->status === 'selesai')
+                                <div class="flex justify-between gap-4">
+                                    <span class="text-gray-400 shrink-0">Pembayaran:</span>
+                                    <span class="font-semibold text-right {{ ($order->invoice->status ?? null) === 'paid' ? 'text-green-600' : 'text-amber-600' }}">
+                                        {{ ($order->invoice->status ?? null) === 'paid' ? 'Lunas' : 'Belum Dibayar' }}
+                                    </span>
+                                </div>
+                                @endif
+                            </div>
+                        </div>
+                    @empty
+                        <div class="bg-white p-6 rounded-2xl border border-gray-100 shadow-sm text-sm text-gray-500 text-center">
+                            Belum ada riwayat servis untuk kendaraan ini.
+                        </div>
+                    @endforelse
                 </div>
-                <div class="flex justify-between">
-                    <span class="text-gray-400">Status:</span>
-                    <span class="px-3 py-1 rounded-full text-xs font-bold bg-purple-100 text-[#BF24B4]">
-                        {{ $transaksi->status ?? 'Dalam Pengerjaan' }}
-                    </span>
+            @else
+                <div class="w-full max-w-xl mt-8 text-left bg-white p-6 rounded-2xl border border-red-100 shadow-sm">
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">Kendaraan Tidak Ditemukan</h3>
+                    <p class="text-sm text-gray-500">
+                        Tidak ada kendaraan dengan nomor polisi
+                        <span class="font-semibold text-gray-800">{{ strtoupper(trim(request('plat_nomor'))) }}</span>.
+                        Pastikan penulisan nomor polisi sudah benar.
+                    </p>
                 </div>
-            </div>
-        </div>
+            @endif
         @endif
 
     </main>
