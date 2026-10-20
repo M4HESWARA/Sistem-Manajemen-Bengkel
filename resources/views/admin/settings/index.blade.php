@@ -6,11 +6,11 @@
 
 <div class="mb-4">
     <h1 class="h4 fw-bold mb-0">Pengaturan</h1>
-    <p class="text-muted small mb-0">Kelola akun pengguna, password, dan informasi bengkel.</p>
+    <p class="text-muted small mb-0">Kelola akun pengguna dan informasi bengkel.</p>
 </div>
 
 <div class="row g-3">
-    <div class="col-md-4">
+    <div class="col-md-6">
         <a href="{{ route('admin.settings.pengguna') }}" class="text-decoration-none text-reset">
             <div class="card p-4 h-100">
                 <div class="d-flex align-items-center justify-content-center mb-3"
@@ -22,19 +22,7 @@
             </div>
         </a>
     </div>
-    <div class="col-md-4">
-        <a href="{{ route('admin.settings.password') }}" class="text-decoration-none text-reset">
-            <div class="card p-4 h-100">
-                <div class="d-flex align-items-center justify-content-center mb-3"
-                     style="width:48px;height:48px;border-radius:.9rem;background:linear-gradient(135deg,var(--bengkel-primary),var(--bengkel-accent));">
-                    <i class="bi bi-key text-white fs-5"></i>
-                </div>
-                <h2 class="h6 fw-bold">Ganti Password</h2>
-                <p class="text-muted small mb-0">Ubah password akun Anda sendiri yang sedang login.</p>
-            </div>
-        </a>
-    </div>
-    <div class="col-md-4">
+    <div class="col-md-6">
         <a href="{{ route('admin.settings.bengkel') }}" class="text-decoration-none text-reset">
             <div class="card p-4 h-100">
                 <div class="d-flex align-items-center justify-content-center mb-3"

@@ -5,7 +5,6 @@ use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\InventoriController;
 use App\Http\Controllers\Admin\KasirController;
 use App\Http\Controllers\Admin\LaporanController;
-use App\Http\Controllers\Admin\PasswordSettingController;
 use App\Http\Controllers\Admin\PendaftaranController;
 use App\Http\Controllers\Admin\RiwayatServisController;
 use App\Http\Controllers\Admin\ServiceOrderActionController;
@@ -85,9 +84,6 @@ Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->grou
         Route::get('/pengguna/{user}/edit', [UserManagementController::class, 'edit'])->name('pengguna.edit');
         Route::put('/pengguna/{user}', [UserManagementController::class, 'update'])->name('pengguna.update');
         Route::post('/pengguna/{user}/toggle-active', [UserManagementController::class, 'toggleActive'])->name('pengguna.toggle-active');
-
-        Route::get('/password', [PasswordSettingController::class, 'edit'])->name('password');
-        Route::put('/password', [PasswordSettingController::class, 'update'])->name('password.update');
 
         Route::get('/bengkel', [CompanySettingController::class, 'edit'])->name('bengkel');
         Route::put('/bengkel', [CompanySettingController::class, 'update'])->name('bengkel.update');
