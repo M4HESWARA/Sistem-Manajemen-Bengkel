@@ -2,6 +2,36 @@
 
 @section('title', 'Workspace Mekanik')
 
+@push('styles')
+<style>
+    .scroll-panel {
+        max-height: calc(100vh - 180px);
+        overflow-y: auto;
+        padding-right: 0.5rem;
+    }
+    .scroll-panel::-webkit-scrollbar {
+        width: 8px;
+    }
+    .scroll-panel::-webkit-scrollbar-thumb {
+        background: #d0d5dd;
+        border-radius: 4px;
+    }
+    .scroll-panel::-webkit-scrollbar-thumb:hover {
+        background: #b0b7c3;
+    }
+    .scroll-panel::-webkit-scrollbar-track {
+        background: transparent;
+    }
+    @media (max-width: 991.98px) {
+        .scroll-panel {
+            max-height: none;
+            overflow-y: visible;
+            padding-right: 0;
+        }
+    }
+</style>
+@endpush
+
 @section('content')
 
 @if (session('success'))
@@ -20,6 +50,7 @@
     <div class="col-lg-4">
         <h5 class="fw-bold mb-4 text-dark">Daftar Antrian Penugasan</h5>
 
+        <div class="scroll-panel">
         @forelse ($tugasAktif as $order)
             @php
                 $isSelected = $selectedOrder && $selectedOrder->id === $order->id;
@@ -81,10 +112,12 @@
                 <p class="mb-0">Belum ada tugas aktif untuk kamu saat ini. 🎉</p>
             </div>
         @endforelse
+        </div>
     </div>
 
     <!-- KOLOM KANAN: PENGERJAAN AKTIF -->
     <div class="col-lg-8">
+        <div class="scroll-panel">
         @if ($selectedOrder)
             <div class="card p-4 mb-3" style="border-top: 4px solid var(--bengkel-accent);">
                 
@@ -213,6 +246,7 @@
                 <p class="mb-0 fw-semibold">Pilih salah satu tugas dari daftar antrian di sebelah kiri untuk mulai mengerjakannya.</p>
             </div>
         @endif
+        </div>
     </div>
 
 </div>
