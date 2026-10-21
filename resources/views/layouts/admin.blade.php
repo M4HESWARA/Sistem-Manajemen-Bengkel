@@ -103,7 +103,24 @@
             position: relative;
             z-index: 1;
         }
+
+        @media (max-width: 1199.98px) {
+            .topbar .nav-pill-item {
+                padding: 0.45rem 0.65rem;
+                font-size: 0.82rem;
+            }
+        }
+
+        @media (max-width: 575.98px) {
+            .topbar {
+                padding: 0.65rem 1rem;
+            }
+            .topbar img {
+                height: 30px !important;
+            }
+        }
     </style>
+    <link href="{{ asset('css/bengkel-theme.css') }}" rel="stylesheet">
     @stack('styles')
 </head>
 

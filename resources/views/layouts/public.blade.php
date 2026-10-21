@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Auto Bengkel')</title>
+    <title>@yield('title', 'KSR Garage')</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
     <style>
-        :root { --bengkel-primary: #7c3aed; --bengkel-accent: #ed02fe; }
+        :root { --bengkel-primary: #a31d99; --bengkel-accent: #BF24B4; }
         body { font-family: 'Segoe UI', system-ui, sans-serif; color: #1f2937; }
         .navbar-public { padding: 1rem 1.5rem; background: #fff; border-bottom: 1px solid #f0f0f0; }
         .navbar-public img { height: 45px; }
@@ -28,6 +28,7 @@
         footer a:hover { color: var(--bengkel-primary); }
         footer img { height: 32px; }
     </style>
+    <link href="{{ asset('css/bengkel-theme.css') }}" rel="stylesheet">
     @stack('styles')
 </head>
 <body>

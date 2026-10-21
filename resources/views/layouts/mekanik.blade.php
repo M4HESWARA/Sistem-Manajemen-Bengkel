@@ -101,6 +101,7 @@
             background-color: #fdf0fc;
         }
     </style>
+    <link href="{{ asset('css/bengkel-theme.css') }}" rel="stylesheet">
     @stack('styles')
 </head>
 <body class="d-flex flex-column min-vh-100">

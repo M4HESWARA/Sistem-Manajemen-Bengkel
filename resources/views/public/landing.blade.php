@@ -1,6 +1,6 @@
 @extends('layouts.public')
 
-@section('title', 'Auto Bengkel - KSR Garage')
+@section('title', 'KSR Garage - Servis Motor Transparan')
 
 @section('hide-navbar')@endsection
 @section('hide-footer')@endsection
