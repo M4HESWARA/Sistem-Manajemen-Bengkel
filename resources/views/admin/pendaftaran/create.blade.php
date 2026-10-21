@@ -39,11 +39,15 @@
                 <div class="row g-2 mb-3">
                     <div class="col-md-6">
                         <label class="form-label small fw-semibold">Merk</label>
-                        <input type="text" name="brand" id="brand" class="form-control" value="{{ old('brand') }}" placeholder="mis. Honda">
+                        <select name="brand" id="brand" class="form-select">
+                            <option value="">— Pilih Merk —</option>
+                        </select>
                     </div>
                     <div class="col-md-6">
                         <label class="form-label small fw-semibold">Model</label>
-                        <input type="text" name="model" id="model" class="form-control" value="{{ old('model') }}" placeholder="mis. Vario">
+                        <select name="model" id="model" class="form-select" disabled>
+                            <option value="">— Pilih Model —</option>
+                        </select>
                     </div>
                     <div class="col-md-6">
                         <label class="form-label small fw-semibold">Tahun</label>
@@ -166,6 +170,78 @@
 
 @push('scripts')
 <script>
+const MOTOR_DATA = {
+    Honda: [
+        'BeAT', 'BeAT Street', 'Vario 125', 'Vario 160', 'Scoopy', 'Genio',
+        'PCX 160', 'ADV 160', 'Supra X 125', 'Supra GTR 150', 'Revo', 'Revo Fit',
+        'Blade 110', 'CB150R StreetFire', 'CBR150R', 'CBR250RR', 'CRF150L',
+        'CRF250L', 'CRF450L', 'CT125', 'Monkey', 'Super Cub C125', 'Verza 150',
+        'MegaPro Mono', 'Tiger', 'CS1', 'Vario Techno 125', 'Spacy', 'Vario 110',
+    ],
+    Yamaha: [
+        'Mio M3', 'Mio S', 'Mio Z', 'Mio Gear 125', 'GT 125', 'Lexi', 'Lexi LX',
+        'NMAX', 'NMAX Connected', 'Aerox 155', 'Aerox 155 Connected', 'Fazzio',
+        'Grand Filano', 'FreeGO', 'SMAX', 'MX King 150', 'Jupiter Z1',
+        'Jupiter MX King', 'Vixion', 'Vixion R', 'All New Vixion', 'R15',
+        'R15M', 'R25', 'XSR 155', 'WR 155R', 'WR 250F', 'XTZ 125', 'Byson',
+        'Scorpio Z', 'Force 150', 'Aria 110',
+    ],
+    Suzuki: [
+        'Satria F150', 'Satria F150 Final Edition', 'NEX II', 'NEX Crossover',
+        'Address', 'Address Playful', 'GSX-R150', 'GSX-S150', 'Burgman Street 125EX',
+        'Thunder 125', 'Thunder 150', 'Smash', 'Shogun', 'Shogun Axelo',
+        'Belang 150', 'R150', 'Inazuma 250', 'V-Strom 250', 'Hayabusa',
+        'GSX-R1000', 'Lets', 'Jelata 110',
+    ],
+    Kawasaki: [
+        'Ninja 250', 'Ninja 250 SL', 'Ninja ZX-25R', 'Ninja ZX-6R', 'Ninja 400',
+        'Ninja H2', 'KLX 150', 'KLX 150BF', 'KLX 230', 'KLX 250',
+        'D-Tracker 150', 'D-Tracker X', 'W175', 'W175 Cafe', 'W800',
+        'Z250', 'Z900', 'Z125 Pro', 'Versys 650', 'Versys 1000',
+        'Vulcan S', 'Eliminator', 'ZX-10R', 'ZX-14R', 'KX450', 'KLX230 SM',
+    ],
+    Vespa: [
+        'Sprint 150', 'Primavera 150', 'GTS 150', 'GTS 300', 'ET4 125',
+        'LX 125', 'PX 150', 'Modern Classic',
+    ],
+    'Lainnya': [],
+};
+
+const brandSelect = document.getElementById('brand');
+const modelSelect = document.getElementById('model');
+
+Object.keys(MOTOR_DATA).forEach(brand => {
+    brandSelect.add(new Option(brand, brand));
+});
+
+function renderModels(brand) {
+    const models = MOTOR_DATA[brand] || [];
+    modelSelect.innerHTML = '';
+    modelSelect.add(new Option('— Pilih Model —', ''));
+    models.forEach(m => modelSelect.add(new Option(m, m)));
+    modelSelect.disabled = !brand || models.length === 0;
+}
+
+brandSelect.addEventListener('change', function () {
+    renderModels(this.value);
+});
+
+// Set merk+model sekaligus (untuk old() & auto-fill), termasuk nilai di luar daftar
+function setBrandModel(brand, model) {
+    if (brand && !(brand in MOTOR_DATA)) {
+        brandSelect.add(new Option(brand, brand));
+    }
+    brandSelect.value = brand ?? '';
+    renderModels(brandSelect.value);
+    if (model && ![...modelSelect.options].some(o => o.value === model)) {
+        modelSelect.add(new Option(model, model));
+    }
+    modelSelect.value = model ?? '';
+}
+
+// Prefill dari input lama saat validasi gagal
+setBrandModel(@json(old('brand')), @json(old('model')));
+
 function previewImage(input, previewId) {
     const preview = document.getElementById(previewId);
     if (input.files && input.files[0]) {
@@ -193,8 +269,7 @@ document.getElementById('platNomor').addEventListener('input', function () {
             .then(res => res.json())
             .then(data => {
                 if (data.found) {
-                    document.getElementById('brand').value = data.vehicle.brand ?? '';
-                    document.getElementById('model').value = data.vehicle.model ?? '';
+                    setBrandModel(data.vehicle.brand ?? '', data.vehicle.model ?? '');
                     document.getElementById('year').value = data.vehicle.year ?? '';
                     document.getElementById('color').value = data.vehicle.color ?? '';
                     document.getElementById('namaPelanggan').value = data.customer.full_name ?? '';
