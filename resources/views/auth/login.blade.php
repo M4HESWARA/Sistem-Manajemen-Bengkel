@@ -131,7 +131,7 @@
                 </div>
             @endif
 
-            <form method="POST" action="{{ route('login.attempt') }}">
+            <form method="POST" action="{{ route('login.attempt') }}" autocomplete="off">
                 @csrf
 
                 <div class="mb-3">
@@ -139,7 +139,7 @@
                     <div class="input-group">
                         <span class="input-group-text input-icon"><i class="bi bi-person"></i></span>
                         <input type="text" class="form-control" id="username" name="username"
-                               value="{{ old('username') }}" required autofocus placeholder="Masukkan username">
+                               value="{{ old('username') }}" required autofocus placeholder="Masukkan username" autocomplete="off">
                     </div>
                 </div>
 
@@ -148,7 +148,7 @@
                     <div class="input-group">
                         <span class="input-group-text input-icon"><i class="bi bi-lock"></i></span>
                         <input type="password" class="form-control" id="password" name="password"
-                               required placeholder="••••••••">
+                               required placeholder="••••••••" autocomplete="new-password">
                     </div>
                 </div>
 
