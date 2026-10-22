@@ -12,7 +12,7 @@
 @endif
 
 <div class="d-flex flex-wrap justify-content-between align-items-center mb-3 gap-2">
-    <h1 class="h4 fw-bold mb-0">Dashboard Operasional</h1>
+    <h1 class="h4 fw-bold mb-0" style="color: #F8FAFC;">Dashboard Operasional</h1>
 
     <form method="GET" class="d-flex align-items-center gap-2">
         <input type="date" name="date" class="form-control form-control-sm"
@@ -70,7 +70,7 @@
     {{-- Status Antrean Servis --}}
     <div class="col-lg-8">
         <div class="card p-3">
-            <h2 class="h6 fw-bold mb-3">Status Antrean Servis</h2>
+            <h2 class="h6 fw-bold mb-3" style="color: #F8FAFC;">Status Antrean Servis</h2>
 
             <ul class="nav nav-tabs" id="antrianTab" role="tablist">
                 <li class="nav-item" role="presentation">
@@ -180,32 +180,32 @@
 
     {{-- Peringatan Stok Tipis --}}
     <div class="col-lg-4">
-        <div class="card p-3" style="background:#fef2f2;">
-            <h2 class="h6 fw-bold mb-3 text-danger">
+        <div class="card p-3">
+            <h2 class="h6 fw-bold mb-3" style="color: #FF00FF;">
                 <i class="bi bi-exclamation-triangle-fill"></i> Peringatan Stok Tipis
             </h2>
 
             @php
                 $badgeStyles = [
-                    'background:#fce7f3;color:#db2777;',
-                    'background:#ffedd5;color:#c2410c;',
-                    'background:#fef9c3;color:#a16207;',
+                    'background:rgba(255, 0, 255, 0.15);color:#FF00FF;border:1px solid rgba(255, 0, 255, 0.4);',
+                    'background:rgba(251, 146, 60, 0.15);color:#fb923c;border:1px solid rgba(251, 146, 60, 0.4);',
+                    'background:rgba(250, 204, 21, 0.15);color:#facc15;border:1px solid rgba(250, 204, 21, 0.4);',
                 ];
             @endphp
             @forelse ($lowStockItems as $item)
-                <div class="d-flex justify-content-between align-items-center py-2 border-bottom">
+                <div class="d-flex justify-content-between align-items-center py-2 border-bottom" style="border-color: #334155 !important;">
                     <div>
-                        <div class="fw-semibold small">{{ $item->name }}</div>
-                        <div class="text-muted" style="font-size:.75rem;">Kategori: {{ $item->category->name ?? '-' }}</div>
+                        <div class="fw-semibold small" style="color: #F8FAFC;">{{ $item->name }}</div>
+                        <div style="font-size:.75rem; color: #94A3B8;">Kategori: {{ $item->category->name ?? '-' }}</div>
                     </div>
                     <span class="badge" style="{{ $badgeStyles[$loop->index % 3] }}">Sisa {{ $item->stok }} {{ $item->satuan }}</span>
                 </div>
             @empty
-                <p class="text-muted small mb-0 py-2">Semua stok sparepart dalam kondisi aman.</p>
+                <p class="small mb-0 py-2" style="color: #94A3B8;">Semua stok sparepart dalam kondisi aman.</p>
             @endforelse
 
             <a href="{{ route('admin.inventori') }}" class="d-block text-center small fw-semibold mt-3"
-               style="color: var(--bengkel-primary);">Lihat Semua Inventori</a>
+               style="color: #FF00FF;">Lihat Semua Inventori</a>
         </div>
     </div>
 </div>
@@ -214,7 +214,9 @@
 
 @push('styles')
 <style>
-    .nav-tabs .nav-link { color: #6b7280; font-weight: 600; font-size: .85rem; border: none; }
-    .nav-tabs .nav-link.active { color: var(--bengkel-primary); border-bottom: 2px solid var(--bengkel-primary); }
+    .nav-tabs { border-bottom: 1px solid #334155; }
+    .nav-tabs .nav-link { color: #94A3B8; font-weight: 600; font-size: .85rem; border: none; padding: 0.5rem 1rem; }
+    .nav-tabs .nav-link:hover { color: #FF00FF; }
+    .nav-tabs .nav-link.active { color: #F8FAFC; background: #FF00FF; border: none; border-radius: 0.5rem 0.5rem 0 0; font-weight: 700; }
 </style>
 @endpush
