@@ -6,16 +6,19 @@
     <title>Masuk - KSR Garage</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bengkel-primary: #a31d99;
-            --bengkel-accent: #BF24B4;
-            --bengkel-accent-dark: #c000cf;
+            --magenta: #FF00FF;
+            --magenta-hover: #e600e6;
         }
         body {
             min-height: 100vh;
-            background: #f8f9fb;
-            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: #121212;
+            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+            color: #F8FAFC;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -26,61 +29,86 @@
             position: absolute;
             top: 1.5rem;
             left: 1.5rem;
-            color: #6b7280 !important; 
+            color: #94A3B8 !important;
             text-decoration: none;
             font-weight: 600;
             font-size: .9rem;
+            transition: color .2s ease;
         }
-        .back-link:hover { color: var(--bengkel-accent) !important; }
-
-        .brand-logo {
-            font-family: 'Segoe UI', sans-serif;
-            font-weight: 800;
-            font-style: italic;
-            font-size: 1.8rem;
-            letter-spacing: -.5px;
-            background: linear-gradient(135deg, var(--bengkel-primary), var(--bengkel-accent));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            margin-bottom: 2rem;
-        }
+        .back-link:hover { color: var(--magenta) !important; }
 
         .card.login-card {
             width: 100%;
-            max-width: 380px;
-            border: none;
-            border-top: 4px solid var(--bengkel-accent);
+            max-width: 400px;
+            background: #1E293B;
+            border: 1px solid #334155;
             border-radius: .75rem;
-            box-shadow: 0 10px 30px rgba(0,0,0,.08);
+            box-shadow: 0 0 30px rgba(255, 0, 255, 0.12), 0 10px 30px rgba(0,0,0,.4);
         }
+
+        .card.login-card h1 { color: #F8FAFC; }
+        .card.login-card .form-label { color: #F8FAFC; }
+        .card.login-card .text-muted,
+        .card.login-card .subtitle { color: #94A3B8 !important; }
 
         .input-icon {
-            background-color: #fff;
-            color: #9ca3af;
+            background-color: #0F172A;
+            color: #94A3B8;
+            border: 1px solid #334155;
+            border-right: none;
         }
+        .form-control {
+            background-color: #0F172A !important;
+            border: 1px solid #334155;
+            color: #F8FAFC !important;
+        }
+        .form-control::placeholder { color: #94A3B8; }
         .form-control:focus {
-            border-color: var(--bengkel-accent);
-            box-shadow: 0 0 0 .2rem rgba(236,72,153,.15);
+            background-color: #0F172A;
+            border-color: var(--magenta);
+            box-shadow: 0 0 0 .2rem rgba(255, 0, 255, .25);
+            color: #F8FAFC;
+        }
+        .input-group:focus-within .input-icon {
+            border-color: var(--magenta);
+            color: var(--magenta);
         }
 
-        .btn-bengkel {
-            background-color: var(--bengkel-accent) !important;
+        .form-check-input {
+            background-color: #0F172A;
+            border-color: #334155;
+        }
+        .form-check-input:checked {
+            background-color: var(--magenta);
+            border-color: var(--magenta);
+        }
+        .form-check-input:focus {
+            border-color: var(--magenta);
+            box-shadow: 0 0 0 .2rem rgba(255, 0, 255, .25);
+        }
+        .form-check-label { color: #94A3B8; }
+
+        .btn-magenta {
+            background-color: var(--magenta) !important;
             border: none !important;
             color: #fff !important;
-            font-weight: 600;
+            font-weight: 700;
+            letter-spacing: .5px;
+            border-radius: .6rem;
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.45), 0 0 45px rgba(255, 0, 255, 0.25);
+            transition: box-shadow .2s ease, background-color .2s ease;
         }
-        .btn-bengkel:hover, .btn-bengkel:focus {
-            background-color: var(--bengkel-accent-dark) !important;
+        .btn-magenta:hover, .btn-magenta:focus {
+            background-color: var(--magenta-hover) !important;
             color: #fff !important;
+            box-shadow: 0 0 28px rgba(255, 0, 255, 0.65), 0 0 60px rgba(255, 0, 255, 0.35);
         }
 
-        .link-accent {
-            color: var(--bengkel-accent);
-            text-decoration: none;
-            font-size: .85rem;
+        .alert-danger {
+            background: rgba(255, 0, 255, .1);
+            border: 1px solid rgba(255, 0, 255, .4);
+            color: #ff80ff;
         }
-        .link-accent:hover { text-decoration: underline; }
     </style>
     <link href="{{ asset('css/bengkel-theme.css') }}" rel="stylesheet">
 </head>
@@ -89,17 +117,16 @@
         <i class="bi bi-chevron-left"></i> Ke Halaman Utama
     </a>
 
-    <img src="{{ asset('images/logo-ksr-garage.png') }}" alt="KSR Garage" class="mb-4" style="max-width: 220px; width: 100%;">
-
     <div class="card login-card">
         <div class="card-body p-4 p-md-5">
             <div class="text-center mb-4">
+                <img src="{{ asset('images/logo-ksr-garage.png') }}" alt="KSR Garage" class="mb-4" style="max-width: 200px; width: 100%;">
                 <h1 class="h4 fw-bold mb-1">Selamat Datang Kembali</h1>
-                <p class="text-muted small mb-0">Silakan masuk ke akun Anda untuk melanjutkan</p>
+                <p class="subtitle small mb-0">Silakan masuk ke akun Anda untuk melanjutkan</p>
             </div>
 
             @if ($errors->any())
-                <div class="alert alert-danger py-2 small">
+                <div class="alert alert-danger py-2 small mb-4">
                     {{ $errors->first() }}
                 </div>
             @endif
@@ -132,7 +159,7 @@
                     </div>
                 </div>
 
-                <button type="submit" class="btn btn-bengkel w-100 py-2">MASUK</button>
+                <button type="submit" class="btn btn-magenta w-100 py-2">MASUK</button>
             </form>
         </div>
     </div>
