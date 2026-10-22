@@ -11,13 +11,16 @@
     </div>
 @endif
 
-<div class="d-flex flex-wrap justify-content-between align-items-center mb-3 gap-2">
+<div class="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-2">
     <h1 class="h4 fw-bold mb-0" style="color: #F8FAFC;">Dashboard Operasional</h1>
 
-    <form method="GET" class="d-flex align-items-center gap-2">
-        <input type="date" name="date" class="form-control form-control-sm"
+    <div class="d-flex align-items-center gap-2">
+        <input type="date" name="date" class="form-control form-control-sm" style="background: #1E293B; border: 1px solid #334155; color: #F8FAFC; width: auto;"
                value="{{ $date->format('Y-m-d') }}" onchange="this.form.submit()">
-    </form>
+        <a href="{{ route('admin.pendaftaran') }}" class="btn-magenta">
+            <i class="bi bi-plus-lg"></i> Registrasi Servis Baru
+        </a>
+    </div>
 </div>
 
 {{-- Kartu Statistik --}}
@@ -26,12 +29,12 @@
         <div class="card p-3">
             <div class="d-flex justify-content-between align-items-center">
                 <div>
-                    <p class="text-muted small mb-1">Total Motor Selesai</p>
-                    <h4 class="fw-bold mb-0">{{ $totalMotorSelesai }}</h4>
+                    <p class="small mb-1" style="color: #94A3B8;">Total Motor Selesai</p>
+                    <h4 class="fw-bold mb-0" style="color: #F8FAFC; font-size: 1.8rem;">{{ $totalMotorSelesai }}</h4>
                 </div>
                 <div class="d-flex align-items-center justify-content-center"
-                     style="width:40px;height:40px;border-radius:.75rem;background:linear-gradient(135deg,var(--bengkel-primary),var(--bengkel-accent));">
-                    <i class="bi bi-scooter text-white"></i>
+                     style="width:46px;height:46px;border-radius:.75rem;background:rgba(255, 0, 255, 0.15);">
+                    <i class="bi bi-scooter fs-5" style="color: #FF00FF;"></i>
                 </div>
             </div>
         </div>
@@ -40,12 +43,12 @@
         <div class="card p-3">
             <div class="d-flex justify-content-between align-items-center">
                 <div>
-                    <p class="text-muted small mb-1">Pendapatan Hari Ini</p>
-                    <h4 class="fw-bold mb-0">Rp {{ number_format($pendapatanHariIni, 0, ',', '.') }}</h4>
+                    <p class="small mb-1" style="color: #94A3B8;">Pendapatan Hari Ini</p>
+                    <h4 class="fw-bold mb-0" style="color: #F8FAFC; font-size: 1.5rem;">Rp {{ number_format($pendapatanHariIni, 0, ',', '.') }}</h4>
                 </div>
                 <div class="d-flex align-items-center justify-content-center"
-                     style="width:40px;height:40px;border-radius:.75rem;background:linear-gradient(135deg,var(--bengkel-primary),var(--bengkel-accent));">
-                    <i class="bi bi-cash-coin text-white"></i>
+                     style="width:46px;height:46px;border-radius:.75rem;background:rgba(255, 0, 255, 0.15);">
+                    <i class="bi bi-cash-coin fs-5" style="color: #FF00FF;"></i>
                 </div>
             </div>
         </div>
@@ -54,12 +57,12 @@
         <div class="card p-3">
             <div class="d-flex justify-content-between align-items-center">
                 <div>
-                    <p class="text-muted small mb-1">Skor Efisiensi</p>
-                    <h4 class="fw-bold mb-0">{{ $skorEfisiensi }}%</h4>
+                    <p class="small mb-1" style="color: #94A3B8;">Skor Efisiensi</p>
+                    <h4 class="fw-bold mb-0" style="color: #F8FAFC; font-size: 1.8rem;">{{ $skorEfisiensi }}%</h4>
                 </div>
                 <div class="d-flex align-items-center justify-content-center"
-                     style="width:40px;height:40px;border-radius:.75rem;background:linear-gradient(135deg,var(--bengkel-primary),var(--bengkel-accent));">
-                    <i class="bi bi-speedometer2 text-white"></i>
+                     style="width:46px;height:46px;border-radius:.75rem;background:rgba(255, 0, 255, 0.15);">
+                    <i class="bi bi-speedometer2 fs-5" style="color: #FF00FF;"></i>
                 </div>
             </div>
         </div>
@@ -72,7 +75,7 @@
         <div class="card p-3">
             <h2 class="h6 fw-bold mb-3" style="color: #F8FAFC;">Status Antrean Servis</h2>
 
-            <ul class="nav nav-tabs" id="antrianTab" role="tablist">
+            <ul class="nav nav-tabs border-0" id="antrianTab" role="tablist">
                 <li class="nav-item" role="presentation">
                     <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#tab-menunggu" type="button">
                         Menunggu Mekanik
@@ -94,19 +97,19 @@
                 {{-- Tab: Menunggu Mekanik --}}
                 <div class="tab-pane fade show active" id="tab-menunggu">
                     @forelse ($antrianMenunggu as $order)
-                        <div class="d-flex flex-wrap justify-content-between align-items-center border rounded-3 p-3 mb-2 gap-2">
+                        <div class="d-flex flex-wrap justify-content-between align-items-center border rounded-3 p-3 mb-2 gap-2" style="border-color: #334155 !important; background: transparent;">
                             <div class="d-flex align-items-center gap-3">
                                 <div class="d-flex align-items-center justify-content-center"
-                                     style="width:40px;height:40px;border-radius:.6rem;background:#f3f4f6;">
-                                    <i class="bi bi-scooter fs-5" style="color: var(--bengkel-primary);"></i>
+                                     style="width:42px;height:42px;border-radius:.6rem;background:rgba(255, 0, 255, 0.12);">
+                                    <i class="bi bi-scooter fs-5" style="color: #FF00FF;"></i>
                                 </div>
                                 <div>
-                                    <div class="fw-semibold">
+                                    <div class="fw-semibold" style="color: #F8FAFC;">
                                         {{ $order->vehicle->brand }} {{ $order->vehicle->model }}
                                         — {{ $order->vehicle->plat_nomor }}
                                     </div>
-                                    <div class="text-muted small">
-                                        <span style="color: var(--bengkel-accent); font-weight:600;">Keluhan:</span>
+                                    <div class="small" style="color: #94A3B8;">
+                                        <span style="color: #FF00FF;">Keluhan:</span>
                                         {{ $order->keluhan_awal }}
                                     </div>
                                 </div>
@@ -120,11 +123,11 @@
                                         <option value="{{ $mekanik->id }}">{{ $mekanik->full_name }}</option>
                                     @endforeach
                                 </select>
-                                <button type="submit" class="btn btn-outline-dark btn-sm">Assign Mekanik</button>
+                                <button type="submit" class="btn btn-magenta btn-sm">Assign Mekanik</button>
                             </form>
                         </div>
                     @empty
-                        <p class="text-muted small mb-0 py-3">Tidak ada kendaraan yang menunggu mekanik saat ini.</p>
+                        <p class="small mb-0 py-3" style="color: #94A3B8;">Tidak ada kendaraan yang menunggu mekanik saat ini.</p>
                     @endforelse
                 </div>
 
@@ -180,16 +183,16 @@
 
     {{-- Peringatan Stok Tipis --}}
     <div class="col-lg-4">
-        <div class="card p-3">
-            <h2 class="h6 fw-bold mb-3" style="color: #FF00FF;">
+        <div class="card p-3" style="border-color: rgba(239, 68, 68, 0.4);">
+            <h2 class="h6 fw-bold mb-3" style="color: #ef4444;">
                 <i class="bi bi-exclamation-triangle-fill"></i> Peringatan Stok Tipis
             </h2>
 
             @php
                 $badgeStyles = [
-                    'background:rgba(255, 0, 255, 0.15);color:#FF00FF;border:1px solid rgba(255, 0, 255, 0.4);',
-                    'background:rgba(251, 146, 60, 0.15);color:#fb923c;border:1px solid rgba(251, 146, 60, 0.4);',
-                    'background:rgba(250, 204, 21, 0.15);color:#facc15;border:1px solid rgba(250, 204, 21, 0.4);',
+                    'background:rgba(239, 68, 68, 0.18);color:#f87171;border:1px solid rgba(239, 68, 68, 0.5);',
+                    'background:rgba(249, 115, 22, 0.18);color:#fb923c;border:1px solid rgba(249, 115, 22, 0.5);',
+                    'background:rgba(234, 179, 8, 0.18);color:#facc15;border:1px solid rgba(234, 179, 8, 0.5);',
                 ];
             @endphp
             @forelse ($lowStockItems as $item)
@@ -214,9 +217,11 @@
 
 @push('styles')
 <style>
-    .nav-tabs { border-bottom: 1px solid #334155; }
-    .nav-tabs .nav-link { color: #94A3B8; font-weight: 600; font-size: .85rem; border: none; padding: 0.5rem 1rem; }
-    .nav-tabs .nav-link:hover { color: #FF00FF; }
-    .nav-tabs .nav-link.active { color: #F8FAFC; background: #FF00FF; border: none; border-radius: 0.5rem 0.5rem 0 0; font-weight: 700; }
+    .nav-tabs { border-bottom: 1px solid #334155; gap: 1.5rem; }
+    .nav-tabs .nav-link { color: #94A3B8; font-weight: 500; font-size: .85rem; border: none; padding: 0.6rem 0; background: transparent; }
+    .nav-tabs .nav-link:hover { color: #F8FAFC; }
+    .nav-tabs .nav-link.active { color: #F8FAFC; background: transparent; border: none; border-bottom: 2px solid #FF00FF; border-radius: 0; font-weight: 600; }
+    .form-select, .form-control { background-color: #1E293B; border: 1px solid #334155; color: #F8FAFC; }
+    .form-select:focus, .form-control:focus { background-color: #1E293B; border-color: #FF00FF; box-shadow: 0 0 0 .2rem rgba(255, 0, 255, .25); color: #F8FAFC; }
 </style>
 @endpush

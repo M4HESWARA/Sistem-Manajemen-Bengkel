@@ -50,24 +50,19 @@
             font-weight: 500;
         }
         .nav-pill-item {
-            padding: 0.45rem 0.9rem;
-            font-weight: 600;
+            padding: 0.45rem 0;
+            font-weight: 500;
             font-size: 0.88rem;
             color: var(--text-secondary);
             text-decoration: none;
-            border-radius: 0.5rem;
             transition: all 0.2s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
         }
         .nav-pill-item:hover {
             color: var(--magenta);
-            background-color: rgba(255, 0, 255, 0.1);
         }
         .nav-pill-item.active {
             color: var(--magenta);
-            background-color: var(--bg-card);
+            font-weight: 600;
         }
         .icon-btn {
             width: 38px;
@@ -196,20 +191,18 @@
         
         <!-- 1. Bagian Kiri (Logo & Menu Desktop) -->
         <div class="d-flex align-items-center gap-3">
-            <a href="{{ route('admin.dashboard') }}" class="text-decoration-none d-flex align-items-center gap-2">
+            <a href="{{ route('admin.dashboard') }}" class="text-decoration-none d-flex flex-column align-items-start">
                 <img src="{{ asset('images/logo-ksr-garage.png') }}" alt="KSR Garage" style="height: 36px; display: block;">
-                <span class="fw-bold d-none d-md-inline" style="color: #F8FAFC; font-size: 0.95rem;">Admin Dashboard</span>
+                <span class="d-none d-md-inline" style="color: #94A3B8; font-size: 0.7rem; margin-top: 2px;">Admin Dashboard</span>
             </a>
 
             <!-- Menu Navigasi Desktop (Laptop / Komputer) -->
-            <div class="d-none d-lg-flex align-items-center gap-1 ms-3">
-                <a href="{{ route('admin.dashboard') }}" class="nav-pill-item {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}"><i class="bi bi-speedometer2"></i> Dashboard</a>
-                <a href="{{ route('admin.pendaftaran') }}" class="nav-pill-item {{ request()->routeIs('admin.pendaftaran') ? 'active' : '' }}"><i class="bi bi-clipboard-plus"></i> Pendaftaran</a>
-                <a href="{{ route('admin.inventori') }}" class="nav-pill-item {{ request()->routeIs('admin.inventori*') ? 'active' : '' }}"><i class="bi bi-box-seam"></i> Spareparts</a>
-                <a href="{{ route('admin.kasir') }}" class="nav-pill-item {{ request()->routeIs('admin.kasir*') ? 'active' : '' }}"><i class="bi bi-cash-stack"></i> Kasir</a>
-                <a href="#" class="nav-pill-item"><i class="bi bi-wrench"></i> Mekanik</a>
-                <a href="{{ route('admin.laporan') }}" class="nav-pill-item {{ request()->routeIs('admin.laporan') ? 'active' : '' }}"><i class="bi bi-bar-chart-line"></i> Laporan</a>
-                <a href="{{ route('admin.riwayat') }}" class="nav-pill-item {{ request()->routeIs('admin.riwayat*') ? 'active' : '' }}"><i class="bi bi-clock-history"></i> Riwayat</a>
+            <div class="d-none d-lg-flex align-items-center gap-4 ms-4">
+                <a href="{{ route('admin.dashboard') }}" class="nav-pill-item {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}" style="{{ request()->routeIs('admin.dashboard') ? 'border-bottom: 2px solid #FF00FF; border-radius: 0; padding-bottom: 0.35rem;' : '' }}">Dashboard</a>
+                <a href="{{ route('admin.pendaftaran') }}" class="nav-pill-item {{ request()->routeIs('admin.pendaftaran') ? 'active' : '' }}" style="{{ request()->routeIs('admin.pendaftaran') ? 'border-bottom: 2px solid #FF00FF; border-radius: 0; padding-bottom: 0.35rem;' : '' }}">Pendaftaran</a>
+                <a href="{{ route('admin.inventori') }}" class="nav-pill-item {{ request()->routeIs('admin.inventori*') ? 'active' : '' }}" style="{{ request()->routeIs('admin.inventori*') ? 'border-bottom: 2px solid #FF00FF; border-radius: 0; padding-bottom: 0.35rem;' : '' }}">Inventori</a>
+                <a href="{{ route('admin.kasir') }}" class="nav-pill-item {{ request()->routeIs('admin.kasir*') ? 'active' : '' }}" style="{{ request()->routeIs('admin.kasir*') ? 'border-bottom: 2px solid #FF00FF; border-radius: 0; padding-bottom: 0.35rem;' : '' }}">Kasir</a>
+                <a href="{{ route('admin.laporan') }}" class="nav-pill-item {{ request()->routeIs('admin.laporan') ? 'active' : '' }}" style="{{ request()->routeIs('admin.laporan') ? 'border-bottom: 2px solid #FF00FF; border-radius: 0; padding-bottom: 0.35rem;' : '' }}">Laporan</a>
             </div>
         </div>
 
@@ -226,7 +219,7 @@
                 <div class="rounded-circle d-flex align-items-center justify-content-center" style="width: 38px; height: 38px; background: var(--bg-card); border: 1px solid var(--border);">
                     <i class="bi bi-person-fill" style="color: var(--text-secondary);"></i>
                 </div>
-                <span class="small fw-semibold">{{ auth()->user()->full_name ?? 'Admin Bengkel' }}</span>
+                <span class="small" style="color: #F8FAFC;">Admin Bengkel</span>
             </div>
             
             <!-- Tombol Pengaturan -->
