@@ -60,7 +60,7 @@
             </nav>
 
             <div class="flex items-center gap-2 sm:gap-3">
-                <a href="{{ route('login') }}" class="hidden md:inline-flex items-center text-sm font-semibold text-[#FF00FF] border border-[#FF00FF] rounded-lg px-5 py-2 hover:bg-[#FF00FF] hover:text-[#121212] transition-colors no-underline">
+                <a href="{{ route('login') }}" class="hidden md:inline text-sm font-medium text-[#94A3B8] hover:text-[#FF00FF] transition-colors no-underline">
                     Masuk
                 </a>
 
@@ -77,7 +77,7 @@
             <nav class="max-w-7xl mx-auto px-5 sm:px-6 py-3 flex flex-col gap-1">
                 <a href="#alur-layanan" class="px-3 py-2.5 rounded-lg text-sm font-medium text-[#94A3B8] hover:bg-white/5 hover:text-[#FF00FF] no-underline">Alur Layanan</a>
                 <a href="#kontak" class="px-3 py-2.5 rounded-lg text-sm font-medium text-[#94A3B8] hover:bg-white/5 hover:text-[#FF00FF] no-underline">Kontak</a>
-                <a href="{{ route('login') }}" class="mt-1 inline-flex items-center justify-center rounded-lg border border-[#FF00FF] text-[#FF00FF] hover:bg-[#FF00FF] hover:text-[#121212] px-4 py-2.5 text-sm font-semibold no-underline transition-colors">Masuk</a>
+                <a href="{{ route('login') }}" class="px-3 py-2.5 rounded-lg text-sm font-medium text-[#94A3B8] hover:bg-white/5 hover:text-[#FF00FF] no-underline">Masuk</a>
             </nav>
         </div>
     </header>
@@ -126,26 +126,6 @@
             <span>Cek Status Kendaraan</span>
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
         </a>
-
-        <!-- INPUT TRACKING QUICK SEARCH -->
-        <div class="relative w-full max-w-xl mt-8 bg-[#1E293B] p-2 md:p-3 rounded-2xl border border-white/10 shadow-xl shadow-black/40">
-            <form action="{{ route('public.cek-status') }}" method="GET" class="flex flex-col sm:flex-row items-center gap-2">
-                <div class="relative w-full flex items-center">
-                    <svg class="w-5 h-5 text-[#94A3B8] absolute left-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                    </svg>
-                    <input type="text"
-                           name="plat_nomor"
-                           placeholder="Masukkan Plat Nomor (B 1234 ABC)"
-                           required
-                           class="w-full pl-11 pr-4 py-3 bg-transparent text-[#F8FAFC] placeholder-[#94A3B8] text-sm md:text-base focus:outline-none uppercase font-semibold tracking-wide">
-                </div>
-                <button type="submit"
-                        class="w-full sm:w-auto bg-[#FF00FF] hover:bg-[#e600e6] text-white font-bold text-sm px-6 py-3.5 rounded-xl transition-all whitespace-nowrap">
-                    Lacak Servis
-                </button>
-            </form>
-        </div>
     </section>
 
     <!-- CARA KERJA PRAKTIS -->
