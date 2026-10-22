@@ -30,7 +30,7 @@
                 <h2 class="h6 fw-bold mb-3" style="color: #F8FAFC;"><i class="bi bi-scooter" style="color: #FF00FF;"></i> Data Kendaraan & Pelanggan</h2>
 
                 <div class="mb-3">
-                    <label class="form-label small fw-semibold">Nomor Polisi</label>
+                    <label class="form-label small fw-semibold" style="color: #F8FAFC;">Nomor Polisi</label>
                     <input type="text" name="plat_nomor" id="platNomor" class="form-control text-uppercase"
                            value="{{ old('plat_nomor') }}" placeholder="mis. L 1234 AB" required autofocus>
                     <div id="platNomorStatus" class="form-text"></div>
@@ -38,43 +38,44 @@
 
                 <div class="row g-2 mb-3">
                     <div class="col-md-6">
-                        <label class="form-label small fw-semibold">Merk</label>
+                        <label class="form-label small fw-semibold" style="color: #F8FAFC;">Merk</label>
                         <select name="brand" id="brand" class="form-select">
                             <option value="">— Pilih Merk —</option>
                         </select>
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label small fw-semibold">Model</label>
+                        <label class="form-label small fw-semibold" style="color: #F8FAFC;">Model</label>
                         <select name="model" id="model" class="form-select" disabled>
                             <option value="">— Pilih Model —</option>
                         </select>
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label small fw-semibold">Tahun</label>
+                        <label class="form-label small fw-semibold" style="color: #F8FAFC;">Tahun</label>
                         <input type="number" name="year" id="year" class="form-control" value="{{ old('year') }}" placeholder="mis. 2022">
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label small fw-semibold">Warna</label>
+                        <label class="form-label small fw-semibold" style="color: #F8FAFC;">Warna</label>
                         <input type="text" name="color" id="color" class="form-control" value="{{ old('color') }}" placeholder="mis. Hitam">
                     </div>
                 </div>
 
-                <hr>
+                <hr style="border-color: #334155;">
 
                 <div class="mb-3">
-                    <label class="form-label small fw-semibold">Nama Pelanggan</label>
+                    <label class="form-label small fw-semibold" style="color: #F8FAFC;">Nama Pelanggan</label>
                     <input type="text" name="nama_pelanggan" id="namaPelanggan" class="form-control"
                            value="{{ old('nama_pelanggan') }}" placeholder="Nama lengkap" required>
                 </div>
                 <div class="row g-2">
                     <div class="col-md-6">
-                        <label class="form-label small fw-semibold">No. HP</label>
+                        <label class="form-label small fw-semibold" style="color: #F8FAFC;">No. HP</label>
                         <input type="text" name="no_hp" id="noHp" class="form-control"
                                value="{{ old('no_hp') }}" placeholder="08xxxxxxxxxx" required>
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label small fw-semibold">Alamat (opsional)</label>
+                        <label class="form-label small fw-semibold" style="color: #94A3B8;">Alamat (opsional)</label>
                         <input type="text" name="alamat" id="alamat" class="form-control" value="{{ old('alamat') }}">
+                    </tag>
                     </div>
                 </div>
             </div>
@@ -95,13 +96,13 @@
 
                 <div class="row g-3 mb-3">
                     <div class="col-md-6">
-                        <label class="form-label small fw-semibold">Foto Odometer</label>
-                        <input type="file" name="odometer_photo" accept="image/*" class="form-control" required
+                        <label class="form-label small fw-semibold" style="color: #F8FAFC;">Foto Odometer</label>
+                        <input type="file" name="odometer_photo" accept="image/*" class="form-control file-input-dark" required
                                onchange="previewImage(this, 'previewOdometer')">
-                        <img id="previewOdometer" class="mt-2 rounded border d-none" style="max-height:120px;">
+                        <img id="previewOdometer" class="mt-2 rounded border d-none" style="max-height:120px; border-color: #334155 !important;">
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label small fw-semibold">Kilometer (Odometer)</label>
+                        <label class="form-label small fw-semibold" style="color: #F8FAFC;">Kilometer (Odometer)</label>
                         <input type="number" name="odometer_reading" class="form-control"
                                value="{{ old('odometer_reading') }}" placeholder="mis. 12500" required min="0">
                     </div>
@@ -109,13 +110,13 @@
 
                 <div class="row g-3 mb-3">
                     <div class="col-md-6">
-                        <label class="form-label small fw-semibold">Foto Kondisi Bensin (opsional)</label>
-                        <input type="file" name="fuel_photo" accept="image/*" class="form-control"
+                        <label class="form-label small fw-semibold" style="color: #F8FAFC;">Foto Kondisi Bensin (opsional)</label>
+                        <input type="file" name="fuel_photo" accept="image/*" class="form-control file-input-dark"
                                onchange="previewImage(this, 'previewFuel')">
-                        <img id="previewFuel" class="mt-2 rounded border d-none" style="max-height:120px;">
+                        <img id="previewFuel" class="mt-2 rounded border d-none" style="max-height:120px; border-color: #334155 !important;">
                     </div>
                     <div class="col-md-6">
-                        <label class="form-label small fw-semibold">Kapasitas Bensin</label>
+                        <label class="form-label small fw-semibold" style="color: #F8FAFC;">Kapasitas Bensin</label>
                         <select name="fuel_level" class="form-select" required>
                             <option value="" disabled selected>Pilih kondisi</option>
                             <option value="empty">Kosong (Empty)</option>
@@ -127,7 +128,7 @@
                     </div>
                 </div>
 
-                <label class="form-label small fw-semibold">Checklist Indikator & Lampu</label>
+                <label class="form-label small fw-semibold" style="color: #F8FAFC;">Checklist Indikator & Lampu</label>
                 <div class="row row-cols-2 row-cols-md-3 g-2 mb-3">
                     @foreach ([
                         'lampu_utama_ok' => 'Lampu Utama',
@@ -139,13 +140,13 @@
                         <div class="col">
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" name="{{ $field }}" id="{{ $field }}" checked>
-                                <label class="form-check-label small" for="{{ $field }}">{{ $label }} OK</label>
+                                <label class="form-check-label small" for="{{ $field }}" style="color: #F8FAFC;">{{ $label }} OK</label>
                             </div>
                         </div>
                     @endforeach
                 </div>
 
-                <label class="form-label small fw-semibold">Catatan Kondisi (opsional)</label>
+                <label class="form-label small fw-semibold" style="color: #94A3B8;">Catatan Kondisi (opsional)</label>
                 <textarea name="catatan_kondisi" class="form-control" rows="2"
                           placeholder="Catatan tambahan, mis. lecet body, dsb.">{{ old('catatan_kondisi') }}</textarea>
             </div>
@@ -153,8 +154,8 @@
     </div>
 
     <div class="d-flex justify-content-end gap-2 mt-3">
-        <a href="{{ route('admin.dashboard') }}" class="btn btn-outline-secondary">Batal</a>
-        <button type="submit" class="btn btn-bengkel px-4">
+        <a href="{{ route('admin.dashboard') }}" class="btn btn-outline-secondary" style="border-color: #334155; color: #94A3B8;">Batal</a>
+        <button type="submit" class="btn btn-magenta px-4" style="background-color: #FF00FF; border: none; color: #fff; font-weight: 700; box-shadow: 0 0 20px rgba(255, 0, 255, 0.45);">
             <i class="bi bi-check-circle"></i> Daftarkan Servis
         </button>
     </div>
@@ -165,6 +166,47 @@
 @push('styles')
 <style>
     .text-uppercase { text-transform: uppercase; }
+    .form-control, .form-select {
+        background-color: #0F172A;
+        border: 1px solid #334155;
+        color: #F8FAFC;
+    }
+    .form-control::placeholder {
+        color: #94A3B8;
+    }
+    .form-control:focus, .form-select:focus {
+        background-color: #0F172A;
+        border-color: #FF00FF;
+        box-shadow: 0 0 0 .2rem rgba(255, 0, 255, .25);
+        color: #F8FAFC;
+    }
+    .form-check-input {
+        background-color: #0F172A;
+        border-color: #334155;
+    }
+    .form-check-input:checked {
+        background-color: #FF00FF;
+        border-color: #FF00FF;
+    }
+    .form-check-input:focus {
+        border-color: #FF00FF;
+        box-shadow: 0 0 0 .2rem rgba(255, 0, 255, .25);
+    }
+    .file-input-dark::file-selector-button {
+        background-color: #1E293B;
+        color: #F8FAFC;
+        border: 1px solid #334155;
+        padding: 0.375rem 0.75rem;
+        margin-right: 0.75rem;
+        border-radius: 0.375rem;
+        transition: background-color .2s ease;
+    }
+    .file-input-dark::file-selector-button:hover {
+        background-color: #334155;
+    }
+    .file-input-dark {
+        color: #94A3B8;
+    }
 </style>
 @endpush
 
