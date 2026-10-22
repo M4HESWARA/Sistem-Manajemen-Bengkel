@@ -8,6 +8,9 @@
 @push('styles')
 <!-- Memuat Tailwind CSS khusus untuk halaman ini -->
 <script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
     .tailwind-scope {
         font-family: 'Inter', sans-serif;
@@ -19,36 +22,50 @@
     html {
         scroll-behavior: smooth;
     }
-    
+    body {
+        background-color: #121212;
+    }
     /* Trik CSS untuk menyembunyikan footer bawaan dari layouts/public */
     footer:not(.tailwind-footer) {
         display: none !important;
+    }
+    .glow-magenta {
+        box-shadow: 0 0 20px rgba(255, 0, 255, 0.45), 0 0 45px rgba(255, 0, 255, 0.25);
+    }
+    .glow-magenta:hover {
+        box-shadow: 0 0 28px rgba(255, 0, 255, 0.65), 0 0 60px rgba(255, 0, 255, 0.35);
+    }
+    .hero-grid {
+        background-image:
+            linear-gradient(rgba(255, 0, 255, 0.05) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 0, 255, 0.05) 1px, transparent 1px);
+        background-size: 44px 44px;
     }
 </style>
 @endpush
 
 @section('content')
-<div class="tailwind-scope full-bleed-container bg-[#FAFAFA] min-h-screen flex flex-col justify-between">
-    
+<div class="tailwind-scope full-bleed-container bg-[#121212] min-h-screen flex flex-col justify-between text-[#F8FAFC]">
+
     <!-- NAVBAR / HEADER -->
-    <header class="w-full bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-gray-100">
+    <header class="w-full bg-[#121212]/80 backdrop-blur-md sticky top-0 z-50 border-b border-white/10">
         <div class="max-w-7xl mx-auto px-5 sm:px-6 md:px-12 lg:px-16 py-3 md:py-4 flex justify-between items-center gap-3">
             <a href="{{ url('/') }}" class="flex items-center flex-shrink-0">
                 <img src="{{ asset('images/logo-ksr-garage.png') }}" alt="KSR Garage" class="h-9 md:h-[40px] w-auto object-contain">
             </a>
 
-            <nav class="hidden md:flex items-center gap-8">
-                <a href="#alur-layanan" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors no-underline">Alur Layanan</a>
-                <a href="#kontak" class="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors no-underline">Kontak</a>
+            <nav class="hidden md:flex items-center gap-10">
+                <a href="#alur-layanan" class="text-sm font-medium text-[#94A3B8] hover:text-[#FF00FF] transition-colors no-underline">Alur Layanan</a>
+                <a href="#kontak" class="text-sm font-medium text-[#94A3B8] hover:text-[#FF00FF] transition-colors no-underline">Kontak</a>
             </nav>
 
             <div class="flex items-center gap-2 sm:gap-3">
-                <a href="{{ route('login') }}" class="hidden md:inline text-sm font-semibold text-gray-700 hover:text-gray-900 transition-colors no-underline">
+                <a href="{{ route('login') }}" class="hidden md:inline-flex items-center text-sm font-semibold text-[#FF00FF] border border-[#FF00FF] rounded-lg px-5 py-2 hover:bg-[#FF00FF] hover:text-[#121212] transition-colors no-underline">
                     Masuk
                 </a>
 
                 <button id="navToggle" type="button" aria-label="Buka menu" aria-expanded="false" aria-controls="navMobile"
-                    class="md:hidden inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-gray-200 bg-white text-gray-700 transition-colors hover:bg-gray-50">
+                    class="md:hidden inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-white/15 bg-white/5 text-[#F8FAFC] transition-colors hover:bg-white/10">
                     <svg id="navIconOpen" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
                     <svg id="navIconClose" class="w-5 h-5 hidden" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>
                 </button>
@@ -56,11 +73,11 @@
         </div>
 
         <!-- Menu khusus mobile -->
-        <div id="navMobile" class="md:hidden hidden border-t border-gray-100 bg-white">
+        <div id="navMobile" class="md:hidden hidden border-t border-white/10 bg-[#121212]">
             <nav class="max-w-7xl mx-auto px-5 sm:px-6 py-3 flex flex-col gap-1">
-                <a href="#alur-layanan" class="px-3 py-2.5 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 no-underline">Alur Layanan</a>
-                <a href="#kontak" class="px-3 py-2.5 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 no-underline">Kontak</a>
-                <a href="{{ route('login') }}" class="mt-1 inline-flex items-center justify-center rounded-lg bg-[#BF24B4] hover:bg-[#a31d99] px-4 py-2.5 text-sm font-semibold text-white no-underline transition-colors">Masuk</a>
+                <a href="#alur-layanan" class="px-3 py-2.5 rounded-lg text-sm font-medium text-[#94A3B8] hover:bg-white/5 hover:text-[#FF00FF] no-underline">Alur Layanan</a>
+                <a href="#kontak" class="px-3 py-2.5 rounded-lg text-sm font-medium text-[#94A3B8] hover:bg-white/5 hover:text-[#FF00FF] no-underline">Kontak</a>
+                <a href="{{ route('login') }}" class="mt-1 inline-flex items-center justify-center rounded-lg border border-[#FF00FF] text-[#FF00FF] hover:bg-[#FF00FF] hover:text-[#121212] px-4 py-2.5 text-sm font-semibold no-underline transition-colors">Masuk</a>
             </nav>
         </div>
     </header>
@@ -89,71 +106,91 @@
     </script>
 
     <!-- HERO SECTION -->
-    <section class="w-full pt-16 pb-20 md:pt-24 md:pb-28 flex flex-col items-center text-center px-4" 
-             style="background-image: url('data:image/svg+xml,%3Csvg width=\'20\' height=\'20\' viewBox=\'0 0 20 20\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'%23f0f0f0\' fill-opacity=\'0.5\' fill-rule=\'evenodd\'%3E%3Ccircle cx=\'3\' cy=\'3\' r=\'3\'/%3E%3Ccircle cx=\'13\' cy=\'13\' r=\'3\'/%3E%3C/g%3E%3C/svg%3E');">
-        
-        <div class="inline-flex items-center gap-2 bg-[#F6E6F5] border border-purple-200/60 text-[#BF24B4] text-xs font-semibold px-4 py-1.5 rounded-full mb-8 shadow-sm">
+    <section class="w-full pt-16 pb-20 md:pt-24 md:pb-28 flex flex-col items-center text-center px-4 hero-grid relative overflow-hidden">
+        <div class="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#FF00FF]/10 blur-[140px] rounded-full pointer-events-none"></div>
+
+        <div class="relative inline-flex items-center gap-2 bg-[#FF00FF]/10 border border-[#FF00FF]/40 text-[#FF00FF] text-xs font-bold px-4 py-1.5 rounded-full mb-8 tracking-wider">
             <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
             <span>PANTAU SERVIS REAL-TIME</span>
         </div>
 
-        <h1 class="text-3xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 max-w-4xl leading-tight tracking-tight mb-6">
+        <h1 class="relative text-3xl md:text-5xl lg:text-6xl font-extrabold text-[#F8FAFC] max-w-4xl leading-tight tracking-tight mb-6">
             Tinggalkan Motor di Bengkel<br>Tanpa Rasa Khawatir.
         </h1>
 
-        <p class="text-gray-500 text-sm md:text-base max-w-2xl leading-relaxed mb-10 px-2">
+        <p class="relative text-[#94A3B8] text-sm md:text-base max-w-2xl leading-relaxed mb-10 px-2">
             Percayakan motor Anda pada teknisi ahli kami. Pantau setiap tahap perbaikan secara transparan langsung dari layar HP Anda, tanpa perlu repot bolak-balik bertanya ke admin.
         </p>
 
-        <a href="{{ route('public.cek-status') }}" class="inline-flex items-center gap-2 bg-[#BF24B4] hover:bg-[#a31d99] text-white font-semibold text-sm md:text-base px-8 py-3.5 rounded-xl transition-all shadow-lg shadow-purple-500/20 no-underline">
+        <a href="{{ route('public.cek-status') }}" class="relative inline-flex items-center gap-2 bg-[#FF00FF] hover:bg-[#e600e6] text-white font-bold text-sm md:text-base px-8 py-3.5 rounded-xl transition-all glow-magenta no-underline">
             <span>Cek Status Kendaraan</span>
             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
         </a>
+
+        <!-- INPUT TRACKING QUICK SEARCH -->
+        <div class="relative w-full max-w-xl mt-8 bg-[#1E293B] p-2 md:p-3 rounded-2xl border border-white/10 shadow-xl shadow-black/40">
+            <form action="{{ route('public.cek-status') }}" method="GET" class="flex flex-col sm:flex-row items-center gap-2">
+                <div class="relative w-full flex items-center">
+                    <svg class="w-5 h-5 text-[#94A3B8] absolute left-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                    </svg>
+                    <input type="text"
+                           name="plat_nomor"
+                           placeholder="Masukkan Plat Nomor (B 1234 ABC)"
+                           required
+                           class="w-full pl-11 pr-4 py-3 bg-transparent text-[#F8FAFC] placeholder-[#94A3B8] text-sm md:text-base focus:outline-none uppercase font-semibold tracking-wide">
+                </div>
+                <button type="submit"
+                        class="w-full sm:w-auto bg-[#FF00FF] hover:bg-[#e600e6] text-white font-bold text-sm px-6 py-3.5 rounded-xl transition-all whitespace-nowrap">
+                    Lacak Servis
+                </button>
+            </form>
+        </div>
     </section>
 
     <!-- CARA KERJA PRAKTIS -->
-    <section id="alur-layanan" class="w-full py-20 bg-gray-50/50 border-t border-gray-100">
+    <section id="alur-layanan" class="w-full py-20 bg-[#0d0d0d] border-t border-white/10">
         <div class="max-w-6xl mx-auto px-6 md:px-12">
-            
+
             <div class="text-center mb-16">
-                <h2 class="text-2xl md:text-4xl font-extrabold text-gray-900 mb-3">
+                <h2 class="text-2xl md:text-4xl font-extrabold text-[#F8FAFC] mb-3">
                     Cara Kerja Praktis
                 </h2>
-                <p class="text-gray-500 text-sm md:text-base">
+                <p class="text-[#94A3B8] text-sm md:text-base">
                     Hanya 3 tahapan singkat untuk perbaikan motor yang lebih efisien.
                 </p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <!-- Langkah 1 -->
-                <div class="bg-white rounded-3xl p-8 border border-gray-100 shadow-sm flex flex-col items-center text-center">
-                    <div class="w-14 h-14 rounded-2xl bg-purple-50 flex items-center justify-center text-[#BF24B4] mb-6">
+                <div class="bg-[#1E293B] rounded-3xl p-8 border border-white/10 shadow-lg shadow-black/30 flex flex-col items-center text-center transition-transform hover:-translate-y-1">
+                    <div class="w-14 h-14 rounded-2xl bg-[#FF00FF]/10 flex items-center justify-center text-[#FF00FF] mb-6">
                         <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5m0 0h4m-4 0V11m0 0h4m-4 0H9m4 0V5"></path></svg>
                     </div>
-                    <h3 class="text-base font-bold text-gray-900 mb-3">1. Datang & Daftar</h3>
-                    <p class="text-gray-500 text-xs md:text-sm leading-relaxed">
+                    <h3 class="text-base font-bold text-[#F8FAFC] mb-3">1. Datang &amp; Daftar</h3>
+                    <p class="text-[#94A3B8] text-xs md:text-sm leading-relaxed">
                         Datang langsung ke bengkel dan sampaikan keluhan motor Anda kepada Admin kami.
                     </p>
                 </div>
 
                 <!-- Langkah 2 -->
-                <div class="bg-white rounded-3xl p-8 border border-gray-100 shadow-sm flex flex-col items-center text-center">
-                    <div class="w-14 h-14 rounded-2xl bg-purple-50 flex items-center justify-center text-[#BF24B4] mb-6">
+                <div class="bg-[#1E293B] rounded-3xl p-8 border border-white/10 shadow-lg shadow-black/30 flex flex-col items-center text-center transition-transform hover:-translate-y-1">
+                    <div class="w-14 h-14 rounded-2xl bg-[#FF00FF]/10 flex items-center justify-center text-[#FF00FF] mb-6">
                         <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
                     </div>
-                    <h3 class="text-base font-bold text-gray-900 mb-3">2. Cek Status via Web</h3>
-                    <p class="text-gray-500 text-xs md:text-sm leading-relaxed">
+                    <h3 class="text-base font-bold text-[#F8FAFC] mb-3">2. Cek Status via Web</h3>
+                    <p class="text-[#94A3B8] text-xs md:text-sm leading-relaxed">
                         Buka website kami tanpa perlu login. Cukup masukkan Nomor Polisi kendaraan untuk memantau progres servis secara real-time.
                     </p>
                 </div>
 
                 <!-- Langkah 3 -->
-                <div class="bg-white rounded-3xl p-8 border border-gray-100 shadow-sm flex flex-col items-center text-center">
-                    <div class="w-14 h-14 rounded-2xl bg-purple-50 flex items-center justify-center text-[#BF24B4] mb-6">
+                <div class="bg-[#1E293B] rounded-3xl p-8 border border-white/10 shadow-lg shadow-black/30 flex flex-col items-center text-center transition-transform hover:-translate-y-1">
+                    <div class="w-14 h-14 rounded-2xl bg-[#FF00FF]/10 flex items-center justify-center text-[#FF00FF] mb-6">
                         <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
                     </div>
-                    <h3 class="text-base font-bold text-gray-900 mb-3">3. Selesai & Bayar</h3>
-                    <p class="text-gray-500 text-xs md:text-sm leading-relaxed">
+                    <h3 class="text-base font-bold text-[#F8FAFC] mb-3">3. Selesai &amp; Bayar</h3>
+                    <p class="text-[#94A3B8] text-xs md:text-sm leading-relaxed">
                         Setelah servis selesai, Anda akan menerima detail tagihan. Lakukan pembayaran di kasir dan motor siap dibawa pulang.
                     </p>
                 </div>
@@ -162,12 +199,12 @@
     </section>
 
     <!-- BOTTOM CTA -->
-    <section class="w-full py-20 bg-white text-center border-t border-gray-100">
+    <section class="w-full py-20 bg-[#121212] text-center border-t border-white/10">
         <div class="max-w-4xl mx-auto px-6">
-            <h2 class="text-2xl md:text-4xl font-extrabold text-gray-900 mb-8 tracking-tight">
+            <h2 class="text-2xl md:text-4xl font-extrabold text-[#F8FAFC] mb-8 tracking-tight">
                 Pantau Progres Motor Anda Sekarang.
             </h2>
-            <a href="{{ route('public.cek-status') }}" class="inline-flex items-center gap-2 bg-[#BF24B4] hover:bg-[#a31d99] text-white font-semibold text-sm md:text-base px-8 py-3.5 rounded-xl transition-all shadow-lg shadow-purple-500/20 no-underline">
+            <a href="{{ route('public.cek-status') }}" class="inline-flex items-center gap-2 bg-[#FF00FF] hover:bg-[#e600e6] text-white font-bold text-sm md:text-base px-8 py-3.5 rounded-xl transition-all glow-magenta no-underline">
                 <span>Cek Status Motor Saya</span>
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
             </a>
@@ -175,19 +212,19 @@
     </section>
 
     <!-- FOOTER CUSTOM -->
-    <footer id="kontak" class="tailwind-footer w-full bg-white border-t border-gray-100 pt-16 pb-12">
+    <footer id="kontak" class="tailwind-footer w-full bg-[#0d0d0d] border-t border-white/10 pt-16 pb-12">
         <div class="max-w-7xl mx-auto px-6 md:px-12 lg:px-16">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-10 pb-12 border-b border-gray-100">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-10 pb-12 border-b border-white/10">
                 <div class="md:col-span-2">
                     <img src="{{ asset('images/logo-ksr-garage.png') }}" alt="KSR Garage" class="h-9 w-auto mb-4 object-contain">
-                    <p class="text-gray-400 text-xs md:text-sm leading-relaxed max-w-sm">
+                    <p class="text-[#94A3B8] text-xs md:text-sm leading-relaxed max-w-sm">
                         Inovasi bengkel motor modern. Memberikan pelayanan yang cepat, terpercaya, dan transparan melalui sistem digital.
                     </p>
                 </div>
 
                 <div>
-                    <h4 class="text-xs font-bold text-gray-900 uppercase tracking-wider mb-4">Layanan</h4>
-                    <ul class="space-y-2.5 text-xs md:text-sm text-gray-500 list-none p-0">
+                    <h4 class="text-xs font-bold text-[#F8FAFC] uppercase tracking-wider mb-4">Layanan</h4>
+                    <ul class="space-y-2.5 text-xs md:text-sm text-[#94A3B8] list-none p-0">
                         <li>Pemeriksaan Berkala</li>
                         <li>Perbaikan Mesin</li>
                         <li>Penggantian Suku Cadang</li>
@@ -195,14 +232,14 @@
                 </div>
 
                 <div>
-                    <h4 class="text-xs font-bold text-gray-900 uppercase tracking-wider mb-4">Hubungi Kami</h4>
-                    <ul class="space-y-3 text-xs md:text-sm text-gray-500 list-none p-0">
+                    <h4 class="text-xs font-bold text-[#F8FAFC] uppercase tracking-wider mb-4">Hubungi Kami</h4>
+                    <ul class="space-y-3 text-xs md:text-sm text-[#94A3B8] list-none p-0">
                         <li class="flex items-start gap-2">
-                            <svg class="w-4 h-4 text-gray-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                            <svg class="w-4 h-4 text-[#94A3B8] shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                             <span>Jl. Gatot Subroto No. 88, Jakarta Selatan, DKI Jakarta 12930</span>
                         </li>
                         <li class="flex items-center gap-2">
-                            <svg class="w-4 h-4 text-gray-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                            <svg class="w-4 h-4 text-[#94A3B8] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
                             <span>halo@ksr-garage.com</span>
                         </li>
                     </ul>
@@ -210,7 +247,7 @@
             </div>
 
             <div class="pt-8 text-left">
-                <p class="text-xs text-gray-400">
+                <p class="text-xs text-[#94A3B8]">
                     &copy; 2026 KSR Garage. All Rights Reserved.
                 </p>
             </div>
