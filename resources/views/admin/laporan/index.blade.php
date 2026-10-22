@@ -14,6 +14,8 @@
     $periodeAktif = $month->format('Y-m');
     $periodeAktifLabel = $periodeOptions[$periodeAktif] ?? $month->translatedFormat('F Y');
     $skorTertinggi = $kinerjaMekanik->max('skor_efisiensi');
+    $totalPendapatanFormat = number_format($totalPendapatan, 0, ',', '.');
+    $efisiensiFormat = $efisiensiRataRata . '%';
 @endphp
 
 <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-2">
@@ -284,9 +286,9 @@
             ['Laporan & Analitik KSR Garage'],
             ['Periode', periode],
             [],
-            ['Total Pendapatan', 'Rp ' + @json(number_format($totalPendapatan, 0, ',', '.'))],
+            ['Total Pendapatan', 'Rp ' + @json($totalPendapatanFormat)],
             ['Total Motor Selesai', @json($totalMotorServis)],
-            ['Efisiensi Rata-rata', @json($efisiensiRataRata . '%')],
+            ['Efisiensi Rata-rata', @json($efisiensiFormat)],
             [],
             ['Analitik Kinerja Mekanik'],
             ['Nama Mekanik', 'Total Servis', 'Rata-rata Waktu/Motor (menit)', 'Skor Efisiensi (%)']
