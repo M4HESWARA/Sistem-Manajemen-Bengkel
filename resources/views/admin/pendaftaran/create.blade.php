@@ -5,8 +5,8 @@
 @section('content')
 
 <div class="mb-4">
-    <h1 class="h4 fw-bold mb-0">Pendaftaran Servis Baru</h1>
-    <p class="text-muted small mb-0">Daftarkan kendaraan masuk beserta verifikasi fisik awal.</p>
+    <h1 class="h4 fw-bold mb-0" style="color: #F8FAFC;">Pendaftaran Servis Baru</h1>
+    <p class="small mb-0" style="color: #94A3B8;">Daftarkan kendaraan masuk beserta verifikasi fisik awal.</p>
 </div>
 
 @if ($errors->any())
@@ -27,7 +27,7 @@
         {{-- Data Kendaraan & Pelanggan --}}
         <div class="col-lg-6">
             <div class="card p-4 h-100">
-                <h2 class="h6 fw-bold mb-3"><i class="bi bi-scooter"></i> Data Kendaraan & Pelanggan</h2>
+                <h2 class="h6 fw-bold mb-3" style="color: #F8FAFC;"><i class="bi bi-scooter" style="color: #FF00FF;"></i> Data Kendaraan & Pelanggan</h2>
 
                 <div class="mb-3">
                     <label class="form-label small fw-semibold">Nomor Polisi</label>
@@ -83,15 +83,15 @@
         {{-- Keluhan Awal --}}
         <div class="col-lg-6">
             <div class="card p-4 mb-3">
-                <h2 class="h6 fw-bold mb-3"><i class="bi bi-chat-left-text"></i> Keluhan Awal</h2>
+                <h2 class="h6 fw-bold mb-3" style="color: #F8FAFC;"><i class="bi bi-chat-left-text" style="color: #FF00FF;"></i> Keluhan Awal</h2>
                 <textarea name="keluhan_awal" class="form-control" rows="4" required
                           placeholder="Contoh: Ganti oli, servis rutin, rem bunyi...">{{ old('keluhan_awal') }}</textarea>
             </div>
 
             {{-- Verifikasi Fisik Awal --}}
             <div class="card p-4">
-                <h2 class="h6 fw-bold mb-1"><i class="bi bi-camera"></i> Verifikasi Fisik Awal</h2>
-                <p class="text-muted small mb-3">Wajib diisi sebagai bukti kondisi kendaraan sebelum servis dimulai.</p>
+                <h2 class="h6 fw-bold mb-1" style="color: #F8FAFC;"><i class="bi bi-camera" style="color: #FF00FF;"></i> Verifikasi Fisik Awal</h2>
+                <p class="small mb-3" style="color: #94A3B8;">Wajib diisi sebagai bukti kondisi kendaraan sebelum servis dimulai.</p>
 
                 <div class="row g-3 mb-3">
                     <div class="col-md-6">
