@@ -17,9 +17,6 @@
     <div class="d-flex align-items-center gap-2">
         <input type="date" name="date" class="form-control form-control-sm" style="background: #1E293B; border: 1px solid #334155; color: #F8FAFC; width: auto;"
                value="{{ $date->format('Y-m-d') }}" onchange="this.form.submit()">
-        <a href="{{ route('admin.pendaftaran') }}" class="btn-magenta">
-            <i class="bi bi-plus-lg"></i> Registrasi Servis Baru
-        </a>
     </div>
 </div>
 

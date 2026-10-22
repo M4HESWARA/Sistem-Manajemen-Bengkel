@@ -12,10 +12,7 @@
         $periodeOptions[$bulan->format('Y-m')] = $bulan->translatedFormat('F Y');
     }
     $periodeAktif = $month->format('Y-m');
-    $periodeAktifLabel = $periodeOptions[$periodeAktif] ?? $month->translatedFormat('F Y');
     $skorTertinggi = $kinerjaMekanik->max('skor_efisiensi');
-    $totalPendapatanFormat = number_format($totalPendapatan, 0, ',', '.');
-    $efisiensiFormat = $efisiensiRataRata . '%';
 @endphp
 
 <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-2">
@@ -34,10 +31,6 @@
                 @endforeach
             </select>
         </form>
-
-        <button type="button" id="btnEkspor" class="btn btn-magenta">
-            <i class="bi bi-file-earmark-arrow-down"></i> Ekspor Laporan
-        </button>
     </div>
 </div>
 
@@ -273,50 +266,5 @@
             }
         }
     });
-</script>
-
-<script>
-    // Ekspor laporan sederhana ke file CSV
-    (function () {
-        const btn = document.getElementById('btnEkspor');
-        if (!btn) { return; }
-
-        const periode = @json($periodeAktifLabel);
-        const ringkasan = [
-            ['Laporan & Analitik KSR Garage'],
-            ['Periode', periode],
-            [],
-            ['Total Pendapatan', 'Rp ' + @json($totalPendapatanFormat)],
-            ['Total Motor Selesai', @json($totalMotorServis)],
-            ['Efisiensi Rata-rata', @json($efisiensiFormat)],
-            [],
-            ['Analitik Kinerja Mekanik'],
-            ['Nama Mekanik', 'Total Servis', 'Rata-rata Waktu/Motor (menit)', 'Skor Efisiensi (%)']
-        ];
-
-        const mekanik = @json($kinerjaMekanik);
-        mekanik.forEach(function (m) {
-            ringkasan.push([m.nama, m.total_servis, m.rata_rata_menit, m.skor_efisiensi]);
-        });
-
-        btn.addEventListener('click', function () {
-            const csv = ringkasan.map(function (row) {
-                return row.map(function (cell) {
-                    const value = cell === undefined ? '' : String(cell);
-                    return '"' + value.replace(/"/g, '""') + '"';
-                }).join(',');
-            }).join('\r\n');
-
-            const blob = new Blob(['\ufeff' + csv], { type: 'text/csv;charset=utf-8;' });
-            const url = URL.createObjectURL(blob);
-            const link = document.createElement('a');
-            link.href = url;
-            link.download = 'laporan-ksr-garage-' + @json($periodeAktif) + '.csv';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            URL.revokeObjectURL(url);
-        });
-    })();
 </script>
 @endpush
