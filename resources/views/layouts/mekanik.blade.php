@@ -6,48 +6,40 @@
     <title>@yield('title', 'Workspace Mekanik') - KSR Garage</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         :root { 
-            --bengkel-primary: #a31d99; 
-            --bengkel-accent: #BF24B4; 
+            --magenta: #FF00FF;
+            --magenta-hover: #e600e6;
+            --bg-main: #121212;
+            --bg-panel: #1E293B;
+            --bg-input: #0F172A;
+            --border: #334155;
+            --text-primary: #F8FAFC;
+            --text-secondary: #94A3B8;
         }
         body {
-            background: #f8f9fc;
-            font-family: 'Segoe UI', system-ui, sans-serif;
-            color: #2b2b2b;
-        }
-        .dropdown-item.active, .dropdown-item:active {
-            background-color: var(--bengkel-accent) !important;
-            color: #ffffff !important;
+            background: var(--bg-main);
+            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+            color: var(--text-primary);
         }
         .topbar {
             top: 0;
-            background: #ffffff;
-            border-bottom: 3px solid var(--bengkel-accent);
+            background: #0F172A;
+            border-bottom: 1px solid var(--border);
             padding: 0.75rem 1.5rem;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.4);
             position: sticky;
             z-index: 1000;
         }
         .brand-caption {
             font-size: 0.72rem;
-            color: #6c757d;
+            color: var(--text-secondary);
             line-height: 1;
             margin-top: 3px;
             font-weight: 500;
-        }
-        .nav-pill-item {
-            padding: 0.45rem 0.9rem;
-            font-weight: 700;
-            font-size: 0.88rem;
-            color: #495057;
-            text-decoration: none;
-            border-radius: 0.5rem;
-            transition: all 0.2s ease;
-        }
-        .nav-pill-item:hover, .nav-pill-item.active {
-            color: var(--bengkel-accent);
-            background-color: #fcf0fc;
         }
         .icon-btn {
             width: 38px;
@@ -56,49 +48,87 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #6c757d;
+            color: var(--text-secondary);
             background: transparent;
             border: none;
             font-size: 1.1rem;
             transition: all 0.2s ease;
         }
         .icon-btn:hover {
-            background: #e9ecef;
-            color: #212529;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--magenta);
         }
         .card { 
-            border: 1px solid #edf2f7; 
+            border: 1px solid var(--border); 
             border-radius: 12px; 
-            box-shadow: 0 2px 8px rgba(0,0,0,0.01);
-            background: #ffffff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            background: var(--bg-panel);
+            color: var(--text-primary);
         }
-        .btn-bengkel {
-            background-color: var(--bengkel-accent);
+        .btn-magenta {
+            background-color: var(--magenta);
             border: none;
             color: #fff;
-            font-weight: 600;
+            font-weight: 700;
         }
-        .btn-bengkel:hover {
-            background-color: var(--bengkel-primary);
+        .btn-magenta:hover {
+            background-color: var(--magenta-hover);
             color: #fff;
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.45);
         }
-        /* Style pill status pekerjaan */
+        .glow-magenta {
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.45), 0 0 45px rgba(255, 0, 255, 0.25);
+        }
         .status-pill {
-            padding: 0.4rem 0.9rem;
+            padding: 0.45rem 1rem;
             border-radius: 50px;
             font-size: 0.8rem;
             font-weight: 600;
-            color: #6c757d;
-            border: 1px solid #dee2e6;
-            background: #ffffff;
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+            background: transparent;
             display: inline-flex;
             align-items: center;
             gap: 0.4rem;
         }
         .status-pill.active {
-            color: var(--bengkel-accent);
-            border-color: var(--bengkel-accent);
-            background-color: #fdf0fc;
+            color: #fff;
+            border-color: var(--magenta);
+            background-color: var(--magenta);
+            box-shadow: 0 0 15px rgba(255, 0, 255, 0.4);
+        }
+        .form-control, .form-select {
+            background-color: var(--bg-input);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+        }
+        .form-control::placeholder {
+            color: var(--text-secondary);
+        }
+        .form-control:focus, .form-select:focus {
+            background-color: var(--bg-input);
+            border-color: var(--magenta);
+            box-shadow: 0 0 0 .2rem rgba(255, 0, 255, .25);
+            color: var(--text-primary);
+        }
+        .input-group-text {
+            background-color: var(--bg-input);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+        }
+        .table {
+            color: var(--text-primary);
+        }
+        .table > :not(caption) > * > * {
+            background-color: transparent;
+            color: var(--text-primary);
+            border-color: var(--border);
+        }
+        .text-muted {
+            color: var(--text-secondary) !important;
+        }
+        .border {
+            border-color: var(--border) !important;
         }
     </style>
     <link href="{{ asset('css/bengkel-theme.css') }}" rel="stylesheet">
@@ -111,16 +141,24 @@
 
         <!-- 1. Bagian Kiri (Logo) -->
         <div class="d-flex align-items-center gap-3">
-            <a href="{{ route('mekanik.dashboard') }}" class="text-decoration-none">
+            <a href="{{ route('mekanik.dashboard') }}" class="text-decoration-none d-flex align-items-center gap-2">
                 <img src="{{ asset('images/logo-ksr-garage.png') }}" alt="KSR Garage" style="height: 36px; display: block;">
-                <div class="brand-caption">Mekanik Dashboard</div>
+                <span class="fw-bold text-white d-none d-md-inline">Workspace Mekanik</span>
             </a>
         </div>
 
-        <!-- 2. Bagian Kanan (Tombol Keluar & Menu Mobile) -->
-        <div class="d-flex align-items-center gap-1 gap-md-2 ms-auto">
-
-            <!-- Tombol Keluar (Di Paling Kanan) -->
+        <!-- 2. Bagian Kanan (Profil Mekanik & Keluar) -->
+        <div class="d-flex align-items-center gap-2 ms-auto">
+            <div class="d-flex align-items-center gap-2 me-2">
+                <div class="rounded-circle d-flex align-items-center justify-content-center" style="width: 38px; height: 38px; background: var(--bg-panel); border: 1px solid var(--border);">
+                    <i class="bi bi-person-fill" style="color: var(--text-secondary);"></i>
+                </div>
+                <div class="d-none d-md-flex flex-column">
+                    <span class="small fw-semibold">{{ auth()->user()->full_name ?? auth()->user()->username }}</span>
+                    <span class="small" style="color: var(--text-secondary);">Mekanik</span>
+                </div>
+            </div>
+            <!-- Tombol Keluar -->
             <form method="POST" action="{{ route('logout') }}" class="m-0">
                 @csrf
                 <button class="icon-btn text-danger" type="submit" title="Keluar">
@@ -138,16 +176,6 @@
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Script penutup menu otomatis saat mengeklik area di luar menu -->
-    <script>
-        document.addEventListener('click', function(e) {
-            const menu = document.getElementById('menuMobile');
-            if (menu && menu.classList.contains('show')) {
-                menu.classList.remove('show');
-            }
-        });
-    </script>
 
     @stack('scripts')
 </body>
