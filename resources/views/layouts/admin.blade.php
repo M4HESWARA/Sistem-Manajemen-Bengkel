@@ -50,18 +50,23 @@
             font-weight: 500;
         }
         .nav-pill-item {
-            padding: 0.45rem 0;
+            padding: 0.45rem 0.75rem;
             font-weight: 500;
             font-size: 0.88rem;
             color: var(--text-secondary);
             text-decoration: none;
+            border-radius: 0.4rem;
+            border-bottom: 2px solid transparent;
             transition: all 0.2s ease;
         }
         .nav-pill-item:hover {
             color: var(--magenta);
+            background-color: rgba(255, 0, 255, 0.08);
         }
         .nav-pill-item.active {
             color: var(--magenta);
+            background-color: var(--bg-card);
+            border-bottom-color: var(--magenta);
             font-weight: 600;
         }
         .icon-btn {
@@ -197,12 +202,13 @@
             </a>
 
             <!-- Menu Navigasi Desktop (Laptop / Komputer) -->
-            <div class="d-none d-lg-flex align-items-center gap-4 ms-4">
-                <a href="{{ route('admin.dashboard') }}" class="nav-pill-item {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}" style="{{ request()->routeIs('admin.dashboard') ? 'border-bottom: 2px solid #FF00FF; border-radius: 0; padding-bottom: 0.35rem;' : '' }}">Dashboard</a>
-                <a href="{{ route('admin.pendaftaran') }}" class="nav-pill-item {{ request()->routeIs('admin.pendaftaran') ? 'active' : '' }}" style="{{ request()->routeIs('admin.pendaftaran') ? 'border-bottom: 2px solid #FF00FF; border-radius: 0; padding-bottom: 0.35rem;' : '' }}">Pendaftaran</a>
-                <a href="{{ route('admin.inventori') }}" class="nav-pill-item {{ request()->routeIs('admin.inventori*') ? 'active' : '' }}" style="{{ request()->routeIs('admin.inventori*') ? 'border-bottom: 2px solid #FF00FF; border-radius: 0; padding-bottom: 0.35rem;' : '' }}">Inventori</a>
-                <a href="{{ route('admin.kasir') }}" class="nav-pill-item {{ request()->routeIs('admin.kasir*') ? 'active' : '' }}" style="{{ request()->routeIs('admin.kasir*') ? 'border-bottom: 2px solid #FF00FF; border-radius: 0; padding-bottom: 0.35rem;' : '' }}">Kasir</a>
-                <a href="{{ route('admin.laporan') }}" class="nav-pill-item {{ request()->routeIs('admin.laporan') ? 'active' : '' }}" style="{{ request()->routeIs('admin.laporan') ? 'border-bottom: 2px solid #FF00FF; border-radius: 0; padding-bottom: 0.35rem;' : '' }}">Laporan</a>
+            <div class="d-none d-lg-flex align-items-center gap-2 ms-4">
+                <a href="{{ route('admin.dashboard') }}" class="nav-pill-item {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">Dashboard</a>
+                <a href="{{ route('admin.pendaftaran') }}" class="nav-pill-item {{ request()->routeIs('admin.pendaftaran') ? 'active' : '' }}">Pendaftaran</a>
+                <a href="{{ route('admin.inventori') }}" class="nav-pill-item {{ request()->routeIs('admin.inventori*') ? 'active' : '' }}">Inventori</a>
+                <a href="{{ route('admin.kasir') }}" class="nav-pill-item {{ request()->routeIs('admin.kasir*') ? 'active' : '' }}">Kasir</a>
+                <a href="{{ route('admin.laporan') }}" class="nav-pill-item {{ request()->routeIs('admin.laporan') ? 'active' : '' }}">Laporan</a>
+                <a href="{{ route('admin.riwayat') }}" class="nav-pill-item {{ request()->routeIs('admin.riwayat*') ? 'active' : '' }}">Riwayat</a>
             </div>
         </div>
 
@@ -244,9 +250,8 @@
                 <ul class="dropdown-menu dropdown-menu-end shadow mt-2" id="menuMobile" style="position: absolute; right: 0; top: 100%;">
                     <li><a class="dropdown-item py-2 {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}" href="{{ route('admin.dashboard') }}"><i class="bi bi-speedometer2 me-2"></i> Dashboard</a></li>
                     <li><a class="dropdown-item py-2 {{ request()->routeIs('admin.pendaftaran') ? 'active' : '' }}" href="{{ route('admin.pendaftaran') }}"><i class="bi bi-clipboard-plus me-2"></i> Pendaftaran</a></li>
-                    <li><a class="dropdown-item py-2 {{ request()->routeIs('admin.inventori*') ? 'active' : '' }}" href="{{ route('admin.inventori') }}"><i class="bi bi-box-seam me-2"></i> Spareparts</a></li>
+                    <li><a class="dropdown-item py-2 {{ request()->routeIs('admin.inventori*') ? 'active' : '' }}" href="{{ route('admin.inventori') }}"><i class="bi bi-box-seam me-2"></i> Inventori</a></li>
                     <li><a class="dropdown-item py-2 {{ request()->routeIs('admin.kasir*') ? 'active' : '' }}" href="{{ route('admin.kasir') }}"><i class="bi bi-cash-stack me-2"></i> Kasir</a></li>
-                    <li><a class="dropdown-item py-2" href="#"><i class="bi bi-wrench me-2"></i> Mekanik</a></li>
                     <li><a class="dropdown-item py-2 {{ request()->routeIs('admin.laporan') ? 'active' : '' }}" href="{{ route('admin.laporan') }}"><i class="bi bi-bar-chart-line me-2"></i> Laporan</a></li>
                     <li><a class="dropdown-item py-2 {{ request()->routeIs('admin.riwayat*') ? 'active' : '' }}" href="{{ route('admin.riwayat') }}"><i class="bi bi-clock-history me-2"></i> Riwayat</a></li>
                 </ul>
