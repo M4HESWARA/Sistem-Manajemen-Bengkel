@@ -162,6 +162,24 @@ a:hover {
     box-shadow: 0 0 0 0.2rem rgba(191, 36, 180, 0.14);
 }
 
+/* ---------- Dark mode autofill override ---------- */
+/* Menjaga background & teks input tetap gelap saat browser melakukan autofill */
+:-webkit-autofill,
+:-webkit-autofill:hover,
+:-webkit-autofill:focus,
+:-webkit-autofill:active,
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px #0F172A inset !important;
+    -webkit-text-fill-color: #F8FAFC !important;
+    caret-color: #F8FAFC;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
 .form-check-input:checked {
     background-color: var(--bengkel-accent);
     border-color: var(--bengkel-accent);
