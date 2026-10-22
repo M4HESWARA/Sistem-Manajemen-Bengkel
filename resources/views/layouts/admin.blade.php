@@ -198,10 +198,7 @@
         <div class="d-flex align-items-center gap-3">
             <a href="{{ route('admin.dashboard') }}" class="text-decoration-none d-flex align-items-center gap-2">
                 <img src="{{ asset('images/logo-ksr-garage.png') }}" alt="KSR Garage" style="height: 36px; display: block;">
-                <div class="d-none d-md-flex flex-column">
-                    <span class="fw-bold" style="color: #F8FAFC;">KSR Garage</span>
-                    <span class="brand-caption">Admin Dashboard</span>
-                </div>
+                <span class="fw-bold d-none d-md-inline" style="color: #F8FAFC; font-size: 0.95rem;">Admin Dashboard</span>
             </a>
 
             <!-- Menu Navigasi Desktop (Laptop / Komputer) -->
@@ -229,10 +226,7 @@
                 <div class="rounded-circle d-flex align-items-center justify-content-center" style="width: 38px; height: 38px; background: var(--bg-card); border: 1px solid var(--border);">
                     <i class="bi bi-person-fill" style="color: var(--text-secondary);"></i>
                 </div>
-                <div class="d-flex flex-column">
-                    <span class="small fw-semibold">{{ auth()->user()->full_name ?? 'KSR Admin' }}</span>
-                    <span class="small" style="color: var(--text-secondary);">KSR Admin</span>
-                </div>
+                <span class="small fw-semibold">{{ auth()->user()->full_name ?? 'Admin Bengkel' }}</span>
             </div>
             
             <!-- Tombol Pengaturan -->
