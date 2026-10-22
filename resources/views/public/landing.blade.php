@@ -60,7 +60,7 @@
             </nav>
 
             <div class="flex items-center gap-2 sm:gap-3">
-                <a href="{{ route('login') }}" class="hidden md:inline text-sm font-medium text-[#94A3B8] hover:text-[#FF00FF] transition-colors no-underline">
+                <a href="{{ route('login') }}" class="hidden md:inline text-sm font-medium text-[#94A3B8] transition-colors no-underline">
                     Masuk
                 </a>
 
