@@ -51,13 +51,13 @@
                     </div>
                     <div class="col-md-6">
                         <label class="form-label small fw-semibold" style="color: #F8FAFC;">Tahun</label>
-                        <select name="year" id="year" class="form-select">
+                        <select name="year" id="year" class="form-select max-h-60 overflow-y-auto">
                             <option value="">— Pilih Tahun —</option>
                         </select>
                     </div>
                     <div class="col-md-6">
                         <label class="form-label small fw-semibold" style="color: #F8FAFC;">Warna</label>
-                        <select name="color" id="color" class="form-select">
+                        <select name="color" id="color" class="form-select max-h-60 overflow-y-auto">
                             <option value="">— Pilih Warna —</option>
                         </select>
                     </div>
@@ -199,6 +199,12 @@
         background-position: right 0.75rem center !important;
         background-size: 16px 12px !important;
         padding-right: 2.25rem;
+    }
+    .form-select.max-h-60 {
+        max-height: 15rem;
+    }
+    .form-select.overflow-y-auto {
+        overflow-y: auto;
     }
     .form-control::placeholder,
     .form-control::-webkit-input-placeholder,
@@ -343,9 +349,8 @@ const MOTOR_DATA = {
 };
 
 const COMMON_COLORS = [
-    'Hitam', 'Putih', 'Merah', 'Silver', 'Abu-abu (Grey)', 'Biru', 
-    'Hijau', 'Kuning', 'Cokelat', 'Matte Black (Hitam Doff)', 
-    'Gunmetal', 'Navy (Biru Dongker)', 'Orange', 'Gold (Emas)', 'Pink'
+    'Hitam', 'Putih', 'Merah', 'Biru', 'Abu-abu / Silver', 'Kuning',
+    'Hijau', 'Cokelat', 'Orange', 'Doff / Matte', 'Lainnya'
 ];
 
 const brandSelect = document.getElementById('brand');
@@ -358,9 +363,9 @@ Object.keys(MOTOR_DATA).forEach(brand => {
     brandSelect.add(new Option(brand, brand));
 });
 
-// 2. Populate Tahun (1980 sampai tahun saat ini)
-const currentYear = new Date().getFullYear();
-for (let y = currentYear; y >= 1980; y--) {
+// 2. Populate Tahun (2026 mundur sampai 1980)
+const latestYear = 2026;
+for (let y = latestYear; y >= 1980; y--) {
     yearSelect.add(new Option(y, y));
 }
 
