@@ -18,7 +18,7 @@
                         <i class="bi bi-people"></i>
                     </div>
                     <h2 class="settings-title">Kelola Pengguna</h2>
-                    <p class="settings-desc">Tambah, edit, atau nonaktifkan akun Admin dan Mekanik.</p>
+                    <p class="settings-desc mb-0">Tambah, edit, atau nonaktifkan akun Admin dan Mekanik.</p>
                 </div>
             </a>
         </div>
@@ -29,7 +29,7 @@
                         <i class="bi bi-shop"></i>
                     </div>
                     <h2 class="settings-title">Info Bengkel</h2>
-                    <p class="settings-desc">Nama, alamat, telepon, dan email bengkel yang tampil di nota.</p>
+                    <p class="settings-desc mb-0">Nama, alamat, telepon, dan email bengkel yang tampil di nota.</p>
                 </div>
             </a>
         </div>
@@ -85,18 +85,6 @@
     .settings-desc {
         color: #94A3B8;
         font-size: 0.9rem;
-        margin-bottom: 1.5rem;
-    }
-    .settings-arrow {
-        margin-top: auto;
-        align-self: flex-end;
-        font-size: 0.85rem;
-        font-weight: 600;
-        color: #94A3B8;
-        transition: color .2s ease;
-    }
-    .settings-link:hover .settings-arrow {
-        color: #FF00FF;
     }
 </style>
 @endpush
