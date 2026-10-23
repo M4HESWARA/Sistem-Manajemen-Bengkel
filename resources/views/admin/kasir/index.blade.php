@@ -234,6 +234,15 @@
         box-shadow: 0 0 0 .2rem rgba(255, 0, 255, .25);
         color: #F8FAFC;
     }
+    input[type='number']::-webkit-inner-spin-button,
+    input[type='number']::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+    input[type='number'] {
+        -moz-appearance: textfield;
+        appearance: textfield;
+    }
 </style>
 @endpush
 
