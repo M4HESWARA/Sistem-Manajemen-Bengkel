@@ -170,9 +170,24 @@
         background-color: #0F172A;
         border: 1px solid #334155;
         color: #F8FAFC;
+        color-scheme: dark;
     }
-    .form-control::placeholder {
+    .form-control::placeholder,
+    .form-control::-webkit-input-placeholder {
         color: #94A3B8;
+        opacity: 1;
+    }
+    .form-select option {
+        background-color: #0F172A;
+        color: #F8FAFC;
+    }
+    .form-select:disabled,
+    .form-control:disabled {
+        background-color: #0F172A !important;
+        border-color: #334155;
+        color: #94A3B8;
+        opacity: 1;
+        cursor: not-allowed;
     }
     .form-control:focus, .form-select:focus {
         background-color: #0F172A;
@@ -192,20 +207,28 @@
         border-color: #FF00FF;
         box-shadow: 0 0 0 .2rem rgba(255, 0, 255, .25);
     }
-    .file-input-dark::file-selector-button {
-        background-color: #1E293B;
-        color: #F8FAFC;
-        border: 1px solid #334155;
+    .file-input-dark {
+        background-color: #0F172A !important;
+        border: 1px solid #334155 !important;
+        color: #94A3B8 !important;
+        color-scheme: dark;
+    }
+    .file-input-dark::file-selector-button,
+    .file-input-dark::-webkit-file-upload-button {
+        background-color: #1E293B !important;
+        color: #E2E8F0 !important;
+        border: 1px solid #475569 !important;
+        border-radius: 0.375rem;
         padding: 0.375rem 0.75rem;
         margin-right: 0.75rem;
-        border-radius: 0.375rem;
-        transition: background-color .2s ease;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color .2s ease, border-color .2s ease;
     }
-    .file-input-dark::file-selector-button:hover {
-        background-color: #334155;
-    }
-    .file-input-dark {
-        color: #94A3B8;
+    .file-input-dark::file-selector-button:hover,
+    .file-input-dark::-webkit-file-upload-button:hover {
+        background-color: #334155 !important;
+        border-color: #64748B !important;
     }
 </style>
 @endpush
