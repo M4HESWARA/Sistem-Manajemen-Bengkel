@@ -58,7 +58,7 @@
             </div>
 
             <div class="d-flex justify-content-end gap-2">
-                <a href="{{ route('admin.settings.index') }}" class="btn btn-batal px-4">Batal / Kembali</a>
+                <a href="{{ route('admin.settings.index') }}" class="btn btn-batal px-4">Batal</a>
                 <button type="submit" class="btn btn-magenta px-4">
                     <i class="bi bi-check-circle"></i> Simpan Perubahan
                 </button>
