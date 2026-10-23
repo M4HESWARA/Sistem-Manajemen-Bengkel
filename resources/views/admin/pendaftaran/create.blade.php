@@ -96,8 +96,14 @@
                 <div class="row g-3 mb-3">
                     <div class="col-md-6">
                         <label class="form-label small fw-semibold" style="color: #F8FAFC;">Foto Odometer</label>
-                        <input type="file" name="odometer_photo" accept="image/*" class="form-control file-input-dark" required
-                               onchange="previewImage(this, 'previewOdometer')">
+                        <div class="file-upload-dark">
+                            <input type="file" name="odometer_photo" id="odometerPhoto" accept="image/*" class="file-input-hidden" required
+                                   onchange="previewImage(this, 'previewOdometer'); tampilkanNamaFile(this, 'odometerFileName')">
+                            <label for="odometerPhoto" class="file-btn-dark">
+                                <i class="bi bi-upload me-1"></i> Choose File
+                            </label>
+                            <span id="odometerFileName" class="file-name-text">Belum ada file dipilih</span>
+                        </div>
                         <img id="previewOdometer" class="mt-2 rounded border d-none" style="max-height:120px; border-color: #334155 !important;">
                     </div>
                     <div class="col-md-6">
@@ -110,8 +116,14 @@
                 <div class="row g-3 mb-3">
                     <div class="col-md-6">
                         <label class="form-label small fw-semibold" style="color: #F8FAFC;">Foto Kondisi Bensin (opsional)</label>
-                        <input type="file" name="fuel_photo" accept="image/*" class="form-control file-input-dark"
-                               onchange="previewImage(this, 'previewFuel')">
+                        <div class="file-upload-dark">
+                            <input type="file" name="fuel_photo" id="fuelPhoto" accept="image/*" class="file-input-hidden"
+                                   onchange="previewImage(this, 'previewFuel'); tampilkanNamaFile(this, 'fuelFileName')">
+                            <label for="fuelPhoto" class="file-btn-dark">
+                                <i class="bi bi-upload me-1"></i> Choose File
+                            </label>
+                            <span id="fuelFileName" class="file-name-text">Belum ada file dipilih</span>
+                        </div>
                         <img id="previewFuel" class="mt-2 rounded border d-none" style="max-height:120px; border-color: #334155 !important;">
                     </div>
                     <div class="col-md-6">
@@ -229,32 +241,60 @@
         border-color: #FF00FF;
         box-shadow: 0 0 0 .2rem rgba(255, 0, 255, .25);
     }
-    input[type="file"].file-input-dark {
-        background-color: #0F172A !important;
-        background-image: none !important;
-        border: 1px solid #334155 !important;
-        color: #E2E8F0 !important;
-        color-scheme: dark;
+    /* Upload file kustom bertema gelap */
+    .file-upload-dark {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        min-height: 42px;
+        padding: 0.35rem 0.6rem;
+        background-color: #0F172A;
+        border: 1px solid #334155;
+        border-radius: 0.5rem;
     }
-    input[type="file"].file-input-dark::file-selector-button,
-    input[type="file"].file-input-dark::-webkit-file-upload-button,
-    input[type="file"].file-input-dark::-ms-browse {
-        background-color: #1E293B !important;
-        background-image: none !important;
-        color: #E2E8F0 !important;
-        border: 1px solid #475569 !important;
+    .file-input-hidden {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+    }
+    .file-btn-dark {
+        display: inline-flex;
+        align-items: center;
+        background-color: #1E293B;
+        color: #E2E8F0;
+        border: 1px solid #475569;
         border-radius: 0.375rem;
-        padding: 0.375rem 0.75rem;
-        margin-right: 0.75rem;
+        padding: 0.4rem 0.85rem;
+        font-size: 0.85rem;
         font-weight: 600;
+        line-height: 1.2;
+        margin: 0;
+        white-space: nowrap;
         cursor: pointer;
-        transition: background-color .2s ease, border-color .2s ease;
+        transition: background-color .2s ease, border-color .2s ease, color .2s ease;
     }
-    input[type="file"].file-input-dark::file-selector-button:hover,
-    input[type="file"].file-input-dark::-webkit-file-upload-button:hover,
-    input[type="file"].file-input-dark::-ms-browse:hover {
-        background-color: #334155 !important;
-        border-color: #64748B !important;
+    .file-btn-dark:hover {
+        background-color: #334155;
+        border-color: #64748B;
+        color: #FFFFFF;
+    }
+    .file-input-hidden:focus-visible + .file-btn-dark {
+        outline: 2px solid #FF00FF;
+        outline-offset: 2px;
+    }
+    .file-name-text {
+        color: #94A3B8;
+        font-size: 0.82rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
     }
 </style>
 @endpush
@@ -339,6 +379,14 @@ function previewImage(input, previewId) {
         preview.src = URL.createObjectURL(input.files[0]);
         preview.classList.remove('d-none');
     }
+}
+
+function tampilkanNamaFile(input, targetId) {
+    const target = document.getElementById(targetId);
+    if (!target) { return; }
+    target.textContent = (input.files && input.files[0])
+        ? input.files[0].name
+        : 'Belum ada file dipilih';
 }
 
 // Cari otomatis data kendaraan saat nomor polisi selesai diketik (debounce)
