@@ -228,6 +228,7 @@
 
     <!-- Konten Utama -->
     <main class="container-fluid py-4 px-4 px-lg-5">
+        @include('partials.alerts')
         @yield('content')
     </main>
 

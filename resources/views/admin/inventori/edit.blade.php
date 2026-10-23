@@ -9,17 +9,6 @@
     <p class="text-muted small mb-0">{{ $sparepart->name }} ({{ $sparepart->sku }})</p>
 </div>
 
-@if ($errors->any())
-    <div class="alert alert-danger">
-        <strong>Ada isian yang belum lengkap:</strong>
-        <ul class="mb-0 mt-1">
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
-
 <div class="card p-4">
     <form method="POST" action="{{ route('admin.inventori.update', $sparepart) }}">
         @csrf

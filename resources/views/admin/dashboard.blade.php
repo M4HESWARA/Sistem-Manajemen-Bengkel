@@ -4,13 +4,6 @@
 
 @section('content')
 
-@if (session('success'))
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        {{ session('success') }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-    </div>
-@endif
-
 <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-2">
     <h1 class="h4 fw-bold mb-0" style="color: #F8FAFC;">Dashboard Operasional</h1>
 

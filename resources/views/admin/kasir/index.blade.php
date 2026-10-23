@@ -4,16 +4,6 @@
 
 @section('content')
 
-@if (session('success'))
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        {{ session('success') }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-    </div>
-@endif
-@if ($errors->any())
-    <div class="alert alert-danger">{{ $errors->first() }}</div>
-@endif
-
 <div class="mb-4">
     <h1 class="h4 fw-bold mb-0" style="color: #F8FAFC;">Kasir &amp; Pembayaran</h1>
     <p class="small mb-0" style="color: #94A3B8;">Pilih antrian kendaraan, konfirmasi pembayaran, lalu cetak nota.</p>

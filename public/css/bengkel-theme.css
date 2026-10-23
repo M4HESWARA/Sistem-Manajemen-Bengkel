@@ -484,3 +484,86 @@ input[type="file"].form-control::-webkit-file-upload-button {
     font-weight: 600;
     cursor: pointer;
 }
+
+/* ---------- Flash alerts (dark mode) ---------- */
+.ksr-alert {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.65rem;
+    padding: 0.8rem 1rem;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    backdrop-filter: blur(6px);
+}
+
+.ksr-alert.alert-dismissible {
+    padding-right: 1rem;
+}
+
+.ksr-alert .ksr-alert-icon {
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+    font-size: 1.05rem;
+    line-height: 1;
+}
+
+.ksr-alert .ksr-alert-body {
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.ksr-alert .ksr-alert-close.btn-close {
+    position: static !important;
+    margin: 0 0 0 0.25rem;
+    padding: 0.35rem;
+    opacity: 0.8;
+    border-radius: 0.35rem;
+    transition: opacity 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ksr-alert .ksr-alert-close.btn-close:hover,
+.ksr-alert .ksr-alert-close.btn-close:focus-visible {
+    opacity: 1;
+}
+
+.ksr-alert.ksr-alert-success {
+    background-color: rgba(6, 78, 59, 0.82) !important;
+    border: 1px solid rgba(16, 185, 129, 0.5) !important;
+    color: #34D399 !important;
+}
+
+.ksr-alert.ksr-alert-success .ksr-alert-icon {
+    color: #34D399;
+}
+
+.ksr-alert.ksr-alert-success .ksr-alert-close.btn-close {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath d='M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414z' fill='%236EE7B7'/%3e%3c/svg%3e") !important;
+}
+
+.ksr-alert.ksr-alert-success .ksr-alert-close.btn-close:hover,
+.ksr-alert.ksr-alert-success .ksr-alert-close.btn-close:focus-visible {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath d='M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414z' fill='%2334D399'/%3e%3c/svg%3e") !important;
+    box-shadow: 0 0 0 0.18rem rgba(52, 211, 153, 0.25);
+}
+
+.ksr-alert.ksr-alert-danger {
+    background-color: rgba(69, 10, 10, 0.82) !important;
+    border: 1px solid rgba(239, 68, 68, 0.5) !important;
+    color: #FCA5A5 !important;
+}
+
+.ksr-alert.ksr-alert-danger .ksr-alert-icon {
+    color: #FCA5A5;
+}
+
+.ksr-alert.ksr-alert-danger .ksr-alert-close.btn-close {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath d='M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414z' fill='%23FCA5A5'/%3e%3c/svg%3e") !important;
+}
+
+.ksr-alert.ksr-alert-danger .ksr-alert-close.btn-close:hover,
+.ksr-alert.ksr-alert-danger .ksr-alert-close.btn-close:focus-visible {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath d='M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414z' fill='%23F87171'/%3e%3c/svg%3e") !important;
+    box-shadow: 0 0 0 0.18rem rgba(239, 68, 68, 0.28);
+}

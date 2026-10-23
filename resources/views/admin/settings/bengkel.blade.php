@@ -4,16 +4,6 @@
 
 @section('content')
 
-@if (session('success'))
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-        {{ session('success') }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-    </div>
-@endif
-@if ($errors->any())
-    <div class="alert alert-danger">{{ $errors->first() }}</div>
-@endif
-
 <a href="{{ route('admin.settings.index') }}" class="back-settings-link d-inline-block mb-2 fw-semibold small">
     <i class="bi bi-arrow-left"></i> Kembali ke Pengaturan
 </a>

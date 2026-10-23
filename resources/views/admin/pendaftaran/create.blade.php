@@ -9,17 +9,6 @@
     <p class="small mb-0" style="color: #94A3B8;">Daftarkan kendaraan masuk beserta verifikasi fisik awal.</p>
 </div>
 
-@if ($errors->any())
-    <div class="alert alert-danger">
-        <strong>Ada isian yang belum lengkap:</strong>
-        <ul class="mb-0 mt-1">
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
-
 <form method="POST" action="{{ route('admin.pendaftaran.store') }}" enctype="multipart/form-data" id="formPendaftaran">
     @csrf
 

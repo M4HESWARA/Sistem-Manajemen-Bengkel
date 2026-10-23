@@ -325,6 +325,7 @@
 
     <!-- MAIN CONTENT -->
     <main class="container-fluid px-4 py-4 flex-grow-1">
+        @include('partials.alerts')
         @yield('content')
     </main>
 
