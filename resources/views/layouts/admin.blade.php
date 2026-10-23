@@ -185,7 +185,7 @@
             }
         }
     </style>
-    <link href="{{ asset('css/bengkel-theme.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/bengkel-theme.css') }}?v={{ filemtime(public_path('css/bengkel-theme.css')) }}" rel="stylesheet">
     @stack('styles')
 </head>
 

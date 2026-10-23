@@ -96,13 +96,14 @@
                 <div class="row g-3 mb-3">
                     <div class="col-md-6">
                         <label class="form-label small fw-semibold" style="color: #F8FAFC;">Foto Odometer</label>
-                        <div class="file-upload-dark">
+                        <div class="file-upload-dark" style="position: relative; display: flex; align-items: center; gap: 0.75rem; min-height: 42px; padding: 0.35rem 0.6rem; background-color: #0F172A; border: 1px solid #334155; border-radius: 0.5rem;">
                             <input type="file" name="odometer_photo" id="odometerPhoto" accept="image/*" class="file-input-hidden" required
+                                   style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;"
                                    onchange="previewImage(this, 'previewOdometer'); tampilkanNamaFile(this, 'odometerFileName')">
-                            <label for="odometerPhoto" class="file-btn-dark">
+                            <label for="odometerPhoto" class="file-btn-dark" style="display: inline-flex; align-items: center; background-color: #1E293B; color: #E2E8F0; border: 1px solid #475569; border-radius: 0.375rem; padding: 0.4rem 0.85rem; font-size: 0.85rem; font-weight: 600; line-height: 1.2; margin: 0; white-space: nowrap; cursor: pointer;">
                                 <i class="bi bi-upload me-1"></i> Choose File
                             </label>
-                            <span id="odometerFileName" class="file-name-text">Belum ada file dipilih</span>
+                            <span id="odometerFileName" class="file-name-text" style="color: #94A3B8; font-size: 0.82rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Belum ada file dipilih</span>
                         </div>
                         <img id="previewOdometer" class="mt-2 rounded border d-none" style="max-height:120px; border-color: #334155 !important;">
                     </div>
@@ -116,13 +117,14 @@
                 <div class="row g-3 mb-3">
                     <div class="col-md-6">
                         <label class="form-label small fw-semibold" style="color: #F8FAFC;">Foto Kondisi Bensin (opsional)</label>
-                        <div class="file-upload-dark">
+                        <div class="file-upload-dark" style="position: relative; display: flex; align-items: center; gap: 0.75rem; min-height: 42px; padding: 0.35rem 0.6rem; background-color: #0F172A; border: 1px solid #334155; border-radius: 0.5rem;">
                             <input type="file" name="fuel_photo" id="fuelPhoto" accept="image/*" class="file-input-hidden"
+                                   style="position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0;"
                                    onchange="previewImage(this, 'previewFuel'); tampilkanNamaFile(this, 'fuelFileName')">
-                            <label for="fuelPhoto" class="file-btn-dark">
+                            <label for="fuelPhoto" class="file-btn-dark" style="display: inline-flex; align-items: center; background-color: #1E293B; color: #E2E8F0; border: 1px solid #475569; border-radius: 0.375rem; padding: 0.4rem 0.85rem; font-size: 0.85rem; font-weight: 600; line-height: 1.2; margin: 0; white-space: nowrap; cursor: pointer;">
                                 <i class="bi bi-upload me-1"></i> Choose File
                             </label>
-                            <span id="fuelFileName" class="file-name-text">Belum ada file dipilih</span>
+                            <span id="fuelFileName" class="file-name-text" style="color: #94A3B8; font-size: 0.82rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Belum ada file dipilih</span>
                         </div>
                         <img id="previewFuel" class="mt-2 rounded border d-none" style="max-height:120px; border-color: #334155 !important;">
                     </div>
