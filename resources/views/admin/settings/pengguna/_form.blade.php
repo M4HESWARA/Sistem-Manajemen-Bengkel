@@ -1,12 +1,12 @@
 <div class="row g-3">
     <div class="col-md-6">
         <label class="form-label small fw-semibold">Username</label>
-        <input type="text" name="username" class="form-control"
+        <input type="text" name="username" class="form-control" placeholder="mis. budi.mekanik"
                value="{{ old('username', $user->username ?? '') }}" required>
     </div>
     <div class="col-md-6">
         <label class="form-label small fw-semibold">Nama Lengkap</label>
-        <input type="text" name="full_name" class="form-control"
+        <input type="text" name="full_name" class="form-control" placeholder="Nama lengkap pengguna"
                value="{{ old('full_name', $user->full_name ?? '') }}" required>
     </div>
 
@@ -19,12 +19,7 @@
     </div>
     <div class="col-md-6">
         <label class="form-label small fw-semibold">No. HP (opsional)</label>
-        <input type="text" name="phone" class="form-control" value="{{ old('phone', $user->phone ?? '') }}">
-    </div>
-
-    <div class="col-md-6">
-        <label class="form-label small fw-semibold">Email (opsional)</label>
-        <input type="email" name="email" class="form-control" value="{{ old('email', $user->email ?? '') }}">
+        <input type="text" name="phone" class="form-control" placeholder="08xxxxxxxxxx" value="{{ old('phone', $user->phone ?? '') }}">
     </div>
 
     <div class="col-md-6">

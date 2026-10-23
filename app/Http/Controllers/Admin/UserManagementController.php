@@ -32,7 +32,6 @@ class UserManagementController extends Controller
             'full_name' => $data['full_name'],
             'role' => $data['role'],
             'phone' => $data['phone'] ?? null,
-            'email' => $data['email'] ?? null,
             'password' => bcrypt($data['password']),
             'is_active' => true,
         ]);
@@ -53,7 +52,6 @@ class UserManagementController extends Controller
         $user->full_name = $data['full_name'];
         $user->role = $data['role'];
         $user->phone = $data['phone'] ?? null;
-        $user->email = $data['email'] ?? null;
 
         if (! empty($data['password'])) {
             $user->password = bcrypt($data['password']);
@@ -83,7 +81,6 @@ class UserManagementController extends Controller
             'full_name' => ['required', 'string', 'max:150'],
             'role' => ['required', Rule::in(['admin', 'mekanik'])],
             'phone' => ['nullable', 'string', 'max:20'],
-            'email' => ['nullable', 'email', 'max:150'],
             'password' => [$requirePassword ? 'required' : 'nullable', 'string', 'min:6', 'confirmed'],
         ]);
     }
