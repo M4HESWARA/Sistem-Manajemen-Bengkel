@@ -19,7 +19,6 @@
                     </div>
                     <h2 class="settings-title">Kelola Pengguna</h2>
                     <p class="settings-desc">Tambah, edit, atau nonaktifkan akun Admin dan Mekanik.</p>
-                    <span class="settings-arrow">Buka <i class="bi bi-arrow-right"></i></span>
                 </div>
             </a>
         </div>
@@ -31,7 +30,6 @@
                     </div>
                     <h2 class="settings-title">Info Bengkel</h2>
                     <p class="settings-desc">Nama, alamat, telepon, dan email bengkel yang tampil di nota.</p>
-                    <span class="settings-arrow">Buka <i class="bi bi-arrow-right"></i></span>
                 </div>
             </a>
         </div>
