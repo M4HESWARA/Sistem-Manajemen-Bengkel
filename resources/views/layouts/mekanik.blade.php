@@ -200,7 +200,7 @@
         <div class="d-flex align-items-center gap-3">
             <a href="{{ route('mekanik.dashboard') }}" class="text-decoration-none d-flex flex-column align-items-start" style="line-height: 1;">
                 <img src="{{ asset('images/logo-ksr-garage.png') }}" alt="KSR Garage" style="height: 36px; display: block;">
-                <span class="brand-caption">Panel Mekanik</span>
+                <span class="brand-caption">Dashboard Mekanik</span>
             </a>
         </div>
 
