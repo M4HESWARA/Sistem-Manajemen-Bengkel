@@ -75,7 +75,6 @@
                     <div class="col-md-6">
                         <label class="form-label small fw-semibold" style="color: #94A3B8;">Alamat (opsional)</label>
                         <input type="text" name="alamat" id="alamat" class="form-control" value="{{ old('alamat') }}">
-                    </tag>
                     </div>
                 </div>
             </div>
@@ -166,34 +165,57 @@
 @push('styles')
 <style>
     .text-uppercase { text-transform: uppercase; }
-    .form-control, .form-select {
-        background-color: #0F172A;
-        border: 1px solid #334155;
-        color: #F8FAFC;
+    html { color-scheme: dark; }
+    .form-control,
+    .form-select,
+    textarea.form-control {
+        background-color: #0F172A !important;
+        background-image: none;
+        border: 1px solid #334155 !important;
+        color: #F8FAFC !important;
         color-scheme: dark;
     }
+    /* Panah dropdown terang agar terlihat di latar gelap */
+    .form-select {
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%2394A3B8' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e") !important;
+        background-repeat: no-repeat !important;
+        background-position: right 0.75rem center !important;
+        background-size: 16px 12px !important;
+        padding-right: 2.25rem;
+    }
     .form-control::placeholder,
-    .form-control::-webkit-input-placeholder {
-        color: #94A3B8;
-        opacity: 1;
+    .form-control::-webkit-input-placeholder,
+    .form-select::placeholder,
+    textarea.form-control::placeholder {
+        color: #94A3B8 !important;
+        opacity: 1 !important;
     }
     .form-select option {
-        background-color: #0F172A;
-        color: #F8FAFC;
+        background-color: #1E293B !important;
+        color: #F8FAFC !important;
+    }
+    .form-select option:checked,
+    .form-select option:hover {
+        background-color: #334155 !important;
+        color: #FFFFFF !important;
     }
     .form-select:disabled,
-    .form-control:disabled {
-        background-color: #0F172A !important;
-        border-color: #334155;
-        color: #94A3B8;
+    .form-control:disabled,
+    .form-select[disabled] {
+        background-color: #1E293B !important;
+        border-color: #334155 !important;
+        color: #94A3B8 !important;
         opacity: 1;
         cursor: not-allowed;
     }
+    .form-select:disabled {
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%2364748B' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e") !important;
+    }
     .form-control:focus, .form-select:focus {
-        background-color: #0F172A;
-        border-color: #FF00FF;
+        background-color: #0F172A !important;
+        border-color: #FF00FF !important;
         box-shadow: 0 0 0 .2rem rgba(255, 0, 255, .25);
-        color: #F8FAFC;
+        color: #F8FAFC !important;
     }
     .form-check-input {
         background-color: #0F172A;
@@ -207,15 +229,18 @@
         border-color: #FF00FF;
         box-shadow: 0 0 0 .2rem rgba(255, 0, 255, .25);
     }
-    .file-input-dark {
+    input[type="file"].file-input-dark {
         background-color: #0F172A !important;
+        background-image: none !important;
         border: 1px solid #334155 !important;
-        color: #94A3B8 !important;
+        color: #E2E8F0 !important;
         color-scheme: dark;
     }
-    .file-input-dark::file-selector-button,
-    .file-input-dark::-webkit-file-upload-button {
+    input[type="file"].file-input-dark::file-selector-button,
+    input[type="file"].file-input-dark::-webkit-file-upload-button,
+    input[type="file"].file-input-dark::-ms-browse {
         background-color: #1E293B !important;
+        background-image: none !important;
         color: #E2E8F0 !important;
         border: 1px solid #475569 !important;
         border-radius: 0.375rem;
@@ -225,8 +250,9 @@
         cursor: pointer;
         transition: background-color .2s ease, border-color .2s ease;
     }
-    .file-input-dark::file-selector-button:hover,
-    .file-input-dark::-webkit-file-upload-button:hover {
+    input[type="file"].file-input-dark::file-selector-button:hover,
+    input[type="file"].file-input-dark::-webkit-file-upload-button:hover,
+    input[type="file"].file-input-dark::-ms-browse:hover {
         background-color: #334155 !important;
         border-color: #64748B !important;
     }
