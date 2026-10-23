@@ -5,13 +5,19 @@
 @section('content')
 
 @php
-    // Daftar pilihan periode (12 bulan terakhir + bulan depan)
+    // Daftar pilihan periode selalu konstan: 12 bulan terakhir dari bulan berjalan
+    $bulanSekarang = now()->startOfMonth();
     $periodeOptions = [];
     for ($i = 11; $i >= 0; $i--) {
-        $bulan = $month->copy()->startOfMonth()->subMonths($i);
+        $bulan = $bulanSekarang->copy()->subMonths($i);
         $periodeOptions[$bulan->format('Y-m')] = $bulan->translatedFormat('F Y');
     }
     $periodeAktif = $month->format('Y-m');
+    // Pastikan bulan yang sedang dipilih tetap muncul walau di luar rentang 12 bulan
+    if (!isset($periodeOptions[$periodeAktif])) {
+        $periodeOptions[$periodeAktif] = $month->copy()->startOfMonth()->translatedFormat('F Y');
+        ksort($periodeOptions);
+    }
     $skorTertinggi = $kinerjaMekanik->max('skor_efisiensi');
 @endphp
 
