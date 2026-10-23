@@ -119,10 +119,6 @@
 <div class="card p-4">
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h2 class="h6 fw-bold mb-0" style="color: #F8FAFC;">Analitik Kinerja Mekanik</h2>
-        <a href="{{ route('admin.riwayat') }}" class="small fw-semibold text-decoration-none link-laporan"
-           style="color: #FF00FF; transition: text-shadow .2s ease;">
-            Lihat Semua <i class="bi bi-arrow-right"></i>
-        </a>
     </div>
 
     <div class="table-responsive">
