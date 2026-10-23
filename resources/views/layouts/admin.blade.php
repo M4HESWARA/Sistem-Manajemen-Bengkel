@@ -37,10 +37,70 @@
             top: 0;
             background: var(--bg-panel);
             border-bottom: 1px solid var(--border);
-            padding: 0.75rem 1.5rem;
+            padding: 0.85rem 1.5rem;
             box-shadow: 0 1px 3px rgba(0,0,0,0.4);
             position: sticky;
             z-index: 1000;
+        }
+        .admin-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.3rem 0.85rem 0.3rem 0.3rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 999px;
+        }
+        .avatar-circle {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+        .badge-status {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            font-size: 0.68rem;
+            font-weight: 600;
+            color: #22C55E;
+        }
+        .badge-status .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #22C55E;
+            box-shadow: 0 0 8px rgba(34, 197, 94, 0.9);
+        }
+        .action-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 0.6rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+        .action-btn:hover {
+            color: var(--magenta);
+            border-color: var(--magenta);
+            box-shadow: 0 0 16px rgba(255, 0, 255, 0.55);
+        }
+        .action-btn.action-danger:hover {
+            color: #f87171;
+            border-color: #f87171;
+            box-shadow: 0 0 16px rgba(248, 113, 113, 0.5);
         }
         .brand-caption {
             font-size: 0.72rem;
@@ -212,31 +272,34 @@
             </div>
         </div>
 
-        <!-- 2. Bagian Kanan (Tombol Aksi & Menu Mobile) -->
-        <div class="d-flex align-items-center gap-1 gap-md-2">
+        <!-- 2. Bagian Kanan (Tombol Aksi, Profil & Menu Mobile) -->
+        <div class="d-flex align-items-center gap-2">
             
             <!-- Tombol Registrasi Servis Baru -->
             <a href="{{ route('admin.pendaftaran') }}" class="btn-magenta text-nowrap px-2 px-md-3">
                 <i class="bi bi-plus-lg"></i> <span class="d-none d-sm-inline">Servis Baru</span>
             </a>
 
-            <!-- Profil Admin -->
-            <div class="d-none d-md-flex align-items-center gap-2 ms-2 me-1">
-                <div class="rounded-circle d-flex align-items-center justify-content-center" style="width: 38px; height: 38px; background: var(--bg-card); border: 1px solid var(--border);">
-                    <i class="bi bi-person-fill" style="color: var(--text-secondary);"></i>
+            <!-- Pill Card Profil Admin -->
+            <div class="admin-badge d-none d-md-flex">
+                <div class="avatar-circle">
+                    <i class="bi bi-person-fill"></i>
                 </div>
-                <span class="small" style="color: #F8FAFC;">Admin Bengkel</span>
+                <div class="d-flex flex-column" style="line-height: 1.2;">
+                    <span class="small fw-semibold" style="color: #F8FAFC;">Admin Bengkel</span>
+                    <span class="badge-status"><span class="dot"></span> Admin On-Duty</span>
+                </div>
             </div>
             
             <!-- Tombol Pengaturan -->
-            <a href="{{ route('admin.settings.index') }}" class="icon-btn" title="Pengaturan">
+            <a href="{{ route('admin.settings.index') }}" class="action-btn" title="Pengaturan">
                 <i class="bi bi-gear"></i>
             </a>
             
             <!-- Tombol Keluar -->
             <form method="POST" action="{{ route('logout') }}" class="m-0">
                 @csrf
-                <button class="icon-btn text-danger" type="submit" title="Keluar">
+                <button class="action-btn action-danger" type="submit" title="Keluar">
                     <i class="bi bi-box-arrow-right"></i>
                 </button>
             </form>
