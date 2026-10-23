@@ -61,6 +61,24 @@
         color: #94A3B8 !important;
         opacity: 1 !important;
     }
+    .price-row .form-control,
+    .price-row .form-select,
+    .price-row .input-group-text {
+        height: 2.75rem;
+    }
+    .input-group-text {
+        background-color: #0F172A !important;
+        border: 1px solid #334155 !important;
+        border-right: 0 !important;
+        border-top-right-radius: 0 !important;
+        border-bottom-right-radius: 0 !important;
+        color: #94A3B8 !important;
+        font-weight: 600;
+    }
+    .input-group > .form-control {
+        border-top-left-radius: 0 !important;
+        border-bottom-left-radius: 0 !important;
+    }
     .form-select {
         background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%2394A3B8' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m2 5 6 6 6-6'/%3e%3c/svg%3e") !important;
         background-repeat: no-repeat !important;

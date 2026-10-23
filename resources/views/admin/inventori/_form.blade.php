@@ -1,4 +1,4 @@
-<div class="row g-3">
+<div class="row g-3 mb-3">
     <div class="col-md-6">
         <label class="form-label small fw-semibold">Kode SKU</label>
         <input type="text" name="sku" class="form-control text-uppercase w-100"
@@ -9,7 +9,9 @@
         <input type="text" name="name" class="form-control w-100"
                value="{{ old('name', $sparepart->name ?? '') }}" required placeholder="mis. Oli Mesin 1L">
     </div>
+</div>
 
+<div class="row g-3 mb-3">
     <div class="col-md-6">
         <label class="form-label small fw-semibold">Kategori</label>
         <select name="category_id" class="form-select w-100">
@@ -27,7 +29,9 @@
         <input type="text" name="kategori_baru" class="form-control w-100"
                placeholder="Kosongkan jika pakai kategori di atas" value="{{ old('kategori_baru') }}">
     </div>
+</div>
 
+<div class="row g-3 align-items-end price-row mb-3">
     <div class="col-md-4">
         <label class="form-label small fw-semibold">Harga Beli (Rp)</label>
         <div class="input-group w-100">
@@ -59,7 +63,9 @@
             @endforeach
         </select>
     </div>
+</div>
 
+<div class="row g-3">
     @unless(isset($sparepart))
         <div class="col-md-6">
             <label class="form-label small fw-semibold">Stok Awal</label>
