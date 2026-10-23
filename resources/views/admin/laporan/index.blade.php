@@ -190,28 +190,21 @@
     const values = @json($grafikValues);
     const highlightIndex = {{ $grafikHighlightIndex }};
 
-    // Plugin: efek glow pada garis tren magenta
+    // Plugin: efek glow hanya pada garis tren yang digambar Chart.js (tanpa path duplikat)
     const glowLine = {
         id: 'glowLine',
-        beforeDatasetsDraw(chart, args, opts) {
+        beforeDatasetDraw(chart, args) {
+            const dataset = chart.data.datasets[args.index];
+            if (!dataset || dataset.type !== 'line') { return; }
             const { ctx } = chart;
-            chart.data.datasets.forEach((dataset, index) => {
-                if (dataset.type !== 'line') { return; }
-                const meta = chart.getDatasetMeta(index);
-                if (meta.hidden) { return; }
-
-                ctx.save();
-                ctx.shadowColor = 'rgba(255, 0, 255, 0.85)';
-                ctx.shadowBlur = 18;
-                ctx.strokeStyle = dataset.borderColor;
-                ctx.lineWidth = dataset.borderWidth;
-                ctx.beginPath();
-                meta.data.forEach((point, i) => {
-                    if (i === 0) { ctx.moveTo(point.x, point.y); } else { ctx.lineTo(point.x, point.y); }
-                });
-                ctx.stroke();
-                ctx.restore();
-            });
+            ctx.save();
+            ctx.shadowColor = 'rgba(255, 0, 255, 0.85)';
+            ctx.shadowBlur = 18;
+        },
+        afterDatasetDraw(chart, args) {
+            const dataset = chart.data.datasets[args.index];
+            if (!dataset || dataset.type !== 'line') { return; }
+            chart.ctx.restore();
         }
     };
 
@@ -235,7 +228,10 @@
                     label: 'Tren',
                     data: values,
                     borderColor: '#FF00FF',
-                    tension: 0.4,
+                    backgroundColor: 'transparent',
+                    tension: 0.3,
+                    cubicInterpolationMode: 'monotone',
+                    spanGaps: true,
                     pointRadius: 3,
                     pointBackgroundColor: '#FF00FF',
                     pointBorderColor: '#0F172A',
