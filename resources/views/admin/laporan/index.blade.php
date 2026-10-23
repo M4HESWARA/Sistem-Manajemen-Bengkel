@@ -22,14 +22,24 @@
     </div>
 
     <div class="d-flex align-items-center gap-2">
-        <form method="GET" class="d-flex align-items-center gap-2">
-            <label for="filterPeriode" class="small mb-0" style="color: #94A3B8;">Periode:</label>
-            <select id="filterPeriode" name="month" class="form-select form-select-sm" onchange="this.form.submit()"
-                    style="background: #1E293B; border: 1px solid #334155; color: #F8FAFC; width: auto; min-width: 180px;">
-                @foreach ($periodeOptions as $nilai => $label)
-                    <option value="{{ $nilai }}" {{ $nilai === $periodeAktif ? 'selected' : '' }}>{{ $label }}</option>
-                @endforeach
-            </select>
+        <form method="GET" class="d-flex align-items-center gap-2" id="formPeriode">
+            <label for="periodeToggle" class="small mb-0" style="color: #94A3B8;">Periode:</label>
+            <input type="hidden" name="month" id="inputPeriode" value="{{ $periodeAktif }}">
+            <div class="dropdown">
+                <button type="button" id="periodeToggle" class="btn btn-sm periode-toggle dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+                    {{ $periodeOptions[$periodeAktif] ?? $month->translatedFormat('F Y') }}
+                </button>
+                <ul class="dropdown-menu periode-menu" aria-labelledby="periodeToggle">
+                    @foreach ($periodeOptions as $nilai => $label)
+                        <li>
+                            <button type="button" class="dropdown-item periode-option {{ $nilai === $periodeAktif ? 'active' : '' }}"
+                                    data-value="{{ $nilai }}">
+                                {{ $label }}
+                            </button>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
         </form>
     </div>
 </div>
@@ -179,6 +189,71 @@
     a.link-laporan:hover {
         text-shadow: 0 0 12px rgba(255, 0, 255, 0.9);
     }
+    /* Dropdown periode */
+    .periode-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.5rem;
+        min-width: 180px;
+        background-color: #1E293B !important;
+        border: 1px solid #334155 !important;
+        color: #F8FAFC !important;
+        font-weight: 600;
+    }
+    .periode-toggle:hover,
+    .periode-toggle:focus,
+    .periode-toggle.show {
+        background-color: #0F172A !important;
+        border-color: #FF00FF !important;
+        color: #F8FAFC !important;
+        box-shadow: 0 0 0 .2rem rgba(255, 0, 255, .2);
+    }
+    .periode-menu {
+        max-height: 240px;
+        overflow-y: auto;
+        overscroll-behavior: contain;
+        min-width: 180px;
+        padding: 0.35rem;
+        background-color: #1E293B;
+        border: 1px solid #334155;
+        border-radius: 0.5rem;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        scrollbar-width: thin;
+        scrollbar-color: #334155 #0F172A;
+    }
+    .periode-menu::-webkit-scrollbar {
+        width: 8px;
+    }
+    .periode-menu::-webkit-scrollbar-track {
+        background: #0F172A;
+        border-radius: 4px;
+    }
+    .periode-menu::-webkit-scrollbar-thumb {
+        background: #334155;
+        border-radius: 4px;
+    }
+    .periode-menu::-webkit-scrollbar-thumb:hover {
+        background: #475569;
+    }
+    .periode-menu .dropdown-item {
+        color: #94A3B8;
+        border-radius: 0.375rem;
+        padding: 0.45rem 0.75rem;
+        font-size: 0.85rem;
+        white-space: nowrap;
+    }
+    .periode-menu .dropdown-item:hover,
+    .periode-menu .dropdown-item:focus {
+        background-color: #334155;
+        color: #F8FAFC;
+    }
+    .periode-menu .dropdown-item.active,
+    .periode-menu .dropdown-item:active {
+        background-color: #FF00FF;
+        color: #FFFFFF;
+        font-weight: 700;
+    }
 </style>
 @endpush
 
@@ -261,6 +336,25 @@
                 }
             }
         }
+    });
+
+    // Saat dropdown dibuka, gulir ke opsi yang sedang aktif
+    const periodeToggle = document.getElementById('periodeToggle');
+    if (periodeToggle) {
+        periodeToggle.addEventListener('show.bs.dropdown', function () {
+            const menu = document.querySelector('.periode-menu');
+            const active = menu ? menu.querySelector('.dropdown-item.active') : null;
+            if (!menu || !active) { return; }
+            menu.scrollTop = active.offsetTop - (menu.clientHeight / 2) + (active.clientHeight / 2);
+        });
+    }
+
+    // Pilih periode dari dropdown kustom
+    document.querySelectorAll('.periode-option').forEach(function (item) {
+        item.addEventListener('click', function () {
+            document.getElementById('inputPeriode').value = this.dataset.value;
+            document.getElementById('formPeriode').submit();
+        });
     });
 </script>
 @endpush
