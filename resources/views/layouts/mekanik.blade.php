@@ -29,17 +29,74 @@
             top: 0;
             background: #0F172A;
             border-bottom: 1px solid var(--border);
-            padding: 0.75rem 1.5rem;
+            padding: 0.85rem 1.5rem;
             box-shadow: 0 1px 3px rgba(0,0,0,0.4);
             position: sticky;
             z-index: 1000;
         }
         .brand-caption {
-            font-size: 0.72rem;
+            font-size: 0.68rem;
             color: var(--text-secondary);
             line-height: 1;
-            margin-top: 3px;
-            font-weight: 500;
+            margin-top: 4px;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+        .mekanik-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.3rem 0.85rem 0.3rem 0.3rem;
+            background: var(--bg-panel);
+            border: 1px solid var(--border);
+            border-radius: 999px;
+        }
+        .avatar-circle {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+        .badge-status {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            font-size: 0.68rem;
+            font-weight: 600;
+            color: #4ade80;
+        }
+        .badge-status .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #4ade80;
+            box-shadow: 0 0 8px rgba(74, 222, 128, 0.9);
+        }
+        .logout-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 0.6rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-panel);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            transition: all 0.2s ease;
+        }
+        .logout-btn:hover {
+            color: var(--magenta);
+            border-color: var(--magenta);
+            background: var(--bg-panel);
+            box-shadow: 0 0 16px rgba(255, 0, 255, 0.55);
         }
         .icon-btn {
             width: 38px;
@@ -139,29 +196,29 @@
 <!-- HEADER TOPBAR -->
     <nav class="topbar d-flex align-items-center justify-content-between gap-2">
 
-        <!-- 1. Bagian Kiri (Logo) -->
+        <!-- 1. Bagian Kiri (Logo + Label) -->
         <div class="d-flex align-items-center gap-3">
-            <a href="{{ route('mekanik.dashboard') }}" class="text-decoration-none d-flex align-items-center gap-2">
+            <a href="{{ route('mekanik.dashboard') }}" class="text-decoration-none d-flex flex-column align-items-start" style="line-height: 1;">
                 <img src="{{ asset('images/logo-ksr-garage.png') }}" alt="KSR Garage" style="height: 36px; display: block;">
-                <span class="fw-bold text-white d-none d-md-inline">Workspace Mekanik</span>
+                <span class="brand-caption">Panel Mekanik</span>
             </a>
         </div>
 
         <!-- 2. Bagian Kanan (Profil Mekanik & Keluar) -->
         <div class="d-flex align-items-center gap-2 ms-auto">
-            <div class="d-flex align-items-center gap-2 me-2">
-                <div class="rounded-circle d-flex align-items-center justify-content-center" style="width: 38px; height: 38px; background: var(--bg-panel); border: 1px solid var(--border);">
-                    <i class="bi bi-person-fill" style="color: var(--text-secondary);"></i>
+            <div class="mekanik-badge">
+                <div class="avatar-circle">
+                    <i class="bi bi-person-fill"></i>
                 </div>
-                <div class="d-none d-md-flex flex-column">
-                    <span class="small fw-semibold">{{ auth()->user()->full_name ?? auth()->user()->username }}</span>
-                    <span class="small" style="color: var(--text-secondary);">Mekanik</span>
+                <div class="d-flex flex-column" style="line-height: 1.2;">
+                    <span class="small fw-semibold" style="color: var(--text-primary);">{{ auth()->user()->full_name ?? auth()->user()->username }}</span>
+                    <span class="badge-status"><span class="dot"></span> Mekanik On-Duty</span>
                 </div>
             </div>
             <!-- Tombol Keluar -->
             <form method="POST" action="{{ route('logout') }}" class="m-0">
                 @csrf
-                <button class="icon-btn text-danger" type="submit" title="Keluar">
+                <button class="logout-btn" type="submit" title="Keluar">
                     <i class="bi bi-box-arrow-right"></i>
                 </button>
             </form>
