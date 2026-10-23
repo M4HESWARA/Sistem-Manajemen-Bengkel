@@ -40,8 +40,7 @@
             line-height: 1;
             margin-top: 4px;
             font-weight: 600;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
+            letter-spacing: 0.03em;
         }
         .mekanik-badge {
             display: flex;
