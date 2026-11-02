@@ -14,10 +14,10 @@
             </div>
         </div>
 
-        <!-- Tombol Close (X) dengan Kotak & Efek Hover Magenta -->
+        <!-- Tombol Close (X) dengan Hover Warna Merah -->
         <button type="button" class="btn p-0 d-flex align-items-center justify-content-center flex-shrink-0" data-bs-dismiss="alert" aria-label="Close"
                 style="width: 30px; height: 30px; border-radius: 8px; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border); color: var(--text-secondary); transition: all 0.2s ease;"
-                onmouseover="this.style.color='var(--magenta)'; this.style.borderColor='var(--magenta)'; this.style.background='rgba(255, 0, 255, 0.1)';"
+                onmouseover="this.style.color='#ef4444'; this.style.borderColor='#ef4444'; this.style.background='rgba(239, 68, 68, 0.1);"
                 onmouseout="this.style.color='var(--text-secondary)'; this.style.borderColor='var(--border)'; this.style.background='rgba(255, 255, 255, 0.05)';">
             <i class="bi bi-x-lg" style="font-size: 0.85rem;"></i>
         </button>
@@ -41,7 +41,7 @@
 
         <button type="button" class="btn p-0 d-flex align-items-center justify-content-center flex-shrink-0" data-bs-dismiss="alert" aria-label="Close"
                 style="width: 30px; height: 30px; border-radius: 8px; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border); color: var(--text-secondary); transition: all 0.2s ease;"
-                onmouseover="this.style.color='#ef4444'; this.style.borderColor='#ef4444'; this.style.background='rgba(239, 68, 68, 0.1)';;"
+                onmouseover="this.style.color='#ef4444'; this.style.borderColor='#ef4444'; this.style.background='rgba(239, 68, 68, 0.1);"
                 onmouseout="this.style.color='var(--text-secondary)'; this.style.borderColor='var(--border)'; this.style.background='rgba(255, 255, 255, 0.05)';">
             <i class="bi bi-x-lg" style="font-size: 0.85rem;"></i>
         </button>
