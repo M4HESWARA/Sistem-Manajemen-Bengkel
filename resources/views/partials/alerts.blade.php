@@ -14,7 +14,7 @@
         <!-- Bagian Kiri: Ikon & Pesan -->
         <div class="d-flex align-items-center gap-3">
             <div class="rounded-circle d-flex align-items-center justify-content-center flex-shrink-0" 
-                 style="width: 32px; height: 32px; background: rgba(255, 0, 255, 0.15); color: var(--magenta);">
+                 style="width: 32px; height: 32px; background: rgba(74, 222, 128, 0.15); color: #4ade80;">
                 <i class="bi bi-check-lg fw-bold"></i>
             </div>
             <div style="font-size: 0.95rem; font-weight: 500;">
