@@ -92,10 +92,10 @@
             transition: all 0.2s ease;
         }
         .logout-btn:hover {
-            color: var(--magenta);
-            border-color: var(--magenta);
+            color: #ef4444;
+            border-color: #ef4444;
             background: var(--bg-panel);
-            box-shadow: 0 0 16px rgba(255, 0, 255, 0.55);
+            box-shadow: 0 0 16px rgba(239, 68, 68, 0.45);
         }
         .icon-btn {
             width: 38px;
