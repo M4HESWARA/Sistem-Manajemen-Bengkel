@@ -1,3 +1,11 @@
+<style>
+    .custom-alert-close:hover {
+        color: #ef4444 !important;
+        border-color: #ef4444 !important;
+        background-color: rgba(239, 68, 68, 0.1) !important;
+    }
+</style>
+
 @if (session('success'))
     <div class="alert alert-dismissible fade show border d-flex align-items-center justify-content-between p-3 mb-4" 
          style="background-color: var(--bg-panel); border-color: var(--magenta) !important; border-radius: 12px; color: var(--text-primary); box-shadow: 0 0 15px rgba(255, 0, 255, 0.2);" 
@@ -14,11 +22,9 @@
             </div>
         </div>
 
-        <!-- Tombol Close (X) dengan Hover Warna Merah -->
-        <button type="button" class="btn p-0 d-flex align-items-center justify-content-center flex-shrink-0" data-bs-dismiss="alert" aria-label="Close"
-                style="width: 30px; height: 30px; border-radius: 8px; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border); color: var(--text-secondary); transition: all 0.2s ease;"
-                onmouseover="this.style.color='#ef4444'; this.style.borderColor='#ef4444'; this.style.background='rgba(239, 68, 68, 0.1);"
-                onmouseout="this.style.color='var(--text-secondary)'; this.style.borderColor='var(--border)'; this.style.background='rgba(255, 255, 255, 0.05)';">
+        <!-- Tombol Close (X) dengan CSS Class Hover Merah -->
+        <button type="button" class="btn p-0 d-flex align-items-center justify-content-center flex-shrink-0 custom-alert-close" data-bs-dismiss="alert" aria-label="Close"
+                style="width: 30px; height: 30px; border-radius: 8px; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border); color: var(--text-secondary); transition: all 0.2s ease;">
             <i class="bi bi-x-lg" style="font-size: 0.85rem;"></i>
         </button>
     </div>
@@ -39,10 +45,8 @@
             </div>
         </div>
 
-        <button type="button" class="btn p-0 d-flex align-items-center justify-content-center flex-shrink-0" data-bs-dismiss="alert" aria-label="Close"
-                style="width: 30px; height: 30px; border-radius: 8px; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border); color: var(--text-secondary); transition: all 0.2s ease;"
-                onmouseover="this.style.color='#ef4444'; this.style.borderColor='#ef4444'; this.style.background='rgba(239, 68, 68, 0.1);"
-                onmouseout="this.style.color='var(--text-secondary)'; this.style.borderColor='var(--border)'; this.style.background='rgba(255, 255, 255, 0.05)';">
+        <button type="button" class="btn p-0 d-flex align-items-center justify-content-center flex-shrink-0 custom-alert-close" data-bs-dismiss="alert" aria-label="Close"
+                style="width: 30px; height: 30px; border-radius: 8px; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border); color: var(--text-secondary); transition: all 0.2s ease;">
             <i class="bi bi-x-lg" style="font-size: 0.85rem;"></i>
         </button>
     </div>
